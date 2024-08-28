@@ -1,0 +1,45 @@
+#main-navbar {
+    background-color: #041E3F;
+}
+
+#navbar-logo {
+    max-width: 100%;
+    height: auto;
+    width: auto; /* This ensures the image scales proportionally */
+    max-height: 3rem; /* Adjust the max height as needed */
+}
+
+#login-button {
+    background-color: #10D5B1;
+    color: #fff;
+}
+
+
+.buttons {
+    display: flex;
+    gap: 1rem; /* Space between buttons */
+}
+
+.navbar-link {
+    color: #fff;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 5px;
+    background-color: transparent;
+    transition: background-color 0.3s;
+}
+
+/* Remove down arrows from navbar links and adjust button sizing */
+.navbar-link::after {
+    content: none !important;
+    padding: 0; /* Remove any additional padding */
+}
+
+.navbar-link {
+    padding-right: 0.75rem; /* Adjust padding to avoid extra space */
+    padding-left: 0.75rem;
+}
+
+.navbar-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
