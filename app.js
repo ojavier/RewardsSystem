@@ -15,7 +15,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true })); // Ejemplo de uso de body-parser
 
 // Comentar la ruta principal hasta que se defina correctamente
-const mainRoutes = require('./routes/misTarjetas.routes.js');
+const mainRoutes = require('./Routes/main.routes.js');
 app.use('/', mainRoutes);
 
 app.use((request, response, next) => {
