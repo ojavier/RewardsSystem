@@ -4,6 +4,9 @@ const app = express();
 app.use(express.static('public'));
 const path = require('path');
 
+app.set('view engine', 'ejs');
+app.set('views', 'views');
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((request, response, next) => {
@@ -12,14 +15,13 @@ app.use((request, response, next) => {
 });
 
 const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: true })); // Ejemplo de uso de body-parser
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// Comentar la ruta principal hasta que se defina correctamente
 const mainRoutes = require('./Routes/main.routes.js');
 app.use('/', mainRoutes);
 
 app.use((request, response, next) => {
-    response.status(404).render('404', {});
+  response.status(404).render('404', {});
 });
 
 const PORT = process.env.PORT || 3000;

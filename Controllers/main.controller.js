@@ -1,3 +1,3 @@
 exports.getRoot = (request, response, next) => {
-    response.redirect('/');
+    response.render('Reportes');
 };
