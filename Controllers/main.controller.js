@@ -1,3 +1,7 @@
+exports.getRoot = (request, response, next) => {
+    response.render('misTarjetas');
+};
+
 exports.getInfo = (request, response, next) => {
     response.render('miInformacion');
 };
