@@ -5,8 +5,10 @@
 #navbar-logo {
     max-width: 100%;
     height: auto;
-    width: auto; /* This ensures the image scales proportionally */
-    max-height: 3rem; /* Adjust the max height as needed */
+    width: auto;
+    /* This ensures the image scales proportionally */
+    max-height: 3rem;
+    /* Adjust the max height as needed */
 }
 
 #login-button {
@@ -17,7 +19,8 @@
 
 .buttons {
     display: flex;
-    gap: 1rem; /* Space between buttons */
+    gap: 1rem;
+    /* Space between buttons */
 }
 
 .navbar-link {
@@ -32,11 +35,13 @@
 /* Remove down arrows from navbar links and adjust button sizing */
 .navbar-link::after {
     content: none !important;
-    padding: 0; /* Remove any additional padding */
+    padding: 0;
+    /* Remove any additional padding */
 }
 
 .navbar-link {
-    padding-right: 0.75rem; /* Adjust padding to avoid extra space */
+    padding-right: 0.75rem;
+    /* Adjust padding to avoid extra space */
     padding-left: 0.75rem;
 }
 
@@ -47,4 +52,48 @@
 .centrado {
     margin: auto;
     width: 50%;
-  }
+}
+
+/* Posiciona el icono de tres puntitos en la esquina superior derecha */
+.top-right-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+/* Posiciona el icono de favoritos a la derecha del título "Establecimientos" */
+.right-icon {
+    margin-left: auto;
+    cursor: pointer;
+}
+
+/* Flexbox para alinear el título y el icono de favoritos en la misma fila */
+.title-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+
+/* Flecha al lado de la imagen en el main */
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Flecha izquierda*/
+.left-arrow {
+    left: -40px;
+}
+
+/* Flecha derecha*/
+.right-arrow {
+    right: -40px;
+}
