@@ -60,8 +60,48 @@
 .centrado {
     margin: auto;
     width: 50%;
-  }
+}
 
-.title-large {
-    font-size: 3rem; /* Ajusta el tamaño según tus necesidades */
+/* Posiciona el icono de tres puntitos en la esquina superior derecha */
+.top-right-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+/* Posiciona el icono de favoritos a la derecha del título "Establecimientos" */
+.right-icon {
+    margin-left: auto;
+    cursor: pointer;
+}
+
+/* Flexbox para alinear el título y el icono de favoritos en la misma fila */
+.title-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+
+/* Flecha al lado de la imagen en el main */
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Flecha izquierda*/
+.left-arrow {
+    left: -40px;
+}
+
+/* Flecha derecha*/
+.right-arrow {
+    right: -40px;
 }
