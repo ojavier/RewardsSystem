@@ -19,6 +19,10 @@
     color: #fff;
 }
 
+#colortextoazul{
+    color: #041E3F;
+}
+
 .buttons {
     display: flex;
     gap: 1rem; /* Space between buttons */
