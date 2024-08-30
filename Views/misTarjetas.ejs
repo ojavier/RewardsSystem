@@ -3,118 +3,94 @@
     <!DOCTYPE html>
     <html lang="es">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Mis Tarjetas</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <div class='container'>
+        <h1 class="title title-large">Mis Tarjetas</h1>
+    </div>
+    <br>
+    <br>
 
-        <link rel="stylesheet" href="Public/Estilos.css">
-    </head>
+    <div class="columns is-vcentered" style="padding-left: 10%;">
+        <div class="column is-half">
+            <figure style="width: 100%;">
+                <img src="/images/tarjeta.png" alt="Tarjeta de lealtad">
+            </figure>
+        </div>
+        <div class="column has-text-centered" style="padding-right: 10%;">
+            <figure class="image is-inline-block" style="width: 256px; height: 256px;">
+                <img src="/images/chilako.png" alt="Chilako logotipo">
 
-    <body>
-        <div class="block">
-            <section class="container">
-                <h1 class="title">Mis tarjetas</h1>
+                <i class="material-icons arrow left-arrow">chevron_left</i>
+                <i class="material-icons arrow right-arrow">chevron_right</i>
 
-                <i class="material-icons top-right-icon">more_vert</i>
-            </section>
+            </figure>
+            <p class="is-size-3 has-text-weight-semibold" style="margin-top: 10px;">Chilako</p>
         </div>
 
-        <main>
-
-            <div class="columns is-vcentered" style="padding-left: 10%;">
-                <div class="column is-half">
-                    <figure style="width: 100%;">
-                        <img src="public/images/tarjeta.png" alt="Tarjeta de lealtad">
-                    </figure>
-                </div>
-                <div class="column has-text-centered" style="padding-right: 10%;">
-                    <figure class="image is-inline-block" style="width: 256px; height: 256px;">
-                        <img src="public/images/chilako.png" alt="Chilako logotipo">
-
-                        <i class="material-icons arrow left-arrow">chevron_left</i>
-                        <i class="material-icons arrow right-arrow">chevron_right</i>
-
-                    </figure>
-                    <p class="is-size-3 has-text-weight-semibold" style="margin-top: 10px;">Chilako</p>
-                </div>
-
-            </div>
-
-            <button class="button is-primary is-rounded"
-                style="margin-top: 20px; margin-left: 10%;">Configuración</button>
-
-        </main>
-
-        <section>
-            <div class="title-section">
-                <h2 class="title" style="margin-top: 5%;"> Establecimientos </h2>
-
-                <i class="material-icons right-icon">favorite_border</i>
-            </div>
-            <div class="box" style="margin-left: 10%; margin-right: 10%;">
-                <div class="columns is-vcentered">
-                    <div class="column is-narrow">
-                        <figure class="image is-128x128">
-                            <img src="public/images/chilako.png" alt="Chilako logotipo">
-                        </figure>
-                    </div>
-                    <div class="column">
-                        <h2 class="is-size-4 has-text-weight-bold">Chilako QRO</h2>
-                        <p class="subtitle is-size-6">Dirección: Calle 123, Ciudad QRO</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="box" style="margin-left: 10%; margin-right: 10%;">
-                <div class="columns is-vcentered">
-                    <div class="column is-narrow">
-                        <figure class="image is-128x128">
-                            <img src="public/images/hotdog.png" alt="Hotdako logotipo">
-                        </figure>
-                    </div>
-                    <div class="column">
-                        <h2 class="is-size-4 has-text-weight-bold">Hotdako QRO</h2>
-                        <p class="subtitle is-size-6">Dirección: Calle 321, Ciudad QRO</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="box" style="margin-left: 10%; margin-right: 10%;">
-                <div class="columns is-vcentered">
-                    <div class="column is-narrow">
-                        <figure class="image is-128x128">
-                            <img src="public/images/hamburguesa.png" alt="Hamburguesako logotipo">
-                        </figure>
-                    </div>
-                    <div class="column">
-                        <h2 class="is-size-4 has-text-weight-bold">Hamburguesako QRO</h2>
-                        <p class="subtitle is-size-6">Dirección: Calle 12, Ciudad QRO</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="box" style="margin-left: 10%; margin-right: 10%;">
-                <div class="columns is-vcentered">
-                    <div class="column is-narrow">
-                        <figure class="image is-128x128">
-                            <img src="public/images/pizza.png" alt="Pizzako logotipo">
-                        </figure>
-                    </div>
-                    <div class="column">
-                        <h2 class="is-size-4 has-text-weight-bold">Pizzako QRO</h2>
-                        <p class="subtitle is-size-6">Dirección: Calle 1, Ciudad QRO</p>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-    </body>
-
-    </html>
-
-    <div class='container'>
-        <h2 class='centrado'>Reportes</h2>
     </div>
+
+    <button class="button is-primary is-rounded" style="margin-top: 20px; margin-left: 10%;">Configuración</button>
+
+
+    <section>
+        <div class="title-section">
+            <h2 class="title" style="margin-top: 5%;"> Establecimientos </h2>
+
+            <i class="material-icons right-icon">favorite_border</i>
+        </div>
+        <div class="box" style="margin-left: 10%; margin-right: 10%;">
+            <div class="columns is-vcentered">
+                <div class="column is-narrow">
+                    <figure class="image is-128x128">
+                        <img src="/images/chilako.png" alt="Chilako logotipo">
+                    </figure>
+                </div>
+                <div class="column">
+                    <h2 class="is-size-4 has-text-weight-bold">Chilako QRO</h2>
+                    <p class="subtitle is-size-6">Dirección: Calle 123, Ciudad QRO</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="box" style="margin-left: 10%; margin-right: 10%;">
+            <div class="columns is-vcentered">
+                <div class="column is-narrow">
+                    <figure class="image is-128x128">
+                        <img src="/images/hotdog.png" alt="Hotdako logotipo">
+                    </figure>
+                </div>
+                <div class="column">
+                    <h2 class="is-size-4 has-text-weight-bold">Hotdako QRO</h2>
+                    <p class="subtitle is-size-6">Dirección: Calle 321, Ciudad QRO</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="box" style="margin-left: 10%; margin-right: 10%;">
+            <div class="columns is-vcentered">
+                <div class="column is-narrow">
+                    <figure class="image is-128x128">
+                        <img src="/images/hamburguesa.png" alt="Hamburguesako logotipo">
+                    </figure>
+                </div>
+                <div class="column">
+                    <h2 class="is-size-4 has-text-weight-bold">Hamburguesako QRO</h2>
+                    <p class="subtitle is-size-6">Dirección: Calle 12, Ciudad QRO</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="box" style="margin-left: 10%; margin-right: 10%;">
+            <div class="columns is-vcentered">
+                <div class="column is-narrow">
+                    <figure class="image is-128x128">
+                        <img src="/images/pizza.png" alt="Pizzako logotipo">
+                    </figure>
+                </div>
+                <div class="column">
+                    <h2 class="is-size-4 has-text-weight-bold">Pizzako QRO</h2>
+                    <p class="subtitle is-size-6">Dirección: Calle 1, Ciudad QRO</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
