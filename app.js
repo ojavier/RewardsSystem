@@ -17,7 +17,7 @@ app.use((request, response, next) => {
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const mainRoutes = require('./Routes/main.routes.js');
+const mainRoutes = require('./routes/main.routes.js');
 app.use('/', mainRoutes);
 
 app.use((request, response, next) => {
