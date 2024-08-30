@@ -1,3 +1,3 @@
 exports.getRoot = (request, response, next) => {
-    response.render('Reportes');
+    response.render('miInformacion');
 };
