@@ -60,7 +60,6 @@
 .centrado {
     margin: auto;
     width: 50%;
-<<<<<<< HEAD
 }
 
 /* Posiciona el icono de tres puntitos en la esquina superior derecha */
@@ -106,10 +105,8 @@
 .right-arrow {
     right: -40px;
 }
-=======
-  }
+
 
 .title-large {
     font-size: 3rem; /* Ajusta el tamaño según tus necesidades */
 }
->>>>>>> 375638552f0e619057635feec0e986ef9db3b783
