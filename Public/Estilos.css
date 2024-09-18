@@ -110,3 +110,6 @@
 .title-large {
     font-size: 3rem; /* Ajusta el tamaño según tus necesidades */
 }
+.cambio-cursor{
+    cursor: pointer;
+}
