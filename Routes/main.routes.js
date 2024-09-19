@@ -3,6 +3,8 @@ const router = express.Router();
 
 const mainController = require('../controllers/main.controller');
 
+router.get('/login', mainController.getLogin);
+
 router.get('/misTarjetas', mainController.getRoot);
 
 router.get('/configuracion', mainController.getConfig);
