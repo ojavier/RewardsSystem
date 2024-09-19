@@ -2,10 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const mainController = require('../controllers/main.controller');
-const etapaController = require('../Controllers/etapa.controller');
+const etapaController = require('../controllers/etapa.controller');
 
-
-router.get('/login', mainController.getLogin);
 
 router.get('/login', mainController.getLogin);
 
@@ -19,8 +17,9 @@ router.get('/reportes', mainController.getReportes);
 
 router.get('/miEquipo', mainController.getEquipo);
 
-router.post('/etapa/modificar', etapaController.modificarEtapa); // Esta ruta ya está bien.
-router.get('/etapa/:id_Etapa', etapaController.buscarEtapa); // Esta ruta debe corresponder a un método buscarEtapa en el controlador.
+// Rutas para Etapa
+router.post('/etapa/modificar', etapaController.modificarEtapa); // Modificar etapa
+router.get('/etapa/:id_Etapa', etapaController.buscarEtapa); // Buscar etapa por ID
 
 
 module.exports = router;
