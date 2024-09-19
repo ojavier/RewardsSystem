@@ -16,12 +16,12 @@
     color: #fff;
 }
 
-#colorarticulo{
+#colorarticulo {
     background-color: #041E3F;
     color: #fff;
 }
 
-#colortextoazul{
+#colortextoazul {
     color: #041E3F;
 }
 
@@ -86,7 +86,6 @@
     margin-right: 10%;
 }
 
-
 /* Flecha al lado de la imagen en el main */
 .arrow {
     position: absolute;
@@ -96,20 +95,25 @@
     cursor: pointer;
 }
 
-/* Flecha izquierda*/
+/* Flecha izquierda */
 .left-arrow {
     left: -40px;
 }
 
-/* Flecha derecha*/
+/* Flecha derecha */
 .right-arrow {
     right: -40px;
 }
 
-
 .title-large {
-    font-size: 3rem; /* Ajusta el tamaño según tus necesidades */
+    font-size: 3rem;
+    /* Ajusta el tamaño según tus necesidades */
 }
 .cambio-cursor{
     cursor: pointer;
+}
+
+/*Separa el icono de ajustes del simbolo de guardados*/
+.icon-tabler-adjustments {
+    margin-right: 10px;
 }
