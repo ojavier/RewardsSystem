@@ -109,3 +109,8 @@
     font-size: 3rem;
     /* Ajusta el tamaño según tus necesidades */
 }
+
+/*Separa el icono de ajustes del simbolo de guardados*/
+.icon-tabler-adjustments {
+    margin-right: 10px;
+}
