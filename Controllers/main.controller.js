@@ -1,3 +1,7 @@
+exports.getLogin = (request, response, next) => {
+    response.render('login');
+};
+
 exports.getRoot = (request, response, next) => {
     response.render('misTarjetas');
 };
