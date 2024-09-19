@@ -5,48 +5,57 @@
     <h1 class="title title-large">Configuración</h1>
 </div>
 
-</br>
-
-    <!-- Botones para cambiar entre Tarjeta, Etapa, Sellos -->
-    <div class="buttons" style="margin-top: 20px; margin-left: 10%;" >
-        <button class="button is-primary is-rounded" onclick="cambiarCampos('tarjeta')">Tarjeta</button>
-        <button class="button is-primary is-rounded" onclick="cambiarCampos('etapa')" style="margin-left: 10px;">Etapa</button>
-        <button class="button is-primary is-rounded" onclick="cambiarCampos('sellos')" style="margin-left: 10px;">Sellos</button>
-    </div>
+<!-- Botones para cambiar entre Tarjeta, Etapa, Sellos -->
+<div class="buttons" style="margin-top: 20px; margin-left: 10%;" >
+    <button class="button is-primary is-rounded" onclick="cambiarCampos('tarjeta')">Tarjeta</button>
+    <button class="button is-primary is-rounded" onclick="cambiarCampos('etapa')" style="margin-left: 10px;">Etapa</button>
+    <button class="button is-primary is-rounded" onclick="cambiarCampos('sellos')" style="margin-left: 10px;">Sellos</button>
 </div>
 
 <section class="section">
     <div class="container">
         <div class="columns is-vcentered">
-            <div class="column is-half">
-                <!-- Caja con campo de texto para ingresar el nombre -->
+            <!-- Campos para Tarjeta -->
+            <div id="tarjetaCampos" class="column is-half" style="display: block;">
                 <div class="box mx-6">
                     <article class="message">
                         <div class="message-header" id="colorarticulo">
-                            <p>Nombre</p>
+                            <p>Número de Tarjeta</p>
                         </div>
                         <div class="message-body">
-                            <!-- Campo de entrada de texto para el nombre -->
-                            <input class="input" type="text" placeholder="Ingresa tu nombre"  style="width: 100%;">
+                            <input class="input" type="text" placeholder="Ingresa el número de tarjeta" style="width: 100%;">
                         </div>
                     </article>
                 </div>
-            
-                <!-- Caja de Email (sigue igual) -->
+            </div>
+
+            <!-- Campos para Etapa -->
+            <div id="etapaCampos" class="column is-half" style="display: none;">
                 <div class="box mx-6">
                     <article class="message">
                         <div class="message-header" id="colorarticulo">
-                            <p>Email</p>
+                            <p>Nombre de la Etapa</p>
                         </div>
                         <div class="message-body">
-                            <!-- Campo de entrada de texto para el nombre -->
-                            <input class="input" type="text" placeholder="Ingresa tu nombre"  style="width: 100%;">
+                            <input class="input" type="text" placeholder="Ingresa el nombre de la etapa" style="width: 100%;">
                         </div>
                     </article>
                 </div>
-            
-                <!-- Añadir más recuadros según sea necesario -->
-            </div>            
+            </div>
+
+            <!-- Campos para Sellos -->
+            <div id="sellosCampos" class="column is-half" style="display: none;">
+                <div class="box mx-6">
+                    <article class="message">
+                        <div class="message-header" id="colorarticulo">
+                            <p>Cantidad de Sellos</p>
+                        </div>
+                        <div class="message-body">
+                            <input class="input" type="text" placeholder="Ingresa la cantidad de sellos" style="width: 100%;">
+                        </div>
+                    </article>
+                </div>
+            </div>
 
             <!-- Columna derecha con la imagen -->
             <div class="column is-half">
@@ -57,3 +66,6 @@
         </div>
     </div>
 </section>
+
+
+<script src="../Services/configButtons.js"></script>
