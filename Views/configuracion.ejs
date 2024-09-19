@@ -6,6 +6,17 @@
     <br>
 </div>
 
+<div class="container">
+    <div class="field">
+        <div class="control has-icons-left">
+            <input class="input" type="text" id="searchBar" placeholder="Buscar..." onkeyup="searchFunction()">
+            <span class="icon is-small is-left">
+                <i class="fas fa-search"></i>
+            </span>
+        </div>
+    </div>
+
+    <br>
 <!-- Botones para cambiar entre Tarjeta, Etapa, Sellos -->
 <div class="buttons" style="margin-top: 20px; margin-left: 10%;" >
     <button class="button is-primary is-rounded" onclick="cambiarCampos('tarjeta')">Tarjeta</button>
@@ -35,10 +46,26 @@
                 <div class="box mx-6">
                     <article class="message">
                         <div class="message-header" id="colorarticulo">
-                            <p>Nombre de la Etapa</p>
+                            <p>Cantidad de sellos</p>
                         </div>
                         <div class="message-body">
-                            <input class="input" type="text" placeholder="Ingresa el nombre de la etapa" style="width: 100%;">
+                            <input class="input" type="text" placeholder="Ingresa la cantidad de sellos" style="width: 100%;">
+                        </div>
+                    </article>
+                    <article class="message"></article>
+                        <div class="message-header" id="colorarticulo">
+                            <p>Minimo de compra</p>
+                        </div>
+                        <div class="message-body">
+                            <input class="input" type="text" placeholder="Ingresa el minimo de compra" style="width: 100%;">
+                        </div>
+                    </article>
+                    <article class="message"></article>
+                        <div class="message-header" id="colorarticulo">
+                            <p>Descuento</p>
+                        </div>
+                        <div class="message-body">
+                            <input class="input" type="text" placeholder="Ingresa el descuento" style="width: 100%;">
                         </div>
                     </article>
                 </div>
@@ -64,6 +91,12 @@
                     <img src="/images/tarjeta.png" alt="Tarjeta de lealtad">
                 </figure>
             </div>
+        </div>
+
+        <!-- Botones de aceptar cambios e ingresar nuevos datos -->
+        <div class="buttons" style="margin-top: 30px;">
+            <button class="button is-success is-rounded" onclick="aceptarCambios()">Aceptar Cambios</button>
+            <button class="button is-warning is-rounded" onclick="ingresarNuevosDatos()">Ingresar Nuevos Datos</button>
         </div>
     </div>
 </section>
