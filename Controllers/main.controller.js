@@ -1,3 +1,5 @@
+const { request, response } = require("express");
+
 exports.getRoot = (request, response, next) => {
     response.render('misTarjetas');
 };
@@ -12,4 +14,8 @@ exports.getInfo = (request, response, next) => {
 
 exports.getReportes = (request, response, next) => {
     response.render('Reportes');
+};
+
+exports.getEquipo = (request, response, next) => {
+    response.render('miEquipo')
 };

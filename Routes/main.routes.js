@@ -11,4 +11,6 @@ router.get('/miInformacion', mainController.getInfo);
 
 router.get('/reportes', mainController.getReportes);
 
+router.get('/miEquipo', mainController.getEquipo);
+
 module.exports = router;
