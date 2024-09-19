@@ -22,11 +22,12 @@
   },
   "homepage": "https://github.com/ojavier/RewardsSystem#readme",
   "devDependencies": {
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.6"
   },
   "dependencies": {
+    "body-parser": "^1.20.3",
     "ejs": "^3.1.10",
-    "express": "^4.19.2",
+    "express": "^4.21.0",
     "mysql2": "^3.11.3"
   }
 }
