@@ -8,8 +8,6 @@ const selloController = require("../controllers/sello.controller");
 
 router.get('/login', mainController.getLogin);
 
-router.get('/login', mainController.getLogin);
-
 router.get('/misTarjetas', mainController.getRoot);
 
 router.get('/configuracion', mainController.getConfig);
