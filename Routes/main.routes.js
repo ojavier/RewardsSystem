@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const mainController = require('../controllers/main.controller');
-const etapaController = require('../controllers/etapa.controller');
+const etapaController = require('../Controllers/etapa.controller'); 
 
 
 router.get('/login', mainController.getLogin);
