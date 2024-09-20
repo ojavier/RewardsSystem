@@ -2,8 +2,14 @@ const express = require('express');
 const router = express.Router();
 
 const mainController = require('../controllers/main.controller');
-const etapaController = require('../Controllers/etapa.controller'); 
+const etapaController = require('../Controllers/etapa.controller');
+const tarjetaController = require('../controllers/tarjetaController');
 
+router.get('/buscarTarjeta', tarjetaController.buscarTarjeta);
+
+router.post('/modificarTarjeta/:id', tarjetaController.modificarTarjeta);
+
+router.post('/crearEtapa/:id', tarjetaController.crearEtapa);
 
 router.get('/login', mainController.getLogin);
 
