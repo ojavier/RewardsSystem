@@ -15,25 +15,22 @@ function cambiarCampos(tipo) {
     }
 }
 
-let id_Etapa = null; // Inicialmente no tenemos un ID de etapa
+let id_Etapa = null; // Mantén esto como variable global
 
-// Función que busca la etapa y guarda su ID
 function buscarEtapa() {
     const searchBar = document.getElementById('searchBar');
     if (!searchBar || !searchBar.value.trim()) {
         alert('Por favor ingresa un ID de etapa válido para buscar.');
         return;
     }
-    
-    id_Etapa = searchBar.value.trim();  // Asegúrate de eliminar espacios en blanco
-    
+
+    id_Etapa = searchBar.value.trim();  // Guarda el valor de id_Etapa globalmente
+
     console.log('Etapa buscada con ID:', id_Etapa);  // Confirmación en consola
     alert(`Etapa con ID ${id_Etapa} ha sido buscada y almacenada.`);
 }
 
 async function aceptarCambios() {
-    console.log('ID de etapa al intentar modificar:', id_Etapa);  // Asegura que el ID está disponible
-
     if (!id_Etapa) {
         alert('ID de etapa no disponible. Asegúrate de buscar la etapa antes de modificarla.');
         return;
@@ -47,6 +44,13 @@ async function aceptarCambios() {
         alert('Por favor, completa todos los campos.');
         return;
     }
+
+    console.log('Datos a enviar:', {
+        id_Etapa,
+        Cant_Sellos,
+        Minimo_Compra,
+        Descuento
+    });
 
     try {
         const response = await fetch('/etapa/modificar', {

@@ -17,21 +17,19 @@ class Etapa {
 
     // Método para modificar los datos de una etapa específica por su id
     static modificarPorId(id_Etapa, nuevosDatos) {
-        const { Cant_Sellos, Minimo_Compra, Descuento, id_Producto } = nuevosDatos;
+        const { Cant_Sellos, Minimo_Compra, Descuento } = nuevosDatos;
         
-        // Consulta corregida
         const query = `
             UPDATE Etapa 
             SET Cant_Sellos = ?, Minimo_Compra = ?, Descuento = ?
             WHERE id_Etapa = ?
         `;
         
-        const params = [Cant_Sellos, Minimo_Compra, Descuento];
-        params.push(id_Etapa);  // Asegurarse de que el id_Etapa se empuje al final
+        const params = [Cant_Sellos, Minimo_Compra, Descuento, id_Etapa]; 
         
         return db.execute(query, params);
-    }
-   
+    } 
+    
 }
 
 // Exportar la clase Etapa
