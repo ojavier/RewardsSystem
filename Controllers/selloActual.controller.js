@@ -1,9 +1,10 @@
 const db = require('C:\\Users\\gaelc\\RewardsSystem\\Util\\database.js');
 
 // Función para mostrar sellos de un usuario por su teléfono
-exports.mostrarSellosPorTelefono = (req, res) => {
+exports.mostrarSellos = (req, res) => {
   const { telefono } = req.body;  // Obtener el teléfono 
 
+  console.log("Telefono recibido:", telefono);
   // Consulta SQL para buscar al usuario por su número de teléfono
   const query = `SELECT sellos FROM usuarios WHERE Telefono = ?`;
 
