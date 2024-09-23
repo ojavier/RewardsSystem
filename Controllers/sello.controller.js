@@ -1,4 +1,4 @@
-const db = require("C:\Users\gaelc\RewardsSystem\oscarv7_rewards.sql");
+const db = require("C:\\Users\\gaelc\\RewardsSystem\\Util\\database.js");
 
 // Registra un sello
 exports.registrarSello = (req,res) => {

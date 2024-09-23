@@ -1,4 +1,4 @@
-const db = require('../config/database');
+const db = require('C:\\Users\\gaelc\\RewardsSystem\\Util\\database.js');
 
 // Función para mostrar sellos de un usuario por su teléfono
 exports.mostrarSellosPorTelefono = (req, res) => {
