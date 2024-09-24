@@ -18,6 +18,7 @@ function cambiarCampos(tipo) {
 let id_Etapa = null; // Mantén esto como variable global
 
 function buscarEtapa() {
+    console.log(id_Etapa)
     const searchBar = document.getElementById('searchBar');
     if (!searchBar || !searchBar.value.trim()) {
         alert('Por favor ingresa un ID de etapa válido para buscar.');
@@ -31,14 +32,17 @@ function buscarEtapa() {
 }
 
 async function aceptarCambios() {
+    id_Etapa = searchBar.value.trim(); 
+    console.log(id_Etapa);
     if (!id_Etapa) {
         alert('ID de etapa no disponible. Asegúrate de buscar la etapa antes de modificarla.');
         return;
     }
 
-    const Cant_Sellos = document.querySelector('input[placeholder="Ingresa la cantidad de sellos"]').value;
-    const Minimo_Compra = document.querySelector('input[placeholder="Ingresa el minimo de compra"]').value;
-    const Descuento = document.querySelector('input[placeholder="Ingresa el descuento"]').value;
+    const Cant_Sellos = document.getElementById('cantidadSellos').value;
+    const Minimo_Compra = document.getElementById('minimoCompra').value;
+    const Descuento = document.getElementById('descuento').value;
+    
 
     if (!Cant_Sellos || !Minimo_Compra || !Descuento) {
         alert('Por favor, completa todos los campos.');
