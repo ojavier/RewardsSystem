@@ -1,9 +1,12 @@
+let currentIdEtapa = null;
+
 async function searchFunction() {
     const id_Etapa = document.getElementById('searchBar').value;
 
     // Si la barra de búsqueda está vacía, no hacer nada
     if (!id_Etapa) {
         document.getElementById('resultadoBusqueda').innerHTML = '';
+        currentIdEtapa = null; // Resetear el valor si la barra está vacía
         return;
     }
 
@@ -14,6 +17,9 @@ async function searchFunction() {
         // Comprobar si la respuesta es correcta
         if (response.ok) {
             const etapa = await response.json();
+
+            // Guardar el id de la etapa para futuras modificaciones
+            currentIdEtapa = etapa.id_Etapa;
 
             // Mostrar los datos de la etapa en el HTML
             document.getElementById('resultadoBusqueda').innerHTML = `
@@ -32,9 +38,11 @@ async function searchFunction() {
         } else {
             // Si no se encontró la etapa, mostrar un mensaje
             document.getElementById('resultadoBusqueda').innerHTML = 'Etapa no encontrada';
+            currentIdEtapa = null;
         }
     } catch (error) {
         console.error('Error buscando la etapa:', error);
         document.getElementById('resultadoBusqueda').innerHTML = 'Error al buscar la etapa';
+        currentIdEtapa = null;
     }
 }
