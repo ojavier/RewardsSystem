@@ -6,7 +6,7 @@ exports.mostrarSellos = (req, res) => {
 
   console.log("Telefono recibido:", telefono);
   // Consulta SQL para buscar al usuario por su número de teléfono
-  const query = `SELECT sellos FROM usuarios WHERE Telefono = ?`;
+  const query = `SELECT COUNT(*) FROM Sellos;`;
 
   db.query(query, [telefono], (err, results) => {
     if (err) {
