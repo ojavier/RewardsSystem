@@ -117,3 +117,70 @@
 .icon-tabler-adjustments {
     margin-right: 10px;
 }
+
+.centrado2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh; /* Para centrar verticalmente */
+    text-align: center; /* Para centrar el texto */
+}
+
+.error-title {
+    font-size: 3rem; /* Aumenta el tamaño del título */
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.error-message {
+    font-size: 1.5rem; /* Aumenta el tamaño del mensaje */
+    margin-bottom: 20px;
+}
+
+.btn-home {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    background-color: #041E3F; /* Color de fondo del botón */
+    color: white; /* Color de texto */
+    text-decoration: none; /* Sin subrayado */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s ease;
+}
+
+.btn-home:hover {
+    background-color: #10D5B1; /* Cambia de color al pasar el mouse */
+}
+
+.vh-100 {
+    height: 100vh;
+}
+.h-custom {
+    height: calc(100% - 56px);
+}    
+.left-side {
+    background-color: #041E3F;
+    width: 50%;
+    height: 100vh; /* Asegura que cubra toda la altura */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-side {
+    width: 50%;
+    background-color: #f4edf3;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.full-screen-image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: url('/images/logo.PNG') no-repeat center center;
+    background-size: cover;
+}

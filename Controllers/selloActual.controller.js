@@ -1,26 +1,25 @@
-const db = require('C:\\Users\\gaelc\\RewardsSystem\\Util\\database.js');
+const Sello = require("C:\Users\gaelc\RewardsSystem\Models\selloActual.models.js");
 
-// Función para mostrar sellos de un usuario por su teléfono
-exports.mostrarSellos = (req, res) => {
-  const { telefono } = req.body;  // Obtener el teléfono 
+// Función para mostrar los sellos de un usuario por su telefono
+exports.mostrarSellos = async(req, res) => {
+  const {Telefono} = req.body;
 
-  console.log("Telefono recibido:", telefono);
-  // Consulta SQL para buscar al usuario por su número de teléfono
-  const query = `SELECT COUNT(*) FROM Sellos;`;
+  console.log("Telefono recibido:", Telefono);
 
-  db.query(query, [telefono], (err, results) => {
-    if (err) {
-      return res.status(500).json({ error: 'Error al obtener los sellos' });
-    }
+  Sello.obtenerSellosPorTelefono(Telefono)
+    .then(([resultados])=> {
+      if (resultados.length === 0 || resultados[0].sellos === 0){
+        return res.status(404).json({mensaje: "Usuario no encontrado o sin sellos"});
+      }
 
-    // Si el usuario no existe, devolvemos un mensaje de error
-    if (results.length === 0) {
-      return res.status(404).json({ mensaje: 'Usuario no encontrado' });
-    }
+      const selloActuales = resultados[0].sellos;
+      res.render("misTarjetas", {Telefono, sellos: selloActuales});
+    })
 
-    // Si el usuario existe, renderizamos la vista con los sellos
-    const sellosActuales = results[0].sellos;
+    .catch(error => {
+      console.error("Error al obtener sellos:", error);
+      return res.status(500).json({error: "Error al obtener sellos"});
+    });
 
-    res.render('misTarjetas', { telefono, sellos: sellosActuales });
-  });
+
 };

@@ -38,18 +38,48 @@ exports.modificarEtapa = (req, res) => {
         Descuento,
     };
 
-    Etapa.modificarPorId(id_Etapa, nuevosDatos)
-        .then(([result]) => {
-            // Verificar el resultado de la actualización
-            console.log('Resultado de la actualización:', result);
+    Etapa.modificarPorId(id_Etapa, nuevosDatos).then(()=>{
 
-            if (result.affectedRows === 0) {
-                return res.status(404).send('Etapa no encontrada');
+        return res.status(200).json({'mensaje':'OK'});
+    }).catch(err => {
+        console.log(err);
+        return res.status(500).json({'mensaje':'Internal server error'});
+    });
+
+
+/*
+    async function modificarEtapa() {
+        if (!currentIdEtapa) {
+            alert("ID de etapa no disponible. Asegúrate de buscar la etapa antes de modificarla.");
+            return;
+        }
+    
+        const Cant_Sellos = document.getElementById('cantidadSellos').value;
+        const Minimo_Compra = document.getElementById('minimoCompra').value;
+        const Descuento = document.getElementById('descuento').value;
+    
+        try {
+            const response = await fetch(`/etapa/${currentIdEtapa}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    Cant_Sellos,
+                    Minimo_Compra,
+                    Descuento
+                })
+            });
+    
+            if (response.ok) {
+                alert("Etapa modificada con éxito");
+            } else {
+                alert("Error modificando la etapa");
             }
-            res.status(200).send('Etapa modificada exitosamente');
-        })
-        .catch(err => {
-            console.log('Error modificando etapa:', err); // Capturar y mostrar el error
-            res.status(500).send('Error al modificar etapa');
-        });
+        } catch (error) {
+            console.error('Error modificando la etapa:', error);
+            alert('Error al modificar la etapa');
+        }
+    }    
+        */
 };
