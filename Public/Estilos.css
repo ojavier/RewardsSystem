@@ -151,3 +151,35 @@
 .btn-home:hover {
     background-color: #10D5B1; /* Cambia de color al pasar el mouse */
 }
+
+.vh-100 {
+    height: 100vh;
+}
+.h-custom {
+    height: calc(100% - 56px);
+}    
+.left-side {
+    background-color: #041E3F;
+    width: 50%;
+    height: 100vh; /* Asegura que cubra toda la altura */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-side {
+    width: 50%;
+    background-color: #f4edf3;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.full-screen-image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: url('/images/logo.PNG') no-repeat center center;
+    background-size: cover;
