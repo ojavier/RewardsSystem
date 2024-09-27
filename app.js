@@ -29,18 +29,20 @@ app.use(session({
   saveUninitialized: false, //Asegura que no se guarde una sesión para una petición que no lo necesita
 }));
 
+// Rutas principales
+const mainRoutes = require('./Routes/main.routes.js');
+app.use('/', mainRoutes);
+
 // Rutas de usuario
 const usuarioRoutes = require('./Routes/usuario.routes.js');
 app.use('/usuario', usuarioRoutes);
 
-
-// Rutas principales
-const mainRoutes = require('./routes/main.routes.js');
-app.use('/', mainRoutes);
-
 // Manejo de errores 404
 app.use((request, response, next) => {
-    response.status(404).render('404', {});
+    response.status(404).render('404', {
+        pagePrimaryTitle: 'Página no encontrada',
+        isLoggedIn: request.session.isLoggedIn || false
+    });
 });
 
 // Iniciar el servidor

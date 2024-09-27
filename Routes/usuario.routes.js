@@ -4,7 +4,7 @@ const isAuth = require('../Util/is-auth');
 
 const usuarioController = require('../controllers/usuario.controller');
 
-router.get('/login', usuarioController.getLogin);
 router.post('/login', usuarioController.postLogin);
+router.get('/login', usuarioController.getLogin);
 
 module.exports = router;

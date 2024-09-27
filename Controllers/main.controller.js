@@ -2,8 +2,17 @@ const { request, response } = require("express");
 
 
 exports.getRoot = (request, response, next) => {
-    response.render('misTarjetas');
+    const isLoggedIn = request.session.isLoggedIn || false;
+    if (!isLoggedIn) {
+        return response.redirect('/usuario/login');
+    }
+    response.render('misTarjetas', {
+        pagePrimaryTitle: 'Mis Tarjetas',
+        isLoggedIn: isLoggedIn,
+        usuario: request.session.usuario || {}
+    });
 };
+
 
 exports.getConfig = (request, response, next) => {
     response.render('configuracion');

@@ -14,27 +14,24 @@
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                     <h2 style="font-weight: bold; text-align: center;">Iniciar Sesión</h2>
-                    <form id="loginForm" action="/usuarios/login" method="POST"> 
-                        <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                        </div>
-
-                        <div data-mdb-input-init class="form-outline mb-4">
-                            <input type="text" id="username" name="username" class="form-control form-control-lg" placeholder="Ingresa tu usuario" required /> <!-- Añadimos el atributo name="username" -->
-                            <label class="form-label" for="username">Usuario</label>
-                        </div>
-
-                        <div data-mdb-input-init class="form-outline mb-3">
-                            <input type="password" id="password" name="password" class="form-control form-control-lg" placeholder="Ingresa contraseña" required /> <!-- Añadimos el atributo name="password" -->
-                            <label class="form-label" for="password">Contraseña</label>
-                        </div>
-
-                        <div class="d-flex justify-content-between align-items-center">
-                        </div>
-
-                        <div class="text-center text-lg-start mt-4 pt-2">
-                            <button type="submit" class="btn btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem; background-color: rgb(6, 213, 177); color:black;">Inicio de Sesión</button>
-                        </div>
-                    </form>
+                </br>
+                <form id="loginForm" action="/usuario/login" method="POST"> 
+                    <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                    </div>
+                
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <label class="form-label" for="Telefono">Número de Teléfono</label>
+                        <input type="text" id="Telefono" name="telefono" class="form-control form-control-lg" placeholder="Ingresa tu número de teléfono" required />
+                    </div>
+                
+                    <div class="d-flex justify-content-between align-items-center">
+                    </div>
+                
+                    <div class="text-center text-lg-start mt-4 pt-2">
+                        <button id="LoginBtn" class="btn btn-primary btn-lg btn-block" style="padding-left: 2.5rem; padding-right: 2.5rem; background-color: rgb(6, 213, 177); color:black;">Iniciar sesión</button>
+                    </div>
+                </form>
+                
                     <div class="help-text">
                         <p>¿Necesitas ayuda?</p>
                         <p>Correo: a01613750@tec.mx</p>
@@ -50,3 +47,4 @@
     </div>
     
   <script src="/Estilos.css"></script>
+  <script src="/js/loginButton.js"></script>
