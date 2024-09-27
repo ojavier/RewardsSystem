@@ -1,4 +1,4 @@
-const Sello = require("C:\Users\gaelc\RewardsSystem\Models\selloActual.models.js");
+const Sello = require('C:\\Users\\gaelc\\RewardsSystem\\Models\\selloActual.models.js');
 
 // Función para mostrar los sellos de un usuario por su telefono
 exports.mostrarSellos = async(req, res) => {

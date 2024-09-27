@@ -40,6 +40,13 @@
     transform: translateY(-50%);
 }
 
+.iconosearchbar{
+    position: relative;
+}
+
+.iconosearchbar input {
+    padding-right: 40px; ;
+}
 .navbar-link {
     color: #fff;
     padding: 0.5rem 1rem;
