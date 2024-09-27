@@ -31,6 +31,22 @@
     /* Space between buttons */
 }
 
+.iconosearchbar img {
+    position: absolute;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+.iconosearchbar{
+    position: relative;
+}
+
+.iconosearchbar input {
+    padding-right: 40px; ;
+}
 .navbar-link {
     color: #fff;
     padding: 0.5rem 1rem;
