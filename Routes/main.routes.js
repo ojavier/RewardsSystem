@@ -1,28 +1,26 @@
 const express = require('express');
 const router = express.Router();
+const isAuth = require('../Util/is-auth');
 
 const mainController = require('../controllers/main.controller');
 const etapaController = require('../Controllers/etapa.controller');
 const selloActualController = require("../controllers/selloActual.controller");
 
 
-router.get('/login', mainController.getLogin);
+router.get('/misTarjetas', isAuth, mainController.getRoot);
 
-router.get('/misTarjetas', mainController.getRoot);
+router.get('/configuracion', isAuth, mainController.getConfig);
 
-router.get('/configuracion', mainController.getConfig);
+router.get('/miInformacion', isAuth, mainController.getInfo);
 
-router.get('/miInformacion', mainController.getInfo);
+router.get('/reportes', isAuth, mainController.getReportes);
 
-router.get('/reportes', mainController.getReportes);
+router.get('/miEquipo', isAuth, mainController.getEquipo);
 
-router.get('/miEquipo', mainController.getEquipo);
-
+// Rutas para Etapa
+router.post('/etapa/modificar', isAuth, etapaController.modificarEtapa); // Modificar etapa
+router.get('/etapa/:id_Etapa', isAuth, etapaController.buscarEtapa); // Buscar etapa por ID
 router.get("/misSucursales", mainController.getSucursales);
 
-//metodos
-
-router.post('/etapa/modificar', etapaController.modificarEtapa); // Esta ruta ya está bien.
-router.get('/etapa/:id_Etapa', etapaController.buscarEtapa); // Esta ruta debe corresponder a un método buscarEtapa en el controlador.
-router.get("/mostrar-Sellos/:Telefono",selloActualController.mostrarSellos)
+router.get("/mostrar-Sellos/:Telefono", isAuth, selloActualController.mostrarSellos);
 module.exports = router; 

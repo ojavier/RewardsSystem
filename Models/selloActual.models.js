@@ -1,4 +1,4 @@
-const db = require('Util\database.js');
+const db = require('../Util/database');
 
 class Sello {
     constructor(id_sello,Fecha_Sello,Hora_Sello,Telefono){
