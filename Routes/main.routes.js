@@ -4,7 +4,6 @@ const isAuth = require('../Util/is-auth');
 
 const mainController = require('../controllers/main.controller');
 const etapaController = require('../Controllers/etapa.controller');
-const selloController = require("../controllers/sello.controller");
 const selloActualController = require("../controllers/selloActual.controller");
 
 
@@ -23,6 +22,5 @@ router.post('/etapa/modificar', isAuth, etapaController.modificarEtapa); // Modi
 router.get('/etapa/:id_Etapa', isAuth, etapaController.buscarEtapa); // Buscar etapa por ID
 router.get("/misSucursales", mainController.getSucursales);
 
-router.post("/registrar-sello",selloController.registrarSello) // Ruta para registrar sello
-router.get("/mostrar-Sellos/:Telefono",selloActualController.mostrarSellos)
+router.get("/mostrar-Sellos/:Telefono", isAuth, selloActualController.mostrarSellos);
 module.exports = router; 

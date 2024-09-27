@@ -9,7 +9,8 @@ exports.getRoot = (request, response, next) => {
     response.render('misTarjetas', {
         pagePrimaryTitle: 'Mis Tarjetas',
         isLoggedIn: isLoggedIn,
-        usuario: request.session.usuario || {}
+        usuario: request.session.usuario || {},
+        sellos: 1
     });
 };
 
