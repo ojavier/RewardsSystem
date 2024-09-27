@@ -19,8 +19,10 @@ router.get('/reportes', mainController.getReportes);
 
 router.get('/miEquipo', mainController.getEquipo);
 
+router.get("/misSucursales", mainController.getSucursales);
+
 router.post('/etapa/modificar', etapaController.modificarEtapa); // Esta ruta ya está bien.
 router.get('/etapa/:id_Etapa', etapaController.buscarEtapa); // Esta ruta debe corresponder a un método buscarEtapa en el controlador.
 router.post("/registrar-sello",selloController.registrarSello) // Ruta para registrar sello
-router.get("/mostrar-sellos/:Telefono",selloActualController.mostrarSellos)
-module.exports = router;
+router.get("/mostrar-Sellos/:Telefono",selloActualController.mostrarSellos)
+module.exports = router; 

@@ -23,3 +23,7 @@ exports.getReportes = (request, response, next) => {
 exports.getEquipo = (request, response, next) => {
     response.render('miEquipo')
 };
+
+exports.getSucursales = (request, response, next) => {
+    response.render("misSucursales")
+};
