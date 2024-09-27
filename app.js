@@ -22,6 +22,18 @@ app.use((request, response, next) => {
     next(); 
 });
 
+const session = require('express-session');
+app.use(session({
+  secret: 'mySecretKey', 
+  resave: false, //La sesión no se guardará en cada petición, sino sólo se guardará si algo cambió 
+  saveUninitialized: false, //Asegura que no se guarde una sesión para una petición que no lo necesita
+}));
+
+// Rutas de usuario
+const usuarioRoutes = require('./Routes/usuario.routes.js');
+app.use('/usuario', usuarioRoutes);
+
+
 // Rutas principales
 const mainRoutes = require('./routes/main.routes.js');
 app.use('/', mainRoutes);
