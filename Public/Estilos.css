@@ -31,6 +31,11 @@
     /* Space between buttons */
 }
 
+.colorlightbotones{
+    background-color: #10D5B1;
+    color: #fff;
+}
+
 .iconosearchbar img {
     position: absolute;
     top: 50%;
