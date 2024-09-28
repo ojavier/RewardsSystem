@@ -17,10 +17,11 @@ router.get('/reportes', isAuth, mainController.getReportes);
 
 router.get('/miEquipo', isAuth, mainController.getEquipo);
 
+router.get("/misSucursales",isAuth, mainController.getSucursales);
+
 // Rutas para Etapa
 router.post('/etapa/modificar', isAuth, etapaController.modificarEtapa); // Modificar etapa
 router.get('/etapa/:id_Etapa', isAuth, etapaController.buscarEtapa); // Buscar etapa por ID
-router.get("/misSucursales", mainController.getSucursales);
 
 router.get("/mostrar-Sellos/:Telefono", isAuth, selloActualController.mostrarSellos);
 module.exports = router; 
