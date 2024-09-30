@@ -2,12 +2,11 @@ const db = require('../Util/database');
 
 // Definición de la clase Tarjeta
 class Tarjeta {
-    constructor(id_Tarjeta, version, fecha_caducidad, imagen, id_Establecimiento) {
-        this.id_Tarjeta = id_Tarjeta;
-        this.version = version;
-        this.fecha_caducidad = fecha_caducidad;
-        this.imagen = imagen;
+    constructor(Telefono, id_Establecimiento, Version, Emision) {
+        this.Telefono = Telefono;
         this.id_Establecimiento = id_Establecimiento;
+        this.Version = Version;
+        this.Emision = Emision;
     }
 
     // Método para obtener todas las tarjetas de un establecimiento
