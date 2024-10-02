@@ -2,49 +2,61 @@
 
 <div class='container'>
     <br>
-    <h1 id="colortextoazul" class="title title-large">Mi informacion</h1>
+    <h1 id="colortextoazul" class="title title-large">Mi información</h1>
 </div>
 
 <br>
 
 <div>
-    <div class="box mx-6">
-    <article class="message">
-        <div class="message-header" id="colorarticulo"><p>Nombre</p>
-        </div>
-        <div class="message-body">
-            Gael Alberto Terán Cásares
-            <img class="cambio-cursor" src="\Images\lapiz.png" alt="Editar" style="float: right; width: 20px; height: 20px;">
-        </div>
-    </article>
-    <br>
-    <article class="message">
-        <div class="message-header" id="colorarticulo"><p>Fecha de nacimiento</p>
-        </div>
-        <div class="message-body">
-            23/08/2004
-            <img class="cambio-cursor" src="\Images\lapiz.png" alt="Editar" style="float: right; width: 20px; height: 20px;">
-        </div>
-    </article>
-    <br>
-    <article class="message">
-        <div class="message-header" id="colorarticulo">
-            Establecimiento
-        </div>
-        <div class="message-body">
-             Chilako Queretaro Benito Juarez #127
-             <img class="cambio-cursor" src="\Images\lapiz.png" alt="Editar" style="float: right; width: 20px; height: 20px;">
-        </div>
-    </article>
-    <article class="message">
-        <div class="message-header" id="colorarticulo">
-            Género
-        </div>
-        
-        <div class="message-body">
-            Hombre
-            <img class="cambio-cursor" src="\Images\lapiz.png" alt="Editar" style="float: right; width: 20px; height: 20px;">
-        </div>
+    <div id="tarjetaCampos" style="display: block;">
+        <form action="/miInformacion" method="POST"> <!-- Asegúrate de que esta sea la ruta correcta para registrar -->
+            <div class="box mx-6">
+                <article class="message">
+                    <div class="message-header" id="colorarticulo">
+                        <p>Nombre</p>
+                    </div>
+                    <div class="message-body">
+                        <input class="input" type="text" name="Nombre" placeholder="Ingresa tu nombre" value="" style="width: 100%;">
+                    </div>
+                </article>
+            </div>
+
+            <div class="box mx-6">
+                <article class="message">
+                    <div class="message-header" id="colorarticulo">
+                        <p>Apellido</p>
+                    </div>
+                    <div class="message-body">
+                        <input class="input" type="text" name="Apellido" placeholder="Ingresa tu apellido" value="" style="width: 100%;">
+                    </div>
+                </article>
+            </div>
+
+            <div class="box mx-6">
+                <article class="message">
+                    <div class="message-header" id="colorarticulo">
+                        <p>Teléfono</p>
+                    </div>
+                    <div class="message-body">
+                        <input class="input" type="tel" name="Telefono" placeholder="Ingresa tu teléfono" value="" style="width: 100%;">
+                    </div>
+                </article>
+            </div>
+
+            <div class="box mx-6">
+                <article class="message">
+                    <div class="message-header" id="colorarticulo">
+                        <p>Fecha de nacimiento</p>
+                    </div>
+                    <div class="message-body">
+                        <input class="input" type="date" name="FechaNacimiento" style="width: 100%;">
+                    </div>
+                </article>
+            </div>
+
+            <div class="box mx-6" style="text-align: center;">
+                <button type="submit" class="button is-primary">Registrar</button> <!-- Botón de registro -->
+            </div>
+        </form>
     </div>
-    </article>
 </div>
