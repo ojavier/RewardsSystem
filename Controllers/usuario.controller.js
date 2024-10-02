@@ -51,3 +51,37 @@ exports.postLogin = (request, response, next) => {
             return response.redirect('/usuario/login');
         });
 };
+
+// Controlador para registrar usuarios
+exports.postRegistrar = (req, res, next) => {
+    const { Nombre, Apellido, Telefono } = req.body;
+
+    // Validar que los datos estén completos
+    if (!Nombre || !Apellido || !Telefono) {
+        req.session.error = 'Todos los campos son obligatorios';
+        return res.redirect('/miInformación');
+    }
+
+    // Registrar el nuevo usuario
+    Usuario.registrar({ Nombre, Apellido, Telefono })
+        .then(() => {
+            req.session.success = 'Usuario registrado con éxito';
+            res.redirect('/usuario/login');  // Redirige al login tras registrarse
+        })
+        .catch(err => {
+            console.error('Error al registrar el usuario:', err);
+            req.session.error = 'Hubo un error al registrar el usuario';
+            res.redirect('/miInformación');
+        });
+};
+
+// Renderizar el formulario de registro
+exports.getRegistrar = (req, res, next) => {
+    const error = req.session.error || null;
+
+    res.render('miInformación', {
+        pagePrimaryTitle: 'Registro de Usuario',
+        error: error,
+        isLoggedIn: false  // El usuario no está logueado en la pantalla de registro
+    });
+};
