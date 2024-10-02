@@ -13,7 +13,7 @@ router.get('/configuracion', isAuth, mainController.getConfig);
 
 router.post('/miInformacion', isAuth, usuarioController.postRegistrar, mainController.getInfo);
 
-router.get('/miInformacion', isAuth, usuarioController.getRegistrar, mainController.getInfo);
+router.get('/miInformacion', usuarioController.getRegistrar, mainController.getInfo);
 
 router.get('/reportes', isAuth, mainController.getReportes);
 

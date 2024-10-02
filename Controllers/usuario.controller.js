@@ -59,7 +59,7 @@ exports.postRegistrar = (req, res, next) => {
     // Validar que los datos estén completos
     if (!Nombre || !Apellido || !Telefono) {
         req.session.error = 'Todos los campos son obligatorios';
-        return res.redirect('/miInformación');
+        return res.redirect('/miInformacion');  // Asegúrate de que la ruta sea correcta
     }
 
     // Registrar el nuevo usuario
@@ -71,7 +71,7 @@ exports.postRegistrar = (req, res, next) => {
         .catch(err => {
             console.error('Error al registrar el usuario:', err);
             req.session.error = 'Hubo un error al registrar el usuario';
-            res.redirect('/miInformación');
+            res.redirect('/miInformacion');  // Asegúrate de que la ruta sea correcta
         });
 };
 
@@ -79,7 +79,7 @@ exports.postRegistrar = (req, res, next) => {
 exports.getRegistrar = (req, res, next) => {
     const error = req.session.error || null;
 
-    res.render('miInformación', {
+    res.render('miInformacion', {
         pagePrimaryTitle: 'Registro de Usuario',
         error: error,
         isLoggedIn: false  // El usuario no está logueado en la pantalla de registro

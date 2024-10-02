@@ -23,7 +23,7 @@ function handleLogin(e) {
     }
 
     // Validar el formato del número de teléfono (por ejemplo, 10 dígitos)
-    const telefonoRegex = /^\d{10}$/; // Ajusta la expresión regular según tu necesidad
+    const telefonoRegex = /^\d{3}$/; // Ajusta la expresión regular según tu necesidad
     if (!telefonoRegex.test(Telefono)) {
         Swal.fire({
             html: '<b>Por favor, ingresa un número de teléfono válido de 10 dígitos</b>',
@@ -41,5 +41,5 @@ function handleLogin(e) {
 function handleRegister() {
     console.log('Botón de registro clickeado'); // Para depuración
     // Redirigir a la página de registro
-    window.location.href = '/miInformación';
+    window.location.href = '/miInformacion';
 }
