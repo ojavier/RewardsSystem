@@ -1,50 +1,57 @@
 <%- include('partials/head.ejs') %>
-<br>
-<div class="container" style="margin-left: 20px;">
-    <h1 class="title is-1 has-text-weight-bold">Mis Clientes</h1>
-
-    <div class="field is-grouped">
-      <div class="control">
-        <button class="button is-primary is-rounded">Registrar Cliente</button>
-      </div>
-    </div>
     <br>
-    <form action="/clientes/buscar" method="get">
+
+    <h1 class="title title-large" style="margin-left: 10%;">Mis Clientes</h1>
+
+    <button class="button is-primary is-rounded" style="margin-left: 10%;">Registrar Cliente</button>
+
+    <br><br>
+
+    <form action="/clientes/buscar" method="get" style="margin-left: 10%; margin-right: 10%;">
         <div class="field iconosearchbar has-addons">
             <div class="control is-expanded">
                 <input class="input" type="text" placeholder="Tel. Cliente" name="SearchTarjeta" id="SearchTarjeta">
             </div>
             <div class="control">
                 <button class="button is-primary">
-                    <img src="https://icones.pro/wp-content/uploads/2021/06/icone-loupe-gris.png" alt="lupa" style="width: 20px; height: 20px;">
+                    <img src="https://icones.pro/wp-content/uploads/2021/06/icone-loupe-gris.png" alt="lupa"
+                        style="width: 20px; height: 20px;">
                 </button>
             </div>
         </div>
     </form>
-</div>
 
-<br>
-<br>
-  <div class="container" style="margin-left: 20px; margin-top: 20px;">
+    <br><br>
+
+
     <% if (Clientes) { %>
-        <div class="box">
-          <h2 class="title is-size-3"> Información </h2>
-          id usuario: <%= Clientes.id_usuario %>
-          <br>
-          Género: <%= Clientes.Genero %>
-          <br>
-          Entidad: <%= Clientes.Entidad %>
-          <br>
-          <br>
-          <button class="button is-primary has-text-centered is-rounded">
-              Registrar Sello
-          </button>
-  
-          <div class="image is-4by3 is-right" style="margin-right: 20px; margin-top: 20px;">
-               <img class="" src="/Public/Images/tarjeta.png" alt="Foto Tarjeta">
-          </div>
+        <div class="box" style="margin-left: 10%; margin-right: 10%;">
+            <div class="column is-vcentered">
+
+                <div class="column is-half">
+                    <h2 class="is-size-4 has-text-weight-bold">Información:</h2>
+
+                    <p class="subtitle is-size-5"><strong>Id Usuario:</strong>
+                        <%= Clientes.id_usuario %>
+                    </p>
+                    <p class="subtitle is-size-5"><strong>Genero:</strong>
+                        <%= Clientes.Genero %>
+                    </p>
+                    <p class="subtitle is-size-5"><strong>Entidad:</strong>
+                        <%= Clientes.Entidad %>
+                    </p>
+
+                    <button class="button is-primary has-text-centered is-rounded">Registrar sello</button>
+
+                </div>
+
+                <div class="column is-half">
+                    <figure class="image">
+                        <!-- Aquí va la imagen de la tarjeta -->
+                    </figure>
+                </div>
+            </div>
         </div>
-      <% } else { %>
-        <p>No se encontraron clientes.</p>
-      <% } %>
-</div>
+        <% } else { %>
+            <p>No se encontraron clientes.</p>
+            <% } %>
