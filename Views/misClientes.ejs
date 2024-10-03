@@ -1,23 +1,26 @@
 <%- include('partials/head.ejs') %>
-<br>
-<br>
-<br>
-<h1 class="title is-1 has-text-weight-bold"> Mis Clientes </h1>
-<br>
-<div class=""> 
-    <a class="button is-primary has-text-centered"> Registrar Cliente </a>
-</div>
-<br>
-<br>
-
-<section></section>
-    <div class="container">
-        <div class="field iconosearchbar">
-            <div class="control">
-                <input class="input" type="text" placeholder="Tel. Cliente" name="SearchTarjeta" id="SearchTarjeta">
-            </div>
-            <img src="https://icones.pro/wp-content/uploads/2021/06/icone-loupe-gris.png" alt="lupa">
-        </div>
+<!-- Agregar un contenedor con margen a la izquierda -->
+ <br>
+ <br>
+<div class="container" style="margin-left: 20px;">
+    <h1 class="title is-1 has-text-weight-bold">Mis Clientes</h1>
+    
+    <!-- Botón para registrar cliente -->
+    <div class="field is-grouped">
+      <div class="control">
+        <a class="button is-primary">Registrar Cliente</a>
+      </div>
     </div>
-</section>
-
+    
+    <!-- Barra de búsqueda con estilo moderno -->
+    <div class="field iconosearchbar has-addons">
+      <div class="control is-expanded">
+        <input class="input" type="text" placeholder="Tel. Cliente" name="SearchTarjeta" id="SearchTarjeta">
+      </div>
+      <div class="control">
+        <a class="button is-primary">
+          <img src="https://icones.pro/wp-content/uploads/2021/06/icone-loupe-gris.png" alt="lupa" style="width: 20px; height: 20px;">
+        </a>
+      </div>
+    </div>
+  </div>
