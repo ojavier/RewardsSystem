@@ -41,7 +41,12 @@ exports.getConfig = (request, response, next) => {
 };
 
 exports.getInfo = (request, response, next) => {
-    response.render('miInformacion');
+    const usuario = request.session.usuario;
+    response.render('miInformacion', {
+        pagePrimaryTitle: 'Mi Información',
+        usuario: usuario,
+        isLoggedIn: request.session.isLoggedIn || false,
+    });
 };
 
 exports.getReportes = (request, response, next) => {
