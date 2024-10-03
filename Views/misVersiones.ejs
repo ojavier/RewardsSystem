@@ -2,35 +2,41 @@
 
     <h1 class="title title-large">Mis Tarjetas</h1>
 
-    <br>
-    <br>
+    <br><br>
 
     <button class="is-primary is-rounded">Crear nueva tarjeta</button>
 
     <div class="tarjetas">
-        <% tarjetas.forEach(tarjeta=> { %>
-            <div class="box">
-                <div class="columns is-vcentered">
-                    <div class="column is-half">
-                        <h2 class="is-size-4 has-text-weight-bold">Información:</h2>
-                        <p class="subtitle is-size-5"><strong>Versión:</strong>
-                            <%= tarjeta.Version %>
-                        </p>
-                        <p class="subtitle is-size-5"><strong>Fecha de emision:</strong>
-                            <%= tarjeta.Emision %>
-                        </p>
+        <% if (tarjetas.length===0) { %>
+            <p>No hay tarjetas disponibles para este establecimiento.</p>
+            <% } else { %>
+                <% tarjetas.forEach(tarjeta=> { %>
+                    <div class="box">
+                        <div class="columns is-vcentered">
 
-                        <div class="buttons">
-                            <button class="button is-primary is-rounded">Editar</button>
-                            <button class="button is-danger is-rounded">Eliminar</button>
-                        </div>
+                            <div class="column is-half">
+                                <h2 class="is-size-4 has-text-weight-bold">Información:</h2>
+                                <p class="subtitle is-size-5"><strong>Versión:</strong>
+                                    <%= tarjeta.Version %>
+                                </p>
+                                <p class="subtitle is-size-5"><strong>Fecha de emisión:</strong>
+                                    <%= tarjeta.Emision %>
+                                </p>
 
-                        <div class="column is-half">
-                            <figure class="image">
-                                <!-- Aqui va la imagen de la tarjeta -->
-                            </figure>
+                                <div class="buttons">
+                                    <button class="button is-primary is-rounded">Editar</button>
+                                    <button class="button is-danger is-rounded">Eliminar</button>
+                                </div>
+                            </div>
+
+                            <div class="column is-half">
+                                <figure class="image">
+                                    <!-- Aquí va la imagen de la tarjeta -->
+                                </figure>
+                            </div>
+
                         </div>
                     </div>
-                </div>
-                <% }) %>
-            </div>
+                    <% }) %>
+                        <% } %>
+    </div>
