@@ -3,9 +3,11 @@ const router = express.Router();
 const isAuth = require('../Util/is-auth');
 
 const mainController = require('../controllers/main.controller');
+// const tarjetasController = require('../Controllers/tarjetas.controller');
 const etapaController = require('../Controllers/etapa.controller');
 const selloActualController = require("../controllers/selloActual.controller");
 
+router.get('/misVersiones', isAuth, mainController.getTarjetas);
 
 router.get('/misTarjetas', isAuth, mainController.getRoot);
 
@@ -17,7 +19,7 @@ router.get('/reportes', isAuth, mainController.getReportes);
 
 router.get('/miEquipo', isAuth, mainController.getEquipo);
 
-router.get("/misSucursales",isAuth, mainController.getSucursales);
+router.get("/misSucursales", isAuth, mainController.getSucursales);
 
 router.get("/misClientes", isAuth, mainController.getClientes);
 
