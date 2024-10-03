@@ -39,3 +39,7 @@ exports.getEquipo = (request, response, next) => {
 exports.getSucursales = (request, response, next) => {
     response.render("misSucursales")
 };
+
+exports.getClientes = (request, response, next) => {
+    response.render("misClientes")
+};

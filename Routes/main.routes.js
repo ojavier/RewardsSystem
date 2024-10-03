@@ -19,6 +19,8 @@ router.get('/miEquipo', isAuth, mainController.getEquipo);
 
 router.get("/misSucursales",isAuth, mainController.getSucursales);
 
+router.get("/misClientes", isAuth, mainController.getClientes);
+
 // Rutas para Etapa
 router.post('/etapa/modificar', isAuth, etapaController.modificarEtapa); // Modificar etapa
 router.get('/etapa/:id_Etapa', isAuth, etapaController.buscarEtapa); // Buscar etapa por ID
