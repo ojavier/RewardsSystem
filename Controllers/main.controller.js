@@ -62,6 +62,10 @@ exports.getSucursales = (request, response, next) => {
     response.render("misSucursales")
 };
 
+exports.getmodTar=(request,response,next) => {
+    response.render("modificarTarjeta")
+};
+
 exports.getClientes = async (request, response, next) => {
     try {
       const clientes = await Clientes.obtenerTodos();
@@ -83,3 +87,5 @@ exports.getClientes = async (request, response, next) => {
         return response.status(500).send({ message: 'Error al buscar cliente' });
     });
 };
+
+
