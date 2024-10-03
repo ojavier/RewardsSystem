@@ -9,10 +9,15 @@ class Tarjeta {
         this.Emision = Emision;
     }
 
-    // Método para obtener todas las tarjetas de un establecimiento
+    // Método para obtener las versiones de tarjeta de un establecimiento
     static obtenerPorEstablecimiento(idEstablecimiento) {
-        const query = 'SELECT * FROM Tarjetas WHERE id_Establecimiento = ?';
-        return db.execute(query, [idEstablecimiento]); // Usamos promesas
+        const query = `
+            SELECT DISTINCT Version, Emision, id_Establecimiento
+            FROM Tarjetas
+            WHERE id_Establecimiento = ?
+            GROUP BY Version
+        `;
+        return db.execute(query, [idEstablecimiento]);
     }
 }
 

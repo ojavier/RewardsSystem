@@ -7,8 +7,7 @@ const tarjetasController = require('../Controllers/tarjetas.controller');
 const etapaController = require('../Controllers/etapa.controller');
 const selloActualController = require("../controllers/selloActual.controller");
 
-
-router.get('/misVersiones', isAuth, tarjetasController.getTarjetas);
+router.get('/misVersiones', isAuth, mainController.getTarjetas);
 
 router.get('/misTarjetas', isAuth, mainController.getRoot);
 

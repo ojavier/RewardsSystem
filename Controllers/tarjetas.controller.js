@@ -4,6 +4,8 @@ const Tarjeta = require('../Models/tarjetas.models'); // Importamos el modelo de
 exports.getTarjetas = (request, response, next) => {
     const idEstablecimiento = request.query.establecimiento;
 
+    console.log('idEstablecimiento:', idEstablecimiento);
+
     // Llamamos al método del modelo para obtener las tarjetas
     Tarjeta.obtenerPorEstablecimiento(idEstablecimiento)
         .then(([results]) => {
