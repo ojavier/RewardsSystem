@@ -6,6 +6,9 @@ const mainController = require('../controllers/main.controller');
 // const tarjetasController = require('../Controllers/tarjetas.controller');
 const etapaController = require('../Controllers/etapa.controller');
 const selloActualController = require("../controllers/selloActual.controller");
+const clienteController = require('../Controllers/cliente.controller');
+
+router.get('/misClientes', clienteController.buscarClientePorTelefono);
 
 router.get('/misVersiones', isAuth, mainController.getTarjetas);
 

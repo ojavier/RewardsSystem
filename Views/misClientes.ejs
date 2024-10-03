@@ -12,43 +12,45 @@
 
     <section>
         <div class="container">
-            <div class="field iconosearchbar">
-                <div class="control">
-                    <input class="input" type="text" placeholder="Tel. Cliente" name="SearchTarjeta" id="SearchTarjeta">
+            <form action="/misClientes" method="GET">
+                <div class="field iconosearchbar">
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Tel. Cliente" name="telefono" id="SearchTarjeta">
+                    </div>
+                    <button type="submit" class="button is-primary">Buscar</button>
                 </div>
-                <img src="https://icones.pro/wp-content/uploads/2021/06/icone-loupe-gris.png" alt="lupa">
-            </div>
+            </form>
         </div>
     </section>
 
     <br>
     <br>
 
-    <div class="box" style="margin-left: 10%; margin-right: 10%;">
-        <div class="columns is-vcentered">
+    <% if (cliente) { %>
+        <div class="box" style="margin-left: 10%; margin-right: 10%;">
+            <div class="columns is-vcentered">
+                <div class="column is-half">
+                    <h2 class="is-size-4 has-text-weight-bold">Información:</h2>
+                    <p class="subtitle is-size-5"><strong>Nombre:</strong>
+                        <%= cliente.Nombre %>
+                    </p> <!-- Aquí va el nombre -->
+                    <p class="subtitle is-size-5"><strong>Genero:</strong>
+                        <%= cliente.Genero %>
+                    </p>
+                    <p class="subtitle is-size-5"><strong>Edad:</strong>
+                        <%= cliente.Edad %>
+                    </p>
 
-            <div class="column is-half">
-                <h2 class="is-size-4 has-text-weight-bold">Información:</h2>
-                <p class="subtitle is-size-5"><strong>Nombre:</strong>
+                    <div class="buttons">
+                        <button class="button is-primary is-rounded">Registrar sello</button>
+                    </div>
+                </div>
 
-                </p>
-                <p class="subtitle is-size-5"><strong>Genero:</strong>
-
-                </p>
-                <p class="subtitle is-size-5"><strong>Edad:</strong>
-
-                </p>
-
-                <div class="buttons">
-                    <button class="button is-primary is-rounded">Registrar sello</button>
+                <div class="column is-half">
+                    <figure class="image">
+                        <!-- Aquí va la imagen de la tarjeta -->
+                    </figure>
                 </div>
             </div>
-
-            <div class="column is-half">
-                <figure class="image">
-                    <!-- Aquí va la imagen de la tarjeta -->
-                </figure>
-            </div>
-
         </div>
-    </div>
+        <% } %>
