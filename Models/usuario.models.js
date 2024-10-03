@@ -15,6 +15,12 @@ class Usuario {
         return db.execute(query, [Telefono]); // Usamos promesas
     }
 
+    // Método para encontrar el nombre del usuario
+    static buscarnombre(Telefono) {
+        const query = "SELECT Nombre FROM Usuarios WHERE Telefono = ";
+        return db.execute(query, [Telefono]); 
+    }
+
 }
 
 // Exportar la clase Usuario

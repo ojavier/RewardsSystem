@@ -13,7 +13,12 @@
         <div class="message-header" id="colorarticulo"><p>Nombre</p>
         </div>
         <div class="message-body">
-            Gael Alberto Terán Cásares
+            <% if (usuario) { %>
+                <%= usuario.Nombre %> <%= usuario.Apellido %>
+            <% } else { %>
+                <p>No se encontró información del usuario.</p>
+            <% } %>
+            
             <img class="cambio-cursor" src="\Images\lapiz.png" alt="Editar" style="float: right; width: 20px; height: 20px;">
         </div>
     </article>

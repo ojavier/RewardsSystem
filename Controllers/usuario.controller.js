@@ -1,3 +1,4 @@
+const { response, request } = require('express');
 const Usuario = require('../Models/usuario.models');
 const isAuth = require('../Util/is-auth');
 
@@ -51,3 +52,5 @@ exports.postLogin = (request, response, next) => {
             return response.redirect('/usuario/login');
         });
 };
+
+
