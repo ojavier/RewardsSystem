@@ -7,6 +7,8 @@ const mainController = require('../controllers/main.controller');
 const etapaController = require('../Controllers/etapa.controller');
 const selloActualController = require("../controllers/selloActual.controller");
 
+router.get('/modificarEtapas', isAuth, mainController.getmodEtap);
+
 router.get('/misVersiones', isAuth, mainController.getTarjetas);
 
 router.get('/misTarjetas', isAuth, mainController.getRoot);

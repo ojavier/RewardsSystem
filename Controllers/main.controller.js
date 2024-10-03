@@ -50,6 +50,10 @@ exports.getInfo = (request, response, next) => {
     });
 };
 
+exports.getmodEtap = (request, response, next) => {
+    response.render('modificarEtapas')
+}
+
 exports.getReportes = (request, response, next) => {
     response.render('Reportes');
 };
@@ -62,25 +66,25 @@ exports.getSucursales = (request, response, next) => {
     response.render("misSucursales")
 };
 
-exports.getmodTar=(request,response,next) => {
+exports.getmodTar = (request, response, next) => {
     response.render("modificarTarjeta")
 };
 
 exports.getClientes = async (request, response, next) => {
     try {
-      const clientes = await Clientes.obtenerTodos();
-      response.render('misClientes', { Clientes: clientes });
+        const clientes = await Clientes.obtenerTodos();
+        response.render('misClientes', { Clientes: clientes });
     } catch (err) {
-      console.error(err);
-      response.status(500).send({ message: 'Error al obtener clientes' });
+        console.error(err);
+        response.status(500).send({ message: 'Error al obtener clientes' });
     }
 };
 
-  exports.buscarClienteSearch = (request,response, next) => {
+exports.buscarClienteSearch = (request, response, next) => {
     const Telefono = request.query.SearchTarjeta;
 
     Clientes.buscarClienteSearch(Telefono).then(([results, fieldData]) => {
-        const cliente = new Clientes(results[0].Telefono,results[0].Entidad,results[0].Genero,results[0].fecha_nacimiento,results[0].id_usuario);
+        const cliente = new Clientes(results[0].Telefono, results[0].Entidad, results[0].Genero, results[0].fecha_nacimiento, results[0].id_usuario);
         return response.render('misClientes', { Clientes: cliente });
     }).catch(err => {
         console.log(err);
