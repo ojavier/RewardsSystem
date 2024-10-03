@@ -25,5 +25,7 @@ router.get("/misClientes", isAuth, mainController.getClientes);
 router.post('/etapa/modificar', isAuth, etapaController.modificarEtapa); // Modificar etapa
 router.get('/etapa/:id_Etapa', isAuth, etapaController.buscarEtapa); // Buscar etapa por ID
 
-router.get("/mostrar-Sellos/:Telefono", isAuth, selloActualController.mostrarSellos);
+//rutas para clientes
+router.get("/clientes/buscar", mainController.buscarClienteSearch);
+
 module.exports = router; 

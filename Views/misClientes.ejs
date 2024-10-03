@@ -1,7 +1,50 @@
 <%- include('partials/head.ejs') %>
 <br>
+<div class="container" style="margin-left: 20px;">
+    <h1 class="title is-1 has-text-weight-bold">Mis Clientes</h1>
+
+    <div class="field is-grouped">
+      <div class="control">
+        <button class="button is-primary is-rounded">Registrar Cliente</button>
+      </div>
+    </div>
+    <br>
+    <form action="/clientes/buscar" method="get">
+        <div class="field iconosearchbar has-addons">
+            <div class="control is-expanded">
+                <input class="input" type="text" placeholder="Tel. Cliente" name="SearchTarjeta" id="SearchTarjeta">
+            </div>
+            <div class="control">
+                <button class="button is-primary">
+                    <img src="https://icones.pro/wp-content/uploads/2021/06/icone-loupe-gris.png" alt="lupa" style="width: 20px; height: 20px;">
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
 <br>
 <br>
-<h1 class="title is-1 has-text-weight-bold has-text-centered"> Mis Sucursales </h1>
-<br>
-<div class="button is-primary has-text-centered"> Registrar Cliente </div>
+  <div class="container" style="margin-left: 20px; margin-top: 20px;">
+    <% if (Clientes) { %>
+        <div class="box">
+          <h2 class="title is-size-3"> Información </h2>
+          id usuario: <%= Clientes.id_usuario %>
+          <br>
+          Género: <%= Clientes.Genero %>
+          <br>
+          Entidad: <%= Clientes.Entidad %>
+          <br>
+          <br>
+          <button class="button is-primary has-text-centered is-rounded">
+              Registrar Sello
+          </button>
+  
+          <div class="image is-4by3 is-right" style="margin-right: 20px; margin-top: 20px;">
+               <img class="" src="/Public/Images/tarjeta.png" alt="Foto Tarjeta">
+          </div>
+        </div>
+      <% } else { %>
+        <p>No se encontraron clientes.</p>
+      <% } %>
+</div>

@@ -1,4 +1,5 @@
 const { request, response } = require("express");
+const Clientes = require('../Models/clientes.models');
 
 
 exports.getRoot = (request, response, next) => {
@@ -40,6 +41,28 @@ exports.getSucursales = (request, response, next) => {
     response.render("misSucursales")
 };
 
-exports.getClientes = (request, response, next) => {
-    response.render("misClientes")
+exports.getClientes = async (request, response, next) => {
+    try {
+      const clientes = await Clientes.obtenerTodos();
+      response.render('misClientes', { Clientes: clientes });
+    } catch (err) {
+      console.error(err);
+      response.status(500).send({ message: 'Error al obtener clientes' });
+    }
+};
+
+  exports.buscarClienteSearch = (request,response, next) => {
+    const Telefono = request.query.Telefono
+
+    Clientes.buscarClienteSearch(Telefono, (err,cliente) => {
+        if (err) {
+            console.error(err);
+            response.status(500).send({ message: 'Error al buscar cliente' });
+          } else if (!cliente) {
+            response.status(404).send({ message: 'Cliente no encontrado' });
+          } else {
+            response.render('misClientes', { Clientes: cliente });
+          }
+    });
+    
 };
