@@ -56,7 +56,7 @@ exports.getmodTar = (request, response, next) => {
 exports.getClientes = async (request, response, next) => {
     try {
         const clientes = await Clientes.obtenerTodos();
-        response.render('misClientes', { Clientes: clientes });
+        response.render('misClientes', { Clientes: clientes, notification: null });
     } catch (err) {
         console.error(err);
         response.status(500).send({ message: 'Error al obtener clientes' });
@@ -69,15 +69,17 @@ exports.buscarClienteSearch = (request, response, next) => {
     Clientes.buscarClienteSearch(Telefono)
         .then(([results, fieldData]) => {
             if (results.length === 0){
-                return response.render("misClientes", { Clientes: null, error: "Cliente no encontrado"});
+                return response.render("misClientes", { Clientes: null, error: "Cliente no encontrado", notification: null});
             }
 
             const cliente = results[0];
 
             Clientes.buscarSellosCliente(Telefono)
             .then((results) => {
-                const sellos = results[0].cantidad_sellos;
-                return response.render("misClientes", { Clientes:cliente, sellos: sellos });
+                const sellos = results[0][0].cantidad_sellos;
+                console.log(results[0]);
+                console.log(results[0][0].cantidad_sellos);
+                return response.render("misClientes", { Clientes:cliente, sellos: sellos, notification: null });
             })
 
             .catch((err) => {
@@ -94,13 +96,13 @@ exports.buscarClienteSearch = (request, response, next) => {
 
 exports.registrarSello = async (request,response, next) => {
     try{
-        const Telefono = request.query.SearchTarjeta;
+        console.log(request.body)
+        const Telefono = request.body.telefono;
         await Sello.registrarSelloTel(Telefono);
-        response.redirect("misClientes", {
-            notification: "Sello registrado correctamente",
-            type: "success",
-            Clientes: request.session.Clientes
-        });
+
+        const [results] = await Clientes.buscarClienteSearch(Telefono);
+        const cliente= results[0];
+        response.render('misClientes', { notification: 'Sello registrado correctamente', type: 'success', Clientes: cliente});
     }
     catch(err) {
         console.error(err);

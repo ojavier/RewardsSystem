@@ -34,9 +34,9 @@ router.post('/etapa/modificar', isAuth, etapaController.modificarEtapa); // Modi
 router.get('/etapa/:id_Etapa', isAuth, etapaController.buscarEtapa); // Buscar etapa por ID
 
 //rutas para clientes
-router.get("/clientes/buscar", mainController.buscarClienteSearch);
+router.get("/clientes/buscar", isAuth, mainController.buscarClienteSearch);
 
-router.post("/sello/registrar", mainController.registrarSello);
+router.post("/sello/registrar", isAuth, mainController.registrarSello);
 
 //Rutas para misVersiones
 
