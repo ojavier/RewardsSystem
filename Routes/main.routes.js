@@ -7,6 +7,8 @@ const tarjetasController = require('../Controllers/tarjetas.controller');
 const etapaController = require('../Controllers/etapa.controller');
 const selloActualController = require("../controllers/selloActual.controller");
 
+router.get('/crearEtapa', isAuth, mainController.getcrearEtap);
+
 router.get('/modificarEtapas', isAuth, mainController.getmodEtap);
 
 router.get('/misVersiones', isAuth, tarjetasController.getTarjetas);
