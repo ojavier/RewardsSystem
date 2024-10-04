@@ -9,7 +9,7 @@ const selloActualController = require("../controllers/selloActual.controller");
 
 router.get('/modificarEtapas', isAuth, mainController.getmodEtap);
 
-router.get('/misVersiones', isAuth, mainController.getTarjetas);
+router.get('/misVersiones', isAuth, tarjetasController.getTarjetas);
 
 router.get('/misTarjetas', isAuth, mainController.getRoot);
 
