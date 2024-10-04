@@ -92,9 +92,19 @@ exports.buscarClienteSearch = (request, response, next) => {
         });
 };
 
-exports.registrarSello = (request,response, next) => {
-    const Telefono = request.query.SearchTarjeta;
-
-    Sello.registrarSelloTel(Telefono)
-}
+exports.registrarSello = async (request,response, next) => {
+    try{
+        const Telefono = request.query.SearchTarjeta;
+        await Sello.registrarSelloTel(Telefono);
+        response.redirect("misClientes", {
+            notification: "Sello registrado correctamente",
+            type: "success",
+            Clientes: request.session.Clientes
+        });
+    }
+    catch(err) {
+        console.error(err);
+        response.status(500).send({message: "Error al registrar Sello"})
+    }
+};
 

@@ -2,7 +2,11 @@
     <br>
 
     <h1 class="title title-large" style="margin-left: 10%;">Mis Clientes</h1>
-
+    <% if (notification) { %>
+        <div class="notification is-<%= type %>">
+          <%= notification %>
+        </div>
+      <% } %>
     <button class="button is-primary is-rounded" style="margin-left: 10%;">Registrar Cliente</button>
 
     <br><br>
