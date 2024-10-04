@@ -36,6 +36,8 @@ router.get('/etapa/:id_Etapa', isAuth, etapaController.buscarEtapa); // Buscar e
 //rutas para clientes
 router.get("/clientes/buscar", mainController.buscarClienteSearch);
 
+router.post("/sello/registrar", mainController.registrarSello);
+
 //Rutas para misVersiones
 
 module.exports = router; 

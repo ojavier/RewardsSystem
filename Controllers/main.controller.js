@@ -1,5 +1,6 @@
 const { request, response } = require("express");
 const Clientes = require('../Models/clientes.models');
+const Sello = require("../Models/selloActual.models");
 
 exports.getRoot = (request, response, next) => {
     const isLoggedIn = request.session.isLoggedIn || false;
@@ -91,4 +92,9 @@ exports.buscarClienteSearch = (request, response, next) => {
         });
 };
 
+exports.registrarSello = (request,response, next) => {
+    const Telefono = request.query.SearchTarjeta;
+
+    Sello.registrarSelloTel(Telefono)
+}
 

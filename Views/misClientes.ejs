@@ -45,9 +45,11 @@
                     <% } else { %>
                         <p class="subtitle is-size-5"><strong>Sellos:</strong> No hay sellos registrados</p>
                     <% } %>
-
-                    <button class="button is-primary has-text-centered is-rounded">Registrar sello</button>
-
+                    
+                    <form action="/sello/registrar" method="post">
+                        <input type="hidden" name="telefono" value="<%= Clientes.Telefono %>">
+                        <button class="button is-primary has-text-centered is-rounded">Registrar sello</button>
+                    </form>
                 </div>
 
                 <div class="column is-half">
