@@ -1,3 +1,4 @@
+const { request, response } = require('express');
 const Etapa = require('../models/etapas.models');
 
 exports.buscarEtapa = (req, res, next) => {
@@ -38,11 +39,37 @@ exports.modificarEtapa = (req, res) => {
         Descuento,
     };
 
-    Etapa.modificarPorId(id_Etapa, nuevosDatos).then(()=>{
+    Etapa.modificarPorId(id_Etapa, nuevosDatos).then(() => {
 
-        return res.status(200).json({'mensaje':'OK'});
+        return res.status(200).json({ 'mensaje': 'OK' });
     }).catch(err => {
         console.log(err);
-        return res.status(500).json({'mensaje':'Internal server error'});
+        return res.status(500).json({ 'mensaje': 'Internal server error' });
     });
 };
+
+exports.crearEtapa = async (req, res, next) => {
+    try {
+        const sellos_cantidad = req.body.sellos_cantidad
+        console.log(sellos_cantidad);
+        const compra_minima = req.body.compra_minima
+        console.log(compra_minima);
+        const descuento = req.body.descuento
+        console.log(descuento);
+        const nombre_producto = req.body.nombre_producto
+        console.log(nombre_producto);
+        const [resProducto] = await Etapa.encontrarProducto(nombre_producto);
+        console.log(resProducto);
+        const id_Producto = resProducto[0];
+        console.log(id_Producto);
+        const id_Etapa = '002'
+        Etapa.crearEtapa(sellos_cantidad, compra_minima, descuento, id_Producto);
+        response.render("crearEtapa");
+    }
+    catch (err) {
+        console.error(err);
+        response.status(500).send({
+            message: "Error al crear etapa"
+        })
+    }
+}
