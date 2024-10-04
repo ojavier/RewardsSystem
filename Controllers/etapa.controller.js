@@ -45,41 +45,4 @@ exports.modificarEtapa = (req, res) => {
         console.log(err);
         return res.status(500).json({'mensaje':'Internal server error'});
     });
-
-
-/*
-    async function modificarEtapa() {
-        if (!currentIdEtapa) {
-            alert("ID de etapa no disponible. Asegúrate de buscar la etapa antes de modificarla.");
-            return;
-        }
-    
-        const Cant_Sellos = document.getElementById('cantidadSellos').value;
-        const Minimo_Compra = document.getElementById('minimoCompra').value;
-        const Descuento = document.getElementById('descuento').value;
-    
-        try {
-            const response = await fetch(`/etapa/${currentIdEtapa}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    Cant_Sellos,
-                    Minimo_Compra,
-                    Descuento
-                })
-            });
-    
-            if (response.ok) {
-                alert("Etapa modificada con éxito");
-            } else {
-                alert("Error modificando la etapa");
-            }
-        } catch (error) {
-            console.error('Error modificando la etapa:', error);
-            alert('Error al modificar la etapa');
-        }
-    }    
-        */
 };

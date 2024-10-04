@@ -31,6 +31,19 @@
     /* Space between buttons */
 }
 
+.colorlightbotones{
+    background-color: #10D5B1;
+}
+
+.coloduper{
+    background-color: #041E3F;
+}
+
+.mitadblanco
+{
+    background-color: #fff;
+}
+
 .iconosearchbar img {
     position: absolute;
     top: 50%;

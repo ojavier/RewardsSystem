@@ -1,3 +1,4 @@
+const { response, request } = require('express');
 const Usuario = require('../Models/usuario.models');
 const isAuth = require('../Util/is-auth');
 
@@ -50,4 +51,9 @@ exports.postLogin = (request, response, next) => {
             request.session.error = 'Error interno del servidor';
             return response.redirect('/usuario/login');
         });
+    
 };
+
+exports
+
+

@@ -2,7 +2,7 @@
 
 <div class='container'>
     <br>
-    <h1 id="colortextoazul" class="title title-large">Mi informacion</h1>
+    <h1 id="colortextoazul" class="title title-large has-text-centered">Mi informacion</h1>
 </div>
 
 <br>
@@ -13,16 +13,25 @@
         <div class="message-header" id="colorarticulo"><p>Nombre</p>
         </div>
         <div class="message-body">
-            Gael Alberto Terán Cásares
+            <% if (usuario) { %>
+                <%= usuario.Nombre %> <%= usuario.Apellido %>
+            <% } else { %>
+                <p>No se encontró información del usuario.</p>
+            <% } %>
+            
             <img class="cambio-cursor" src="\Images\lapiz.png" alt="Editar" style="float: right; width: 20px; height: 20px;">
         </div>
     </article>
     <br>
     <article class="message">
-        <div class="message-header" id="colorarticulo"><p>Fecha de nacimiento</p>
+        <div class="message-header" id="colorarticulo"><p>Teléfono</p>
         </div>
         <div class="message-body">
-            23/08/2004
+            <% if (usuario) { %>
+                <%= usuario.Telefono %>
+            <% } else { %>
+                <p>No se encontró información del usuario.</p>
+            <% } %>
             <img class="cambio-cursor" src="\Images\lapiz.png" alt="Editar" style="float: right; width: 20px; height: 20px;">
         </div>
     </article>
