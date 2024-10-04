@@ -3,9 +3,11 @@ const router = express.Router();
 const isAuth = require('../Util/is-auth');
 
 const mainController = require('../controllers/main.controller');
-// const tarjetasController = require('../Controllers/tarjetas.controller');
+//const tarjetasController = require('../Controllers/tarjetas.controller');
 const etapaController = require('../Controllers/etapa.controller');
 const selloActualController = require("../controllers/selloActual.controller");
+
+router.get('/modificarEtapas', isAuth, mainController.getmodEtap);
 
 router.get('/misVersiones', isAuth, mainController.getTarjetas);
 
