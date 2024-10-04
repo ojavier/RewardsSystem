@@ -14,6 +14,7 @@ class Usuario {
         const query = 'SELECT * FROM Usuarios WHERE Telefono = ?';
         return db.execute(query, [Telefono]); // Usamos promesas
     }
+
 }
 
 // Exportar la clase Usuario

@@ -73,6 +73,7 @@ exports.buscarClienteSearch = (request, response, next) => {
             }
 
             const cliente = results[0];
+            console.log(cliente);
 
             Clientes.buscarSellosCliente(Telefono)
             .then((results) => {

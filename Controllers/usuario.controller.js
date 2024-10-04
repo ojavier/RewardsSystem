@@ -51,6 +51,9 @@ exports.postLogin = (request, response, next) => {
             request.session.error = 'Error interno del servidor';
             return response.redirect('/usuario/login');
         });
+    
 };
+
+exports
 
 

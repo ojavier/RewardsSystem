@@ -40,4 +40,5 @@ router.post("/sello/registrar", isAuth, mainController.registrarSello);
 
 //Rutas para misVersiones
 
+//Rutas para Establecimientos
 module.exports = router; 
