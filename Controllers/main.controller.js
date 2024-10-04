@@ -28,9 +28,13 @@ exports.getInfo = (request, response, next) => {
     });
 };
 
+exports.getcrearEtap = (request, response, next) => {
+    response.render('crearEtapa')
+};
+
 exports.getmodEtap = (request, response, next) => {
     response.render('modificarEtapas')
-}
+};
 
 exports.getReportes = (request, response, next) => {
     response.render('Reportes');
