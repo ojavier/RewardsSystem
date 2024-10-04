@@ -11,9 +11,9 @@ router.get('/misTarjetas', isAuth, mainController.getRoot);
 
 router.get('/configuracion', isAuth, mainController.getConfig);
 
-router.post('/miInformacion', isAuth, usuarioController.postRegistrar, mainController.getInfo);
+router.post('/miInformacion', usuarioController.postRegistrar);
 
-router.get('/miInformacion', usuarioController.getRegistrar, mainController.getInfo);
+router.get('/miInformacion', usuarioController.getRegistrar);
 
 router.get('/reportes', isAuth, mainController.getReportes);
 
