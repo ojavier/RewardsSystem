@@ -56,18 +56,35 @@ exports.getClientes = async (request, response, next) => {
         console.error(err);
         response.status(500).send({ message: 'Error al obtener clientes' });
     }
-
+};
 
 exports.buscarClienteSearch = (request, response, next) => {
     const Telefono = request.query.SearchTarjeta;
 
-    Clientes.buscarClienteSearch(Telefono).then(([results, fieldData]) => {
-        const cliente = new Clientes(results[0].Telefono, results[0].Entidad, results[0].Genero, results[0].fecha_nacimiento, results[0].id_usuario);
-        return response.render('misClientes', { Clientes: cliente });
-    }).catch(err => {
-        console.log(err);
-        return response.status(500).send({ message: 'Error al buscar cliente' });
-    });
+    Clientes.buscarClienteSearch(Telefono)
+        .then(([results, fieldData]) => {
+            if (results.length === 0){
+                return response.render("misClientes", { Clientes: null, error: "Cliente no encontrado"});
+            }
+
+            const cliente = results[0];
+
+            Clientes.buscarSellosCliente(Telefono)
+            .then((results) => {
+                const sellos = results[0].cantidad_sellos;
+                return response.render("misClientes", { Clientes:cliente, sellos: sellos });
+            })
+
+            .catch((err) => {
+                console.log(err);
+                return response.status(500).send({ message: "Error al buscar sellos del cliente"});
+            });
+        })
+
+        .catch((err) => {
+            console.log(err);
+            return response.status(500).send({ message: 'Error al buscar cliente' });
+        });
 };
 
 

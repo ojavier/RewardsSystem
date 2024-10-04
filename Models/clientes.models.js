@@ -25,6 +25,11 @@ class Clientes{
         }
     }
 
-}
+    static buscarSellosCliente(Telefono, callback){
+      const query = "SELECT COUNT(*) AS cantidad_sellos FROM Sellos WHERE Telefono =?";
+      return db.execute(query,[Telefono]);
+    }
+
+};
 
 module.exports = Clientes;

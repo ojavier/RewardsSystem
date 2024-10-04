@@ -40,6 +40,11 @@
                     <p class="subtitle is-size-5"><strong>Entidad:</strong>
                         <%= Clientes.Entidad %>
                     </p>
+                    <% if (typeof sellos !== 'undefined' && sellos !== null) { %>
+                        <p class="subtitle is-size-5"><strong>Sellos:</strong> <%= sellos %></p>
+                    <% } else { %>
+                        <p class="subtitle is-size-5"><strong>Sellos:</strong> No hay sellos registrados</p>
+                    <% } %>
 
                     <button class="button is-primary has-text-centered is-rounded">Registrar sello</button>
 
