@@ -41,6 +41,15 @@ class Etapa {
         return db.execute(query, [nombre_producto]);
     }
 
+    static buscarPorTarjeta(telefono) {
+        const query = `
+            SELECT e.id_Etapa, e.Cant_Sellos, e.Minimo_Compra, e.Descuento
+            FROM Etapa e
+            INNER JOIN TarjetasOfrecenEtapa te ON e.id_Etapa = te.id_Etapa
+            WHERE te.Telefono = ?
+        `;
+        return db.execute(query, [telefono]);
+    }
 }
 
 // Exportar la clase Etapa

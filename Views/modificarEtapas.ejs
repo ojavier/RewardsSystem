@@ -27,3 +27,55 @@
     <a href="/crearEtapa">
         <button class="button is-primary is-rounded" style="margin-left: 10%;">Crear etapa</button>
     </a>
+
+    <br><br>
+
+    <% if (etapas.length> 0) { %>
+        <!-- Iterar sobre las etapas obtenidas del backend -->
+        <% etapas.forEach(etapa=> { %>
+            <div class="box" style="margin-left: 10%; margin-right: 10%;">
+                <div class="columns is-vcentered">
+
+                    <div class="column is-half">
+                        <h2 class="is-size-4 has-text-weight-bold">ID de la etapa: <%= etapa.id_Etapa %>
+                        </h2>
+
+                        <br>
+
+                        <p class="subtitle is-size-5"><strong>Cantidad de sellos:</strong>
+                            <%= etapa.Cant_Sellos %>
+                        </p>
+
+                        <br>
+
+                        <p class="subtitle is-size-5"><strong>Mínimo de compra:</strong>
+                            <%= etapa.Minimo_Compra %>
+                        </p>
+
+                        <br>
+
+                        <p class="subtitle is-size-5"><strong>Descuento:</strong>
+                            <%= etapa.Descuento %>
+                        </p>
+
+                        <br>
+
+                        <a href="/editarEtapa/<%= etapa.id_Etapa %>">
+                            <button class="button is-primary is-rounded">Editar</button>
+                        </a>
+                    </div>
+
+                    <div class="column is-half">
+                        <figure class="image">
+                            <!-- Aquí puedes insertar una imagen de la tarjeta si es necesario -->
+                            <img src="ruta/a/imagen-de-tarjeta" alt="Imagen de tarjeta">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+                <% } else { %>
+                    <p class="has-text-centered subtitle is-3" style="margin-left: 10%; margin-right: 10%;">
+                        No hay etapas disponibles para esta tarjeta.
+                    </p>
+                    <% } %>

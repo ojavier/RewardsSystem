@@ -48,6 +48,7 @@ exports.modificarEtapa = (req, res) => {
     });
 };
 
+//Crea una nueva etapa
 exports.crearEtapa = async (req, res, next) => {
     try {
         const sellos_cantidad = req.body.sellos_cantidad
@@ -72,4 +73,19 @@ exports.crearEtapa = async (req, res, next) => {
             message: "Error al crear etapa"
         })
     }
+}
+exports.obtenerEtapasPorTarjeta = (req, res, next) => {
+    const { Telefono } = req.params
+
+    Etapa.buscarPorTarjeta(Telefono)
+        .then(([rows]) => {
+            if (rows.length === 0) {
+                return res.status(404).send('No hay etapas para esta tarjeta');
+            }
+            res.render('modificarEtapas', { etapas: rows });
+        })
+        .catch(err => {
+            console.log('Error al obtener etapas:', err);
+            res.status(500).send('Error al obtener etapas');
+        });
 }
