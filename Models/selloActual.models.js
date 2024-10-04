@@ -12,16 +12,10 @@ class Sello {
     static registrarSelloTel(Telefono){
 
         function generaridsello(){
-            let randomString = '';
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        for (let i = 0; i < 10; i++) {
-            randomString += characters.charAt(Math.floor(Math.random() * characters.length));
+            const randint = Math.floor(Math.random() * 2147483648);
+            return randint;
         }
-        // Convert the string to an integer
-        const randomInt = parseInt(randomString, 36); // Using base 36 to handle alphanumeric characters
-        return randomInt;
-        }
-        
+
         const id_sello = generaridsello();
         const fechaActual = new Date().toISOString().split('T')[0];
         const horaActual = new Date().toISOString().split('T')[1].slice(0, 8);
