@@ -13,6 +13,18 @@ class Clientes{
         const query = "SELECT * FROM Clientes WHERE Telefono = ?";
         return db.execute(query,[Telefono]);
     }
+
+
+    static async obtenerTodos() {
+        try {
+          const query = 'SELECT * FROM Clientes';
+          const [rows] = await db.query(query);
+          return rows;
+        } catch (err) {
+          throw err;
+        }
+    }
+
 }
 
 module.exports = Clientes;

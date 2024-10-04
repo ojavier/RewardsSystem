@@ -78,7 +78,7 @@ exports.getClientes = async (request, response, next) => {
         console.error(err);
         response.status(500).send({ message: 'Error al obtener clientes' });
     }
-};
+
 
 exports.buscarClienteSearch = (request, response, next) => {
     const Telefono = request.query.SearchTarjeta;
