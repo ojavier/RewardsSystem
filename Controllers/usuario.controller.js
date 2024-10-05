@@ -54,6 +54,29 @@ exports.postLogin = (request, response, next) => {
     
 };
 
-exports
+exports.modificarUsuario = (request, response, next) => {
+    const { Nombre } = request;
+    
+    if (!Nombre) {
+        console.log('Datos recibidos para modificar', request.body);
+        return response.status(400).send('Todos los campos son requeridos');
+    }
+
+    console.log('Datos recibidos para modificar', request.body);
+
+    const nuevosDatos = {
+        Nombre
+    };
+
+    Usuarios.modificarUPorId(id_Usuario, nuevosDatos).then(() => {
+
+        return response.status(200).json({ 'mensaje': 'OK' });
+    }).catch(err => {
+        console.log(err);
+        return response.status(500).json({ 'mensaje': 'Internal server error'});
+    });
+    
+
+};
 
 

@@ -14,7 +14,19 @@ class Usuario {
         const query = 'SELECT * FROM Usuarios WHERE Telefono = ?';
         return db.execute(query, [Telefono]); // Usamos promesas
     }
+    
+    static modificarUPorId(id_Usuario, nuevosDatos) {
+        const { Nombre } = nuevosDatos;
 
+        const query = `
+            UPDATE Usuarios
+            SET Nombre = ?
+            WHERE id_Usuario = ?
+        `;
+        const params = [Nombre];
+
+        return db.execute(query, params);
+    }
 }
 
 // Exportar la clase Usuario
