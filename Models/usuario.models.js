@@ -15,15 +15,19 @@ class Usuario {
         return db.execute(query, [Telefono]); // Usamos promesas
     }
     
-    static modificarUPorId(id_Usuario, nuevosDatos) {
-        const { Nombre } = nuevosDatos;
+    static buscarId(Telefono) {
+        const query = 'SELECT id_Usuario FROM Usuarios WHERE Telefono = ?';
+        return db.execute(query, [Telefono]); // Usamos promesas
+    }
+
+    static modificarUPorId(id_Usuario, nuevosDatos, val) {
 
         const query = `
             UPDATE Usuarios
-            SET Nombre = ?
+            SET ? = ?
             WHERE id_Usuario = ?
         `;
-        const params = [Nombre];
+        const params = [val, nuevosDatos, id_Usuario];
 
         return db.execute(query, params);
     }
