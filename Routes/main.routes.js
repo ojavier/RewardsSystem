@@ -42,3 +42,6 @@ router.post("/sello/registrar", isAuth, mainController.registrarSello);
 
 //Rutas para Establecimientos
 module.exports = router; 
+
+//Rutas para Usuario
+router.post("/usuario/modificar", isAuth, usuario.controller.modificarUsuario);
