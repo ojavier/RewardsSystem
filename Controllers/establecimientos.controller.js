@@ -26,14 +26,3 @@ exports.getEstablecimientos = async (request, response, next) => {
     }
 };
 
-exports.getEstablecimientos = async (request, response, next) => {
-    try {
-      const establecimientos = await Establecimiento.getAllEstablecimientos();
-      request.session.establecimientos = establecimientos;
-      next();
-    } catch (err) {
-      console.error(err);
-      next(err);
-    }
-};
-

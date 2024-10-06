@@ -50,10 +50,25 @@
                         <p class="subtitle is-size-5"><strong>Sellos:</strong> No hay sellos registrados</p>
                     <% } %>
                     
-                    <form action="/sello/registrar" method="post">
-                        <input type="hidden" name="telefono" value="<%= Clientes.Telefono %>">
-                        <button class="button is-primary has-text-centered is-rounded">Registrar sello</button>
-                    </form>
+                    <button class="button is-primary has-text-centered is-rounded" id="SelloPopup">Registrar sello</button>    
+                    
+                    <div class="modal" id="RegistrarSelloPopup">
+                        <div class="modal-background"></div>
+                        <div class="modal-content">
+                            <div class="box">
+                                <h1 class="title is-centered">Registrar Sello</h1>
+                                <input  class="input" type="text" placeholder="Monto de compra" name="monto" id="monto">
+                                <br>
+                                <input  class="input" type="text" placeholder="Nota adicional" name="nota" id="nota">
+                                <br>
+                                <br>
+                                <form action="/sello/registrar" method="post">
+                                    <input type="hidden" name="telefono" value="<%= Clientes.Telefono %>">
+                                </form>
+                            </div>
+                        </div>
+                        <button class="modal-close is-large" aria-label="cerrar"></button>
+                    </div>
                 </div>
 
                 <div class="column is-half">
