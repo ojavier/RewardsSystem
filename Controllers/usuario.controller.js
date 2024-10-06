@@ -1,5 +1,6 @@
 const Usuario = require('../Models/usuario.models');
 const isAuth = require('../Util/is-auth');
+const { v4: uuidv4 } = require('uuid'); 
 
 
 exports.getLogin = (request, response, next) => {
@@ -62,8 +63,11 @@ exports.postRegistrar = (req, res, next) => {
         return res.redirect('/miInformacion');  // Asegúrate de que la ruta sea correcta
     }
 
+    // Generar un id único para el usuario usando UUID v4
+    const id_Usuario = uuidv4();
+
     // Registrar el nuevo usuario
-    Usuario.registrar({ Nombre, Apellido, Telefono })
+    Usuario.registrar({ id_Usuario, Nombre, Apellido, Telefono })
         .then(() => {
             req.session.success = 'Usuario registrado con éxito';
             res.redirect('/usuario/login');  // Redirige al login tras registrarse

@@ -13,16 +13,14 @@ class Usuario {
         const query = 'SELECT * FROM Usuarios WHERE Telefono = ?';
         return db.execute(query, [Telefono]);
     }
-
     // Método para registrar un nuevo usuario
-    static registrar({ Nombre, Apellido, Telefono }) {
+    static registrar({ id_Usuario, Nombre, Apellido, Telefono }) {
         const query = `
-            INSERT INTO Usuarios (Nombre, Apellido, Telefono)
-            VALUES (?, ?, ?)
+            INSERT INTO Usuarios (id_Usuario, nombre, apellido, telefono) VALUES (?, ?, ?, ?)
         `;
-        return db.execute(query, [Nombre, Apellido, Telefono])
+
+        return db.execute(query, [id_Usuario, Nombre, Apellido, Telefono])
             .then(([result]) => {
-                const id_Usuario = result.insertId;  // Obtener el ID del nuevo usuario
                 const id_RolCliente = 1;  // Asumiendo que 1 es el ID del rol 'cliente'
 
                 // Asignar el rol por defecto al usuario
