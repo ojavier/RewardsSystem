@@ -6,6 +6,7 @@ const mainController = require('../controllers/main.controller');
 const tarjetasController = require('../Controllers/tarjetas.controller');
 const etapaController = require('../Controllers/etapa.controller');
 const selloActualController = require("../controllers/selloActual.controller");
+const usuarioController = require("../Controllers/usuario.controller");
 
 router.get('/crearEtapa', isAuth, mainController.getcrearEtap);
 
@@ -18,6 +19,10 @@ router.get('/misTarjetas', isAuth, mainController.getRoot);
 router.get('/configuracion', isAuth, mainController.getConfig);
 
 router.get('/miInformacion', isAuth, mainController.getInfo);
+
+router.post('/registro', usuarioController.postRegistrar);
+
+router.get('/registro', usuarioController.getRegistrar);
 
 router.get('/reportes', isAuth, mainController.getReportes);
 
@@ -38,7 +43,8 @@ router.get("/clientes/buscar", isAuth, mainController.buscarClienteSearch);
 
 router.post("/sello/registrar", isAuth, mainController.registrarSello);
 
-//Rutas para misVersiones
+//ruta para usuario
+router.post("/usuario/modificar", isAuth, usuarioController.modificarUsuario);
 
 //Rutas para Establecimientos
 module.exports = router; 

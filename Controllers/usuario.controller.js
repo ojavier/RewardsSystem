@@ -1,6 +1,7 @@
 const { response, request } = require('express');
 const Usuario = require('../Models/usuario.models');
 const isAuth = require('../Util/is-auth');
+const { v4: uuidv4 } = require('uuid'); 
 
 
 exports.getLogin = (request, response, next) => {
@@ -54,6 +55,64 @@ exports.postLogin = (request, response, next) => {
     
 };
 
-exports
+exports.modificarUsuario = (request, response, next) => {
+    const { Nombre } = request;
+    
+    if (!Nombre) {
+        console.log('Datos recibidos para modificar', request.body);
+        return response.status(400).send('Todos los campos son requeridos');
+    }
 
+    console.log('Datos recibidos para modificar', request.body);
 
+    const nuevosDatos = {
+        Nombre
+    };
+
+    Usuarios.modificarUPorId(id_Usuario, nuevosDatos).then(() => {
+
+        return response.status(200).json({ 'mensaje': 'OK' });
+    }).catch(err => {
+        console.log(err);
+        return response.status(500).json({ 'mensaje': 'Internal server error'});
+    });
+    
+
+};
+
+// Controlador para registrar usuarios
+exports.postRegistrar = (req, res, next) => {
+    const { Nombre, Apellido, Telefono } = req.body;
+
+    // Validar que los datos estén completos
+    if (!Nombre || !Apellido || !Telefono) {
+        req.session.error = 'Todos los campos son obligatorios';
+        return res.redirect('/registro');  // Asegúrate de que la ruta sea correcta
+    }
+
+    // Generar un id único para el usuario usando UUID v4
+    const id_Usuario = uuidv4();
+
+    // Registrar el nuevo usuario
+    Usuario.registrar({ id_Usuario, Nombre, Apellido, Telefono })
+        .then(() => {
+            req.session.success = 'Usuario registrado con éxito';
+            res.redirect('/usuario/login');  // Redirige al login tras registrarse
+        })
+        .catch(err => {
+            console.error('Error al registrar el usuario:', err);
+            req.session.error = 'Hubo un error al registrar el usuario';
+            res.redirect('/registro');  // Asegúrate de que la ruta sea correcta
+        });
+};
+
+// Renderizar el formulario de registro
+exports.getRegistrar = (req, res, next) => {
+    const error = req.session.error || null;
+
+    res.render('registro', {
+        pagePrimaryTitle: 'Registro de Usuario',
+        error: error,
+        isLoggedIn: false  // El usuario no está logueado en la pantalla de registro
+    });
+};
