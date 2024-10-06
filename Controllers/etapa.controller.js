@@ -74,6 +74,8 @@ exports.crearEtapa = async (req, res, next) => {
         })
     }
 }
+
+//Obtener la etapa por medio de la tarjeta
 exports.obtenerEtapasPorTarjeta = (req, res, next) => {
     const { Telefono } = req.params
 
@@ -89,3 +91,18 @@ exports.obtenerEtapasPorTarjeta = (req, res, next) => {
             res.status(500).send('Error al obtener etapas');
         });
 }
+
+//Elimina una etapa de una tarjeta
+exports.eliminarEtapa = (req, res, next) => {
+    const { id_Etapa } = req.params;
+
+    Etapa.eliminarEtapa(id_Etapa)
+        .then(() => {
+            // Redirigir o enviar una respuesta una vez que la etapa ha sido "eliminada" correctamente
+            res.status(200).send('Etapa eliminada correctamente');
+        })
+        .catch(err => {
+            console.log('Error al eliminar la etapa:', err);
+            res.status(500).send('Error al eliminar la etapa');
+        });
+};

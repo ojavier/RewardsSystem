@@ -50,6 +50,15 @@ class Etapa {
         `;
         return db.execute(query, [telefono]);
     }
+
+    static eliminarEtapa(id_Etapa) {
+        const query = `
+            UPDATE Etapa 
+            SET Delete_At = CURRENT_TIMESTAMP 
+            WHERE id_Etapa = ?
+        `;
+        return db.execute(query, [id_Etapa]);
+    }
 }
 
 // Exportar la clase Etapa
