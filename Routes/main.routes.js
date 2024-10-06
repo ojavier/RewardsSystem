@@ -38,8 +38,11 @@ router.get("/misClientes", isAuth, mainController.getClientes);
 router.get("/modificarTarjeta", isAuth, mainController.getmodTar)
 
 // Rutas para Etapa
+router.post('/etapa/crear', isAuth, etapaController.crearEtapa); // Crear etapa
 router.post('/etapa/modificar', isAuth, etapaController.modificarEtapa); // Modificar etapa
 router.get('/etapa/:id_Etapa', isAuth, etapaController.buscarEtapa); // Buscar etapa por ID
+router.get('/etapa/portarjeta', isAuth, etapaController.obtenerEtapasPorTarjeta); // Obtener etapas por tarjeta
+router.post('/etapa/eliminar/:id_Etapa', isAuth, etapaController.eliminarEtapa); // Eliminar etapa de una tarjeta
 
 //rutas para clientes
 router.get("/clientes/buscar", isAuth, mainController.buscarClienteSearch);
