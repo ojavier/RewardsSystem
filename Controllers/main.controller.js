@@ -1,6 +1,7 @@
 const { request, response } = require("express");
 const Clientes = require('../Models/clientes.models');
 const Sello = require("../Models/selloActual.models");
+const Etapa = require('../models/etapas.models');
 
 exports.getRoot = (request, response, next) => {
     const isLoggedIn = request.session.isLoggedIn || false;
@@ -36,8 +37,20 @@ exports.getcrearEtap = (request, response, next) => {
     response.render('crearEtapa')
 };
 
-exports.getmodEtap = (request, response, next) => {
-    response.render('modificarEtapas')
+exports.getmodEtap = (req, res, next) => {
+    const telefono = req.params.telefono;
+
+    Etapa.buscarPorTarjeta(telefono)
+        .then(([rows]) => {
+            if (rows.length === 0) {
+                return res.render('modificarEtapas', { etapas: [] }); // Si no hay etapas, pasa un arreglo vacío
+            }
+            res.render('modificarEtapas', { etapas: rows }); // Pasa las etapas a la vista
+        })
+        .catch(err => {
+            console.log('Error al obtener etapas:', err);
+            res.status(500).send('Error al obtener etapas');
+        });
 };
 
 exports.getReportes = (request, response, next) => {
@@ -71,25 +84,25 @@ exports.buscarClienteSearch = (request, response, next) => {
 
     Clientes.buscarClienteSearch(Telefono)
         .then(([results, fieldData]) => {
-            if (results.length === 0){
-                return response.render("misClientes", { Clientes: null, error: "Cliente no encontrado", notification: null});
+            if (results.length === 0) {
+                return response.render("misClientes", { Clientes: null, error: "Cliente no encontrado", notification: null });
             }
 
             const cliente = results[0];
             console.log(cliente);
 
             Clientes.buscarSellosCliente(Telefono)
-            .then((results) => {
-                const sellos = results[0][0].cantidad_sellos;
-                console.log(results[0]);
-                console.log(results[0][0].cantidad_sellos);
-                return response.render("misClientes", { Clientes:cliente, sellos: sellos, notification: null });
-            })
+                .then((results) => {
+                    const sellos = results[0][0].cantidad_sellos;
+                    console.log(results[0]);
+                    console.log(results[0][0].cantidad_sellos);
+                    return response.render("misClientes", { Clientes: cliente, sellos: sellos, notification: null });
+                })
 
-            .catch((err) => {
-                console.log(err);
-                return response.status(500).send({ message: "Error al buscar sellos del cliente"});
-            });
+                .catch((err) => {
+                    console.log(err);
+                    return response.status(500).send({ message: "Error al buscar sellos del cliente" });
+                });
         })
 
         .catch((err) => {
@@ -98,19 +111,19 @@ exports.buscarClienteSearch = (request, response, next) => {
         });
 };
 
-exports.registrarSello = async (request,response, next) => {
-    try{
+exports.registrarSello = async (request, response, next) => {
+    try {
         console.log(request.body)
         const Telefono = request.body.telefono;
         await Sello.registrarSelloTel(Telefono);
 
         const [results] = await Clientes.buscarClienteSearch(Telefono);
-        const cliente= results[0];
-        response.render('misClientes', { notification: 'Sello registrado correctamente', type: 'success', Clientes: cliente});
+        const cliente = results[0];
+        response.render('misClientes', { notification: 'Sello registrado correctamente', type: 'success', Clientes: cliente });
     }
-    catch(err) {
+    catch (err) {
         console.error(err);
-        response.status(500).send({message: "Error al registrar Sello"})
+        response.status(500).send({ message: "Error al registrar Sello" })
     }
 };
 

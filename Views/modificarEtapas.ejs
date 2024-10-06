@@ -7,14 +7,16 @@
 
     <div>
         <h2 class="title is-3" style="margin-left: 10%;">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-left" width="40"
-                height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M5 12l14 0" />
-                <path d="M5 12l4 4" />
-                <path d="M5 12l4 -4" />
-            </svg>
+            <a href="/modificarTarjeta">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-left"
+                    width="40" height="40" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M5 12l14 0" />
+                    <path d="M5 12l4 4" />
+                    <path d="M5 12l4 -4" />
+                </svg>
+            </a>
 
             Etapas
         </h2>
@@ -22,4 +24,98 @@
 
     <br><br>
 
-    <button class="button is-primary is-rounded" style="margin-left: 10%;">Crear etapa</button>
+    <a href="/crearEtapa">
+        <button class="button is-primary is-rounded" style="margin-left: 10%;">Crear etapa</button>
+    </a>
+
+    <br><br>
+
+    <% if (etapas.length> 0) { %>
+        <!-- Iterar sobre las etapas obtenidas del backend -->
+        <% etapas.forEach(etapa=> { %>
+            <div class="box" style="margin-left: 10%; margin-right: 10%;">
+                <div class="columns is-vcentered">
+
+                    <div class="column is-half">
+                        <h2 class="is-size-4 has-text-weight-bold">ID de la etapa: <%= etapa.id_Etapa %>
+                        </h2>
+
+                        <br>
+
+                        <p class="subtitle is-size-5"><strong>Cantidad de sellos:</strong>
+                            <%= etapa.Cant_Sellos %>
+                        </p>
+
+                        <br>
+
+                        <p class="subtitle is-size-5"><strong>Mínimo de compra:</strong>
+                            <%= etapa.Minimo_Compra %>
+                        </p>
+
+                        <br>
+
+                        <p class="subtitle is-size-5"><strong>Descuento:</strong>
+                            <%= etapa.Descuento %>
+                        </p>
+
+                        <br>
+
+                        <div class="buttons">
+                            <a href="/editarEtapa/<%= etapa.id_Etapa %>">
+                                <button class="button is-primary is-rounded">Editar</button>
+                            </a>
+
+                            <button class="button is-danger is-rounded btn-eliminar" data-id="<%= etapa.id_Etapa %>">
+                                Eliminar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="column is-half">
+                        <figure class="image">
+                            <img src="ruta/a/imagen-de-tarjeta" alt="Imagen de tarjeta">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+                <% } else { %>
+                    <p class="has-text-centered subtitle is-3" style="margin-left: 10%; margin-right: 10%;">
+                        No hay etapas disponibles para esta tarjeta.
+                    </p>
+                    <% } %>
+
+                        <!-- Script para manejar la eliminación de etapas -->
+                        <script>
+                            document.addEventListener('DOMContentLoaded', () => {
+                                const buttons = document.querySelectorAll('.btn-eliminar');
+
+                                buttons.forEach(button => {
+                                    button.addEventListener('click', () => {
+                                        const idEtapa = button.getAttribute('data-id');
+
+                                        if (confirm('¿Estás seguro de que deseas eliminar esta etapa?')) {
+                                            fetch(`/etapas/eliminar/${idEtapa}`, {
+                                                method: 'POST',
+                                                headers: {
+                                                    'Content-Type': 'application/json',
+                                                    'X-Requested-With': 'XMLHttpRequest'
+                                                },
+                                            })
+                                                .then(response => {
+                                                    if (response.ok) {
+                                                        alert('Etapa eliminada correctamente.');
+                                                        window.location.reload(); // Recargar la página después de eliminar
+                                                    } else {
+                                                        alert('Error al eliminar la etapa.');
+                                                    }
+                                                })
+                                                .catch(error => {
+                                                    console.error('Error:', error);
+                                                    alert('Error al eliminar la etapa.');
+                                                });
+                                        }
+                                    });
+                                });
+                            });
+                        </script>
