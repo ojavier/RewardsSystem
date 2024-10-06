@@ -9,6 +9,8 @@ const selloActualController = require("../controllers/selloActual.controller");
 const usuarioController = require("../Controllers/usuario.controller");
 const establecimientosController = require("../Controllers/establecimientos.controller");
 
+router.use(establecimientosController.getEstablecimientos);
+
 router.get('/crearEtapa', isAuth, mainController.getcrearEtap);
 
 router.get('/modificarEtapas', isAuth, mainController.getmodEtap);
