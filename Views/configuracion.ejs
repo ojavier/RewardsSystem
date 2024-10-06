@@ -1,0 +1,114 @@
+<%- include('partials/head.ejs') %>
+
+<div class='container'>
+    <br>
+    <h1 class="title title-large">Configuración</h1>
+    <br>
+</div>
+
+<div class="container">
+    <div class="field">
+        <div class="control has-icons-left">
+            <input class="input" type="text" id="searchBar" placeholder="Buscar..." onkeyup="searchFunction()">
+            <span class="icon is-small is-left">
+                <i class="fas fa-search"></i>
+            </span>
+        </div>
+    </div>
+
+    <br>
+<!-- Botones para cambiar entre Tarjeta, Etapa, Sellos -->
+<div class="buttons" style="margin-top: 20px; margin-left: 10%;" >
+    <button class="button is-primary is-rounded" onclick="cambiarCampos('tarjeta')">Tarjeta</button>
+    <button class="button is-primary is-rounded" onclick="cambiarCampos('etapa')" style="margin-left: 10px;">Etapa</button>
+    <button class="button is-primary is-rounded" onclick="cambiarCampos('sellos')" style="margin-left: 10px;">Sellos</button>
+</div>
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-vcentered">
+            <!-- Campos para Tarjeta -->
+            <div id="tarjetaCampos" class="column is-half" style="display: block;">
+                <div class="box mx-6">
+                    <article class="message">
+                        <div class="message-header" id="colorarticulo">
+                            <p>Número de Tarjeta</p>
+                        </div>
+                        <div class="message-body">
+                            <input class="input" type="text" placeholder="Ingresa el número de tarjeta" style="width: 100%;">
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Campos para Etapa -->
+            <div id="etapaCampos" class="column is-half" style="display: none;">
+                <div id="resultadoBusqueda"></div>
+                <div class="box mx-6">
+                    <article class="message">
+                        <div class="message-header" id="colorarticulo">
+                            <p>Cantidad de sellos</p>
+                        </div>
+                        <div class="message-body">
+                            <input class="input" type="text" id="cantidadSellos" placeholder="Ingresa la cantidad de sellos" style="width: 100%;">
+                        </div>
+                    </article>
+                    <article class="message">
+                        <div class="message-header" id="colorarticulo">
+                            <p>Minimo de compra</p>
+                        </div>
+                        <div class="message-body">
+                            <input class="input" type="text" id="minimoCompra" placeholder="Ingresa el minimo de compra" style="width: 100%;">
+                        </div>
+                    </article>
+                    <article class="message">
+                        <div class="message-header" id="colorarticulo">
+                            <p>Descuento</p>
+                        </div>
+                        <div class="message-body">
+                            <input class="input" type="text" id="descuento" placeholder="Ingresa el descuento" style="width: 100%;">
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Campos para Sellos -->
+            <div id="sellosCampos" class="column is-half" style="display: none;">
+                <div class="box mx-6">
+                    <article class="message">
+                        <div class="message-header" id="colorarticulo">
+                            <p>Cantidad de Sellos</p>
+                        </div>
+                        <div class="message-body">
+                            <input class="input" type="text" placeholder="Ingresa la cantidad de sellos" style="width: 100%;">
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Columna derecha con la imagen -->
+            <div class="column is-half">
+                <figure style="width: 100%;">
+                    <img src="/images/tarjeta.png" alt="Tarjeta de lealtad">
+                </figure>
+
+                <!-- Botones circulares debajo de la imagen -->
+                <div id="botonesCirculares" class="buttons is-centered" style="margin-top: 20px; display: none;">
+                    <button class="button is-primary is-rounded is-circle">1</button>
+                    <button class="button is-primary is-rounded is-circle">2</button>
+                    <button class="button is-primary is-rounded is-circle">3</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botones de aceptar cambios e ingresar nuevos datos -->
+        <div class="buttons" style="margin-top: 30px;">
+            <button class="button is-success is-rounded" onclick="aceptarCambios()">Aceptar Cambios</button>
+            <button class="button is-warning is-rounded" onclick="ingresarNuevosDatos()">Ingresar Nuevos Datos</button>
+        </div>
+    </div>
+</section>
+
+
+<script src="/js/configButtons.js"></script>
+<script src="/js/searchBar.js"></script>

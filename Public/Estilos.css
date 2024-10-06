@@ -16,12 +16,12 @@
     color: #fff;
 }
 
-#colorarticulo{
+#colorarticulo {
     background-color: #041E3F;
     color: #fff;
 }
 
-#colortextoazul{
+#colortextoazul {
     color: #041E3F;
 }
 
@@ -31,6 +31,35 @@
     /* Space between buttons */
 }
 
+.colorlightbotones{
+    background-color: #10D5B1;
+}
+
+.coloduper{
+    background-color: #041E3F;
+}
+
+.mitadblanco
+{
+    background-color: #fff;
+}
+
+.iconosearchbar img {
+    position: absolute;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+.iconosearchbar{
+    position: relative;
+}
+
+.iconosearchbar input {
+    padding-right: 40px; ;
+}
 .navbar-link {
     color: #fff;
     padding: 0.5rem 1rem;
@@ -86,7 +115,6 @@
     margin-right: 10%;
 }
 
-
 /* Flecha al lado de la imagen en el main */
 .arrow {
     position: absolute;
@@ -96,17 +124,92 @@
     cursor: pointer;
 }
 
-/* Flecha izquierda*/
+/* Flecha izquierda */
 .left-arrow {
     left: -40px;
 }
 
-/* Flecha derecha*/
+/* Flecha derecha */
 .right-arrow {
     right: -40px;
 }
 
-
 .title-large {
-    font-size: 3rem; /* Ajusta el tamaño según tus necesidades */
+    font-size: 3rem;
+    /* Ajusta el tamaño según tus necesidades */
+}
+.cambio-cursor{
+    cursor: pointer;
+}
+
+/*Separa el icono de ajustes del simbolo de guardados*/
+.icon-tabler-adjustments {
+    margin-right: 10px;
+}
+
+.centrado2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh; /* Para centrar verticalmente */
+    text-align: center; /* Para centrar el texto */
+}
+
+.error-title {
+    font-size: 3rem; /* Aumenta el tamaño del título */
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.error-message {
+    font-size: 1.5rem; /* Aumenta el tamaño del mensaje */
+    margin-bottom: 20px;
+}
+
+.btn-home {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    background-color: #041E3F; /* Color de fondo del botón */
+    color: white; /* Color de texto */
+    text-decoration: none; /* Sin subrayado */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s ease;
+}
+
+.btn-home:hover {
+    background-color: #10D5B1; /* Cambia de color al pasar el mouse */
+}
+
+.vh-100 {
+    height: 100vh;
+}
+.h-custom {
+    height: calc(100% - 56px);
+}    
+.left-side {
+    background-color: #041E3F;
+    width: 50%;
+    height: 100vh; /* Asegura que cubra toda la altura */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-side {
+    width: 50%;
+    background-color: #f4edf3;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.full-screen-image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: url('/images/logo.PNG') no-repeat center center;
+    background-size: cover;
 }

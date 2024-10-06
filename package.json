@@ -1,0 +1,35 @@
+{
+  "name": "rewardssystem",
+  "version": "1.0.0",
+  "description": "Aplicación web para otorgar recompensas",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ojavier/RewardsSystem.git"
+  },
+  "keywords": [
+    "RewardSystem",
+    "Foodtech"
+  ],
+  "author": "Gacode",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ojavier/RewardsSystem/issues"
+  },
+  "homepage": "https://github.com/ojavier/RewardsSystem#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "express-session": "^1.18.0",
+    "mysql2": "^3.11.3",
+    "uuid": "^10.0.0"
+  }
+}

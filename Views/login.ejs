@@ -1,0 +1,56 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="Estilos.css">
+</head>
+
+<div class="container-fluid h-custom" style="display: flex; height: 100vh; margin-left: 0px; padding-left: 0px;">
+    <div style="flex-basis: 50%; background-color: #041E3F; display: flex; align-items: center; justify-content: center; margin-left: 0px ;">
+        <div class="col-md-9 col-lg-6 col-xl-5">
+            <img src="/images/logo.PNG" width="400" height="330" class="is-centered" alt="Logo">
+        </div>
+    </div>
+
+    <div class="has-text-centered" style="flex-basis: 50%; background-color: white; display: flex; align-items: center; justify-content: center;">
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+            <h2 class="title is-size-1" style="font-weight: bold; text-align: center;">Iniciar Sesión</h2>
+            <br>
+            
+            <form id="loginForm" action="/usuario/login" method="POST"> 
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="Telefono">Número de Teléfono</label>
+                    <input type="text" id="Telefono" name="telefono" class="form-control form-control-lg" placeholder="Ingresa tu número de teléfono" required />
+                </div>
+            
+                <div>
+                    <button id="LoginBtn" class="button is-primary has-text-grey-dark is-fullwidth">Iniciar sesión</button>
+                </div>
+                <br>
+                <div>
+                    <button id="RegisterBtn" type="button" class="button is-link has-text-light is-fullwidth">Registrar</button>
+                </div>
+            </form>             
+
+            <br>
+
+            <div class="help-text">
+                <p>¿Necesitas ayuda?</p>
+                <p>Correo: a01613750@tec.mx</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 btn-dark">
+    <div class="text-white mb-3 mb-md-0">
+        Copyright © 2024. All rights reserved.
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/loginButton.js"></script>
