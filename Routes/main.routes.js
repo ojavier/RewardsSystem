@@ -23,6 +23,10 @@ router.get('/configuracion', isAuth, mainController.getConfig);
 
 router.get('/miInformacion', isAuth, mainController.getInfo);
 
+router.post('/registro', usuarioController.postRegistrar);
+
+router.get('/registro', usuarioController.getRegistrar);
+
 router.get('/reportes', isAuth, mainController.getReportes);
 
 router.get('/miEquipo', isAuth, mainController.getEquipo);

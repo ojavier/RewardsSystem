@@ -15,6 +15,9 @@ exports.getRoot = (request, response, next) => {
     });
 };
 
+exports.getRegistro = (request, response, next) => {
+    response.render('registro');
+}; 
 
 exports.getConfig = (request, response, next) => {
     response.render('configuracion');
