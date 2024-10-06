@@ -15,9 +15,15 @@
         </div>
 
         <span class="control select" style="margin-top: 12px;">
-            <select name="" id="">
-                <option>Selecciona establecimiento</option>
-            </select>
+            <form action="/establecimientos/buscar" method="get">
+                <select name="" id="">
+                    <option>Selecciona establecimiento</option>
+                    <% if (typeof establecimientos !== 'undefined') { %>
+                        <%= establecimientos.map(establecimiento => `<option value="${establecimiento.Nombre}">${establecimiento.Nombre}</option>`).join('') %> 
+                    <% } %>
+                </select>
+            </form>
+            
         </span>
     
         <div class="navbar-end">
