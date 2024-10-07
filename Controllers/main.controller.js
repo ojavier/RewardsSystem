@@ -24,7 +24,6 @@ exports.getConfig = (request, response, next) => {
     response.render('configuracion');
 };
 
-<<<<<<< HEAD
 exports.getInfo = (request, response, next) => {
     const usuario = request.session.usuario;
     response.render('miInformacion', {
@@ -53,8 +52,6 @@ exports.getmodEtap = (req, res, next) => {
             res.status(500).send('Error al obtener etapas');
         });
 };
-=======
->>>>>>> Oscar/RegistroUsers
 
 exports.getReportes = (request, response, next) => {
     response.render('Reportes');
