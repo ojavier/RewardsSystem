@@ -8,7 +8,7 @@ const etapaController = require('../Controllers/etapa.controller');
 const selloActualController = require("../controllers/selloActual.controller");
 const usuarioController = require("../Controllers/usuario.controller");
 const establecimientosController = require("../Controllers/establecimientos.controller");
-const ordenesController = require("Controllers\ordenes.controller.js")
+const ordenesController = require("../Controllers/ordenes.controller")
 
 
 router.get('/crearEtapa', isAuth, mainController.getcrearEtap);

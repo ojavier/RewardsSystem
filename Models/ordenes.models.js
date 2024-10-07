@@ -27,4 +27,4 @@ class Ordenes{
     
 }
 
-module.exports = Establecimiento;
+module.exports = Ordenes;

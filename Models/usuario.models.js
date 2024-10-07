@@ -31,6 +31,8 @@ class Usuario {
                 return db.execute(rolQuery, [id_Usuario, id_RolCliente]);
             });
     }
+
+    static buscar
 }
 
 module.exports = Usuario;

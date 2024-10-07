@@ -18,8 +18,9 @@
             <form action="/establecimientos/buscar" method="get">
                 <select name="" id="">
                     <option>Selecciona establecimiento</option>
-                    <% if (typeof Establecimientos !== 'undefined') { %>
-                        <%= Establecimientos.map(establecimiento => `<option value="${establecimiento.Nombre}">${establecimiento.Nombre}</option>`).join('') %> 
+                    <% console.log(establecimientos) %>
+                    <% for (establecimiento of establecimientos) { %>
+                        <option value="<%= establecimiento.id %>"><%= establecimiento.nombre %></option>
                     <% } %>
                 </select>
             </form>

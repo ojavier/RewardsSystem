@@ -1,5 +1,5 @@
 const { request, response } = require("express")
-const Ordenes = require("Models\ordenes.models.js")
+const Ordenes = require("../Models/ordenes.models")
 
 exports.registrarOrden = async (request, response, next) =>{
     try{

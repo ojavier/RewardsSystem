@@ -14,7 +14,8 @@ exports.getTarjetas = (request, response, next) => {
                 tarjetas: results,
                 pagePrimaryTitle: 'Mis Versiones',
                 isLoggedIn: request.session.isLoggedIn || false,
-                usuario: request.session.usuario || {}
+                usuario: request.session.usuario || {},
+                establecimientos: request.session.establecimientos || [], 
             });
         })
         .catch(err => {

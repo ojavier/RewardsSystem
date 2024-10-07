@@ -44,7 +44,8 @@ app.use('/usuario', usuarioRoutes);
 app.use((request, response, next) => {
     response.status(404).render('404', {
         pagePrimaryTitle: 'Página no encontrada',
-        isLoggedIn: request.session.isLoggedIn || false
+        isLoggedIn: request.session.isLoggedIn || false,
+        establecimientos: request.session.establecimientos || [],
     });
 });
 

@@ -1,4 +1,4 @@
-<%- include('partials/head.ejs') %>
+<%- include('partials/head.ejs', {establecimientos: establecimientos}) %>
     <br>
 
     <h1 class="title title-large" style="margin-left: 10%;">Mis Clientes</h1>
@@ -7,11 +7,12 @@
           <%= notification %>
         </div>
       <% } %>
-    <% if (notificationOrder) { %>
+    <% if (typeof notificationOrder !== 'undefined') { %>
         <div class="notification is-<%= type %>">
           <%= notificationOrder %>
         </div>
     <% } %>
+      
 
     <button class="button is-primary is-rounded" style="margin-left: 10%;" onclick="window.location.href='/registro';">Registrar Cliente</button>
 
@@ -89,4 +90,4 @@
         <% } else { %>
             <p>No se encontraron clientes.</p>
             <% } %>
-<script src="../Public/js/RegistrarSelloPopupButton.js" defer></script>
+<script src="/Public/js/RegistrarSelloPopupButton.js"></script>

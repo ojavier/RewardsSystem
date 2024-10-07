@@ -1,5 +1,6 @@
 const { response, request } = require('express');
 const Usuario = require('../Models/usuario.models');
+const Establecimiento = require('../Models/establecimientos.models');
 const isAuth = require('../Util/is-auth');
 const { v4: uuidv4 } = require('uuid'); 
 
@@ -14,7 +15,8 @@ exports.getLogin = (request, response, next) => {
             isLoggedIn: isLoggedIn,
             permisos: request.session.permisos || [],
             usuario: request.session.usuario || {},
-            error: error
+            error: error,
+            establecimientos: [],
         });
     } else {
         response.redirect('/misTarjetas');
@@ -39,7 +41,20 @@ exports.postLogin = (request, response, next) => {
                 request.session.isLoggedIn = true;
                 request.session.usuario = rows[0];
                 console.log('Usuario encontrado, redirigiendo a misTarjetas');
-                return response.redirect('/misTarjetas');
+
+                Establecimiento.buscarEstablecimientos(telefono).then(([establecimientos, fieldData]) => {
+                    console.log(fieldData);
+                    console.log(establecimientos);
+                    request.session.establecimientos = establecimientos;
+                    return response.redirect('/misTarjetas');
+                    
+                }).catch((err) => {
+        
+                    console.error(err);
+                    response.status(500).send('Error al buscar establecimientos');
+                });
+
+
             } else {
                 // Usuario no encontrado
                 request.session.error = 'Número de teléfono no encontrado';
