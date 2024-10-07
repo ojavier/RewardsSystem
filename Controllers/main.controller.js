@@ -16,9 +16,13 @@ exports.getRoot = (request, response, next) => {
     });
 };
 
+exports.getRegistrarCliente = (request, response, next) => {
+    response.render('registrarCliente')
+}
+
 exports.getRegistro = (request, response, next) => {
     response.render('registro');
-}; 
+};
 
 exports.getConfig = (request, response, next) => {
     response.render('configuracion');

@@ -33,7 +33,7 @@ class Clientes {
   static registrarCliente(Telefono, Entidad, Genero, fecha_nacimiento) {
     const query = `
         INSERT INTO Clientes (Telefono, Entidad, Genero, fecha_nacimiento)
-        VALUES (?)
+        VALUES (?, ?, ?, ?)
       `;
     return db.execute(query, [Telefono, Entidad, Genero, fecha_nacimiento]);
   };

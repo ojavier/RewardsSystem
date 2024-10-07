@@ -7,6 +7,9 @@ const tarjetasController = require('../Controllers/tarjetas.controller');
 const etapaController = require('../Controllers/etapa.controller');
 const selloActualController = require("../controllers/selloActual.controller");
 const usuarioController = require("../Controllers/usuario.controller");
+const clienteController = require('../Controllers/clientes.controller');
+
+router.get('/registrarCliente', isAuth, mainController.getRegistrarCliente);
 
 router.get('/crearEtapa', isAuth, mainController.getcrearEtap);
 
@@ -42,9 +45,10 @@ router.get('/etapa/portarjeta', isAuth, etapaController.obtenerEtapasPorTarjeta)
 router.post('/etapa/eliminar/:id_Etapa', isAuth, etapaController.eliminarEtapa); // Eliminar etapa de una tarjeta
 
 //rutas para clientes
+router.post("/cliente/registrar", isAuth, clienteController.registrarCliente);
 router.get("/clientes/buscar", isAuth, mainController.buscarClienteSearch);
-
 router.post("/sello/registrar", isAuth, mainController.registrarSello);
+
 
 //ruta para usuario
 router.post("/usuario/modificar", isAuth, usuarioController.modificarUsuario);

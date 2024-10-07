@@ -1,0 +1,48 @@
+<%- include('partials/head.ejs') %>
+    <br>
+
+    <h1 class="title title-large" style="margin-left: 10%;"> Registrar cliente</h1>
+
+    <br><br><br>
+
+    <div class="columns is-vcentered" style="padding-left: 10%;">
+        <div class="column is-half">
+            <div class="box">
+                <form action="/cliente/registrar" method="post">
+
+                    <div class="control">
+                        <p class="subtitle is-size-4"><strong>Telefono</strong></p>
+                        <input class="input" type="text" placeholder="Ej. 462 894 7889" name="Telefono" />
+                    </div>
+
+                    <br>
+
+                    <div class="control">
+                        <p class="subtitle is-size-4"><strong>Entidad</strong></p>
+                        <input class="input" type="text" placeholder="Ej. Guanajuato" name="Entidad" />
+                    </div>
+
+                    <br>
+
+                    <div class="control">
+                        <p class="subtitle is-size-4"><strong>Genero</strong></p>
+                        <input class="input" type="text" placeholder="Ej. Masculina" name="Genero" />
+                    </div>
+
+                    <div class="control">
+                        <p class="subtitle is-size-4"><strong>Fecha de Nacimiento</strong></p>
+                        <input class="input" type="date" placeholder="Ej. 10/08/24" name="fecha_nacimiento" />
+                    </div>
+
+                    <br><br><br>
+
+                    <button class="button is-primary is-rounded is-extended">Crear</button>
+
+                </form>
+            </div>
+
+        </div>
+        <div class="column is-half">
+            <!-- Aquí va la imagen de la etapa -->
+        </div>
+    </div>
