@@ -18,8 +18,8 @@
             <form action="/establecimientos/buscar" method="get">
                 <select name="" id="">
                     <option>Selecciona establecimiento</option>
-                    <% if (typeof establecimientos !== 'undefined') { %>
-                        <%= establecimientos.map(establecimiento => `<option value="${establecimiento.Nombre}">${establecimiento.Nombre}</option>`).join('') %> 
+                    <% if (typeof Establecimientos !== 'undefined') { %>
+                        <%= Establecimientos.map(establecimiento => `<option value="${establecimiento.Nombre}">${establecimiento.Nombre}</option>`).join('') %> 
                     <% } %>
                 </select>
             </form>

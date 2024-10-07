@@ -25,8 +25,8 @@ class Sello {
         console.log("numid: ", id_sello);
         console.log("Monto: ", Monto);
         console.log("telefono:", Telefono);
-        const query = 'INSERT INTO Sellos (id_sello, Fecha_sello, Hora_sello, Telefono, Nota, Monto) VALUES(?, ?, ?, ?, ?, ?) ';
-        return db.execute(query, [id_sello,fechaActual,horaActual,Telefono, Nota, Monto]);
+        const query = 'INSERT INTO Sellos (id_sello, Fecha_sello, Hora_sello, Telefono) VALUES(?, ?, ?, ?) ';
+        return db.execute(query, [id_sello,fechaActual,horaActual,Telefono]);
     }
 };
 

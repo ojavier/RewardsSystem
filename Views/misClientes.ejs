@@ -7,6 +7,12 @@
           <%= notification %>
         </div>
       <% } %>
+    <% if (notificationOrder) { %>
+        <div class="notification is-<%= type %>">
+          <%= notificationOrder %>
+        </div>
+    <% } %>
+
     <button class="button is-primary is-rounded" style="margin-left: 10%;" onclick="window.location.href='/registro';">Registrar Cliente</button>
 
     <br><br>
@@ -57,9 +63,11 @@
                         <div class="modal-content">
                             <div class="box">
                                 <h1 class="title is-centered">Registrar Sello</h1>
-                                <input  class="input" type="text" placeholder="Monto de compra" name="monto" id="monto">
-                                <br>
-                                <input  class="input" type="text" placeholder="Nota adicional" name="nota" id="nota">
+                                <form action="/Orden/Registrar" method="post">
+                                    <input  class="input" type="text" placeholder="Monto de compra" name="nivel_Satisfaccion" id="nivel_Satisfaccion">
+                                    <br>
+                                    <input  class="input" type="text" placeholder="Nota adicional" name="Feedback" id="Feedback">
+                                </form>
                                 <br>
                                 <br>
                                 <form action="/sello/registrar" method="post">

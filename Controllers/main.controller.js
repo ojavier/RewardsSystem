@@ -115,11 +115,9 @@ exports.registrarSello = async (request, response, next) => {
     try {
         console.log(request.body)
         const Telefono = request.body.telefono;
-        const Nota = request.body.nota;
-        const Monto = request.body.monto;
         await Sello.registrarSelloTel(Telefono);
 
-        const [results] = await Clientes.buscarClienteSearch(Telefono, Nota, Monto);
+        const [results] = await Clientes.buscarClienteSearch(Telefono);
         const cliente= results[0];
         response.render('misClientes', { notification: 'Sello registrado correctamente', type: 'success', Clientes: cliente});
     }

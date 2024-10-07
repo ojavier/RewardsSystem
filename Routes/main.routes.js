@@ -8,8 +8,8 @@ const etapaController = require('../Controllers/etapa.controller');
 const selloActualController = require("../controllers/selloActual.controller");
 const usuarioController = require("../Controllers/usuario.controller");
 const establecimientosController = require("../Controllers/establecimientos.controller");
+const ordenesController = require("Controllers\ordenes.controller.js")
 
-router.use(establecimientosController.getEstablecimientos);
 
 router.get('/crearEtapa', isAuth, mainController.getcrearEtap);
 
@@ -54,5 +54,8 @@ router.post("/usuario/modificar", isAuth, usuarioController.modificarUsuario);
 
 //Rutas para Establecimientos
 router.get("/establecimientos/buscar", isAuth, establecimientosController.buscarEstablecimientos);
+
+//Rutas para Ordenes
+router.post("/Orden/Registrar", isAuth, ordenesController.registrarOrden);
 
 module.exports = router; 
