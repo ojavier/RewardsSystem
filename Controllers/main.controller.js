@@ -19,9 +19,6 @@ exports.getConfig = (request, response, next) => {
     response.render('configuracion');
 };
 
-exports.getRegistro = (request, response, next) => {
-    response.render('registro');
-};
 
 exports.getReportes = (request, response, next) => {
     response.render('Reportes');
