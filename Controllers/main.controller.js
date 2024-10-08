@@ -155,9 +155,8 @@ exports.registrarSello = async (request, response, next) => {
         console.log(request.body)
         const TelefonoUsuario = request.session.telefono;
         const Telefono = request.body.telefono;
-        const id_Usuario = Usuario.buscarIDconTel(TelefonoUsuario);
 
-        await Sello.registrarSelloTel(Telefono, id_Usuario);
+        await Sello.registrarSelloTel(Telefono, TelefonoUsuario);
 
         const [results] = await Clientes.buscarClienteSearch(Telefono);
         const cliente= results[0];

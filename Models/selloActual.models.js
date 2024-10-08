@@ -11,7 +11,7 @@ class Sello {
         
     }
 
-    static registrarSelloTel(Telefono, id_Usuario){
+    static registrarSelloTel(Telefono, Telefono_Usuario){
 
         function generaridsello(){
             const randint = Math.floor(Math.random() * 2147483648);
@@ -25,9 +25,9 @@ class Sello {
         console.log('horaActual:', horaActual);
         console.log("numid: ", id_sello);
         console.log("telefono:", Telefono);
-        console.log("id_usuario: ", id_Usuario)
+        console.log("Telefono_usuario: ", Telefono_Usuario);
         const query = 'INSERT INTO Sellos (id_sello, Fecha_sello, Hora_sello, Telefono, id_Usuario) VALUES(?, ?, ?, ?, ?) ';
-        return db.execute(query, [id_sello,fechaActual,horaActual,Telefono,id_Usuario]);
+        return db.execute(query, [id_sello,fechaActual,horaActual,Telefono,Telefono_Usuario]);
     }
 };
 

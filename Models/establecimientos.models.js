@@ -14,27 +14,11 @@ class Establecimiento{
         return db.execute(query, [Telefono]);
     }
 
-    static async getAllEstablecimientos() {
-        const query = "SELECT * FROM Establecimientos";
-        try {
-          const [rows] = await db.execute(query);
-          return rows;
-        } catch (err) {
-          console.error(err);
-          throw err;
-        }
-      }
+    static getAllEstablecimientos(id_usuario) {
+        const query = "SELECT * FROM Establecimientos WHERE id_Usuario = ?";
+        db.execute(query, [id_usuario]);
+    }
     
-    static async getAllEstablecimientos() {
-        const query = "SELECT * FROM Establecimientos";
-        try {
-          const [rows] = await db.execute(query);
-          return rows;
-        } catch (err) {
-          console.error(err);
-          throw err;
-        }
-      }
 }
 
 module.exports = Establecimiento;
