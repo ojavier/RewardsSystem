@@ -60,6 +60,6 @@ router.get("/establecimientos/buscar", isAuth, establecimientosController.buscar
 router.post("/Orden/Registrar", isAuth, ordenesController.registrarOrden);
 
 //Rutas para Reportes
-router.get('/top-tenderos', reportesController.getTopTenderos);
+router.get('/reportes/topTenderos', reportesController.getTopTenderos);
 
 module.exports = router; 
