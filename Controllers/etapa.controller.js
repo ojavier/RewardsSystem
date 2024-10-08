@@ -57,10 +57,10 @@ exports.crearEtapa = async (req, res, next) => {
         const descuento = req.body.descuento;
         const nombre_producto = req.body.nombre_producto;
 
-        // Validar que los datos estén completos
-        if (!sellos_cantidad || !compra_minima || !descuento || !nombre_producto) {
+        // Validar que los datos estén completos y sean validos
+        if (!sellos_cantidad || isNaN(sellos_cantidad) || !compra_minima || isNaN(compra_minima) || !descuento || isNaN(descuento) || !nombre_producto) {
             return res.status(400).send({
-                message: 'Todos los campos son requeridos.'
+                message: 'Todos los campos son requeridos y deben ser válidos.'
             });
         }
 
