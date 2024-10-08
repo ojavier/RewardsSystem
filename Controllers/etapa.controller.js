@@ -1,5 +1,6 @@
 const { request, response } = require('express');
 const Etapa = require('../models/etapas.models');
+const { v4: uuidv4 } = require('uuid');
 
 exports.buscarEtapa = (req, res, next) => {
     const { id_Etapa } = req.params; // Obtener el id_Etapa de los parámetros
