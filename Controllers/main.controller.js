@@ -3,6 +3,7 @@ const Clientes = require('../Models/clientes.models');
 const Sello = require("../Models/selloActual.models");
 const Etapa = require('../models/etapas.models');
 const Establecimiento = require("../Models/establecimientos.models");
+const Usuario = require("../Models/usuario.models");
 
 exports.getRoot = (request, response, next) => {
     const isLoggedIn = request.session.isLoggedIn || false;
@@ -148,8 +149,11 @@ exports.buscarClienteSearch = (request, response, next) => {
 exports.registrarSello = async (request, response, next) => {
     try {
         console.log(request.body)
+        const TelefonoUsuario = request.session.telefono;
         const Telefono = request.body.telefono;
-        await Sello.registrarSelloTel(Telefono);
+        const id_Usuario = Usuario.buscarIDconTel(TelefonoUsuario);
+
+        await Sello.registrarSelloTel(Telefono, id_Usuario);
 
         const [results] = await Clientes.buscarClienteSearch(Telefono);
         const cliente= results[0];
