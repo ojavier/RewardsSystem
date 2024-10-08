@@ -49,32 +49,57 @@ exports.modificarEtapa = (req, res) => {
     });
 };
 
-//Crea una nueva etapa
 exports.crearEtapa = async (req, res, next) => {
     try {
-        const sellos_cantidad = req.body.sellos_cantidad
-        console.log(sellos_cantidad);
-        const compra_minima = req.body.compra_minima
-        console.log(compra_minima);
-        const descuento = req.body.descuento
-        console.log(descuento);
-        const nombre_producto = req.body.nombre_producto
-        console.log(nombre_producto);
+        // Obtener los datos del cuerpo de la solicitud
+        const sellos_cantidad = req.body.sellos_cantidad;
+        const compra_minima = req.body.compra_minima;
+        const descuento = req.body.descuento;
+        const nombre_producto = req.body.nombre_producto;
+
+        // Validar que los datos estén completos
+        if (!sellos_cantidad || !compra_minima || !descuento || !nombre_producto) {
+            return res.status(400).send({
+                message: 'Todos los campos son requeridos.'
+            });
+        }
+
+        console.log('Datos recibidos para crear etapa:', {
+            sellos_cantidad,
+            compra_minima,
+            descuento,
+            nombre_producto
+        });
+
+        // Encontrar el ID del producto basado en el nombre del producto
         const [resProducto] = await Etapa.encontrarProducto(nombre_producto);
-        console.log(resProducto);
-        const id_Producto = resProducto[0];
-        console.log(id_Producto);
-        const id_Etapa = '002'
-        Etapa.crearEtapa(sellos_cantidad, compra_minima, descuento, id_Producto);
-        response.render("crearEtapa");
+
+        // Si no se encuentra el producto, devolver un error
+        if (resProducto.length === 0) {
+            return res.status(404).send({
+                message: 'Producto no encontrado.'
+            });
+        }
+
+        const id_Producto = resProducto[0].id_Producto;
+        console.log('ID del producto encontrado:', id_Producto);
+
+        // Generar un nuevo id_Etapa
+        const id_Etapa = uuidv4();
+        console.log('ID de la etapa generado:', id_Etapa);
+
+        // Crear la nueva etapa en la base de datos
+        await Etapa.crearEtapa(id_Etapa, sellos_cantidad, compra_minima, descuento, id_Producto);
+
+        // Renderizar la vista de confirmación
+        res.render("crearEtapa", { message: 'Etapa creada exitosamente.' });
+    } catch (err) {
+        console.error('Error al crear la etapa:', err);
+        res.status(500).send({
+            message: "Error al crear la etapa."
+        });
     }
-    catch (err) {
-        console.error(err);
-        response.status(500).send({
-            message: "Error al crear etapa"
-        })
-    }
-}
+};
 
 //Obtener la etapa por medio de la tarjeta
 exports.obtenerEtapasPorTarjeta = (req, res, next) => {
