@@ -8,7 +8,8 @@ const etapaController = require('../Controllers/etapa.controller');
 const selloActualController = require("../controllers/selloActual.controller");
 const usuarioController = require("../Controllers/usuario.controller");
 const establecimientosController = require("../Controllers/establecimientos.controller");
-const ordenesController = require("../Controllers/ordenes.controller")
+const ordenesController = require("../Controllers/ordenes.controller");
+const reportesController = require('../controllers/reportes.controller');
 
 
 router.get('/crearEtapa', isAuth, mainController.getcrearEtap);
@@ -44,12 +45,12 @@ router.get('/etapa/:id_Etapa', isAuth, etapaController.buscarEtapa); // Buscar e
 router.get('/etapa/portarjeta', isAuth, etapaController.obtenerEtapasPorTarjeta); // Obtener etapas por tarjeta
 router.post('/etapa/eliminar/:id_Etapa', isAuth, etapaController.eliminarEtapa); // Eliminar etapa de una tarjeta
 
-//rutas para clientes
+//Rutas para clientes
 router.get("/clientes/buscar", isAuth, mainController.buscarClienteSearch);
 
 router.post("/sello/registrar", isAuth, mainController.registrarSello);
 
-//ruta para usuario
+//Ruta para usuario
 router.post("/usuario/modificar", isAuth, usuarioController.modificarUsuario);
 
 //Rutas para Establecimientos
@@ -57,5 +58,8 @@ router.get("/establecimientos/buscar", isAuth, establecimientosController.buscar
 
 //Rutas para Ordenes
 router.post("/Orden/Registrar", isAuth, ordenesController.registrarOrden);
+
+//Rutas para Reportes
+router.get('/top-tenderos', reportesController.getTopTenderos);
 
 module.exports = router; 
