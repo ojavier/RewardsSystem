@@ -2,11 +2,12 @@ const { request } = require('express');
 const db = require('../Util/database');
 
 class Sello {
-    constructor(id_sello,Fecha_Sello,Hora_Sello,Telefono){
+    constructor(id_sello,Fecha_Sello,Hora_Sello,Telefono,){
         this.id_sello = id_sello;
         this.Fecha_Sello = Fecha_Sello;
         this.Hora_Sello = Hora_Sello;
         this.Telefono = Telefono;
+        
     }
 
     static registrarSelloTel(Telefono,Nota, Monto){
