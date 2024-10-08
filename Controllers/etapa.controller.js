@@ -1,3 +1,4 @@
+const { request, response } = require('express');
 const Etapa = require('../models/etapas.models');
 
 exports.buscarEtapa = (req, res, next) => {
@@ -38,11 +39,70 @@ exports.modificarEtapa = (req, res) => {
         Descuento,
     };
 
-    Etapa.modificarPorId(id_Etapa, nuevosDatos).then(()=>{
+    Etapa.modificarPorId(id_Etapa, nuevosDatos).then(() => {
 
-        return res.status(200).json({'mensaje':'OK'});
+        return res.status(200).json({ 'mensaje': 'OK' });
     }).catch(err => {
         console.log(err);
-        return res.status(500).json({'mensaje':'Internal server error'});
+        return res.status(500).json({ 'mensaje': 'Internal server error' });
     });
+};
+
+//Crea una nueva etapa
+exports.crearEtapa = async (req, res, next) => {
+    try {
+        const sellos_cantidad = req.body.sellos_cantidad
+        console.log(sellos_cantidad);
+        const compra_minima = req.body.compra_minima
+        console.log(compra_minima);
+        const descuento = req.body.descuento
+        console.log(descuento);
+        const nombre_producto = req.body.nombre_producto
+        console.log(nombre_producto);
+        const [resProducto] = await Etapa.encontrarProducto(nombre_producto);
+        console.log(resProducto);
+        const id_Producto = resProducto[0];
+        console.log(id_Producto);
+        const id_Etapa = '002'
+        Etapa.crearEtapa(sellos_cantidad, compra_minima, descuento, id_Producto);
+        response.render("crearEtapa");
+    }
+    catch (err) {
+        console.error(err);
+        response.status(500).send({
+            message: "Error al crear etapa"
+        })
+    }
+}
+
+//Obtener la etapa por medio de la tarjeta
+exports.obtenerEtapasPorTarjeta = (req, res, next) => {
+    const { Telefono } = req.params
+
+    Etapa.buscarPorTarjeta(Telefono)
+        .then(([rows]) => {
+            if (rows.length === 0) {
+                return res.status(404).send('No hay etapas para esta tarjeta');
+            }
+            res.render('modificarEtapas', { etapas: rows });
+        })
+        .catch(err => {
+            console.log('Error al obtener etapas:', err);
+            res.status(500).send('Error al obtener etapas');
+        });
+}
+
+//Elimina una etapa de una tarjeta
+exports.eliminarEtapa = (req, res, next) => {
+    const { id_Etapa } = req.params;
+
+    Etapa.eliminarEtapa(id_Etapa)
+        .then(() => {
+            // Redirigir o enviar una respuesta una vez que la etapa ha sido "eliminada" correctamente
+            res.status(200).send('Etapa eliminada correctamente');
+        })
+        .catch(err => {
+            console.log('Error al eliminar la etapa:', err);
+            res.status(500).send('Error al eliminar la etapa');
+        });
 };

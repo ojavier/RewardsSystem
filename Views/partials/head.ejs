@@ -15,9 +15,16 @@
         </div>
 
         <span class="control select" style="margin-top: 12px;">
-            <select name="" id="">
-                <option>Selecciona establecimiento</option>
-            </select>
+            <form action="/establecimientos/buscar" method="get">
+                <select name="" id="">
+                    <option>Selecciona establecimiento</option>
+                    <% console.log(establecimientos) %>
+                    <% for (establecimiento of establecimientos) { %>
+                        <option value="<%= establecimiento.id %>"><%= establecimiento.nombre %></option>
+                    <% } %>
+                </select>
+            </form>
+            
         </span>
     
         <div class="navbar-end">

@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
+const establecimientosController = require("./Controllers/establecimientos.controller.js");
 
 // Middleware para servir archivos estáticos
 app.use(express.static('public'));
@@ -22,6 +23,8 @@ app.use((request, response, next) => {
     next(); 
 });
 
+app.use(establecimientosController.getEstablecimientos);
+
 const session = require('express-session');
 app.use(session({
   secret: 'mySecretKey', 
@@ -41,7 +44,8 @@ app.use('/usuario', usuarioRoutes);
 app.use((request, response, next) => {
     response.status(404).render('404', {
         pagePrimaryTitle: 'Página no encontrada',
-        isLoggedIn: request.session.isLoggedIn || false
+        isLoggedIn: request.session.isLoggedIn || false,
+        establecimientos: request.session.establecimientos || [],
     });
 });
 

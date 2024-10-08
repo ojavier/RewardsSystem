@@ -1,4 +1,4 @@
-<%- include('partials/head.ejs') %>
+<%- include('partials/head.ejs', {establecimientos: establecimientos}) %>
 
 <div class='container'>
     <br>
@@ -9,7 +9,7 @@
 
 <div>
     <div id="tarjetaCampos" style="display: block;">
-        <form action="/miInformacion" method="POST"> <!-- Asegúrate de que esta sea la ruta correcta para registrar -->
+        <form action="/registro" method="POST"> <!-- Asegúrate de que esta sea la ruta correcta para registrar -->
             <div class="box mx-6">
                 <article class="message">
                     <div class="message-header" id="colorarticulo">
@@ -60,3 +60,5 @@
         </form>
     </div>
 </div>
+
+
