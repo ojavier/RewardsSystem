@@ -3,9 +3,10 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-oscarv7.alwaysdata.net
--- Generation Time: Sep 18, 2024 at 10:31 AM
+-- Generation Time: Oct 06, 2024 at 03:45 AM
 -- Server version: 10.6.18-MariaDB
 -- PHP Version: 7.4.33
+
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -21,6 +22,7 @@ SET time_zone = "+00:00";
 -- Database: `oscarv7_rewards`
 --
 
+
 -- --------------------------------------------------------
 
 --
@@ -28,12 +30,13 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `Clientes` (
-  `Telefono` int(10) NOT NULL,
+  `Telefono` char(10) NOT NULL,
   `Entidad` varchar(25) DEFAULT NULL,
   `Genero` varchar(20) DEFAULT NULL,
   `fecha_Nacimiento` date DEFAULT NULL,
-  `id_Usuario` int(15) DEFAULT NULL
+  `id_Usuario` varchar(36) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- --------------------------------------------------------
 
@@ -42,10 +45,11 @@ CREATE TABLE `Clientes` (
 --
 
 CREATE TABLE `Establecimientos` (
-  `id_Establecimiento` int(10) NOT NULL,
+  `id_Establecimiento` varchar(36) NOT NULL,
   `Nombre` varchar(30) NOT NULL,
   `Entidad` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- --------------------------------------------------------
 
@@ -54,12 +58,14 @@ CREATE TABLE `Establecimientos` (
 --
 
 CREATE TABLE `Etapa` (
-  `id_Etapa` int(10) NOT NULL,
+  `id_Etapa` varchar(36) NOT NULL,
   `Cant_Sellos` int(10) DEFAULT NULL,
   `Minimo_Compra` float DEFAULT NULL,
   `Descuento` float DEFAULT NULL,
-  `id_Producto` int(10) DEFAULT NULL
+  `id_Producto` varchar(36) DEFAULT NULL,
+  `Delete_At` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- --------------------------------------------------------
 
@@ -68,12 +74,13 @@ CREATE TABLE `Etapa` (
 --
 
 CREATE TABLE `Ordenes` (
-  `id_Orden` int(10) NOT NULL,
+  `id_Orden` varchar(36) NOT NULL,
   `nivel_Satisfaccion` float DEFAULT NULL,
   `Feedback` varchar(200) DEFAULT NULL,
-  `id_Establecimiento` int(10) DEFAULT NULL,
-  `Telefono` int(10) DEFAULT NULL
+  `id_Establecimiento` varchar(36) DEFAULT NULL,
+  `Telefono` char(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- --------------------------------------------------------
 
@@ -82,10 +89,11 @@ CREATE TABLE `Ordenes` (
 --
 
 CREATE TABLE `OrdenesTieneProductos` (
-  `id_Orden` int(10) NOT NULL,
-  `id_Producto` int(10) NOT NULL,
+  `id_Orden` varchar(36) NOT NULL,
+  `id_Producto` varchar(36) NOT NULL,
   `fecha_compra` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- --------------------------------------------------------
 
@@ -99,6 +107,7 @@ CREATE TABLE `Permisos` (
   `Descripcion` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
 -- --------------------------------------------------------
 
 --
@@ -106,11 +115,12 @@ CREATE TABLE `Permisos` (
 --
 
 CREATE TABLE `Productos` (
-  `id_Producto` int(10) NOT NULL,
+  `id_Producto` varchar(36) NOT NULL,
   `Descripcion` varchar(200) DEFAULT NULL,
   `Precio` float DEFAULT NULL,
-  `id_Establecimiento` int(10) DEFAULT NULL
+  `id_Establecimiento` varchar(36) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- --------------------------------------------------------
 
@@ -124,6 +134,7 @@ CREATE TABLE `Roles` (
   `Descripcion` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
 -- --------------------------------------------------------
 
 --
@@ -136,6 +147,7 @@ CREATE TABLE `RolesTienenPermisos` (
   `fecha_asignacion` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
 -- --------------------------------------------------------
 
 --
@@ -143,11 +155,39 @@ CREATE TABLE `RolesTienenPermisos` (
 --
 
 CREATE TABLE `Sellos` (
-  `id_Sello` int(20) NOT NULL,
+  `id_Sello` varchar(36) NOT NULL,
   `Fecha_Sello` date NOT NULL,
   `Hora_Sello` time(6) NOT NULL,
-  `Telefono` int(10) DEFAULT NULL
+  `Telefono` char(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Sucursales`
+--
+
+CREATE TABLE `Sucursales` (
+  `id_Sucursal` varchar(36) NOT NULL,
+  `Direccion` varchar(100) NOT NULL,
+  `Entidad` varchar(30) NOT NULL,
+  `id_Establecimiento` varchar(36) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `SucursalesTieneUsuarios`
+--
+
+CREATE TABLE `SucursalesTieneUsuarios` (
+  `id_Sucursal` varchar(36) NOT NULL,
+  `id_Usuario` varchar(36) NOT NULL,
+  `FechaIncorporacion` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- --------------------------------------------------------
 
@@ -156,11 +196,12 @@ CREATE TABLE `Sellos` (
 --
 
 CREATE TABLE `Tarjetas` (
-  `Telefono` int(10) NOT NULL,
-  `id_Establecimiento` int(10) NOT NULL,
+  `Telefono` char(10) NOT NULL,
+  `id_Establecimiento` varchar(36) NOT NULL,
   `Version` float DEFAULT NULL,
   `Emision` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- --------------------------------------------------------
 
@@ -169,10 +210,11 @@ CREATE TABLE `Tarjetas` (
 --
 
 CREATE TABLE `TarjetasOfrecenEtapa` (
-  `id_Etapa` int(10) NOT NULL,
-  `Telefono` int(10) NOT NULL,
+  `id_Etapa` varchar(36) NOT NULL,
+  `Telefono` char(10) NOT NULL,
   `Creacion` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- --------------------------------------------------------
 
@@ -181,11 +223,12 @@ CREATE TABLE `TarjetasOfrecenEtapa` (
 --
 
 CREATE TABLE `Usuarios` (
-  `id_Usuario` int(15) NOT NULL,
+  `id_Usuario` varchar(36) NOT NULL,
   `Nombre` text NOT NULL,
   `Apellido` text NOT NULL,
-  `Telefono` int(10) NOT NULL
+  `Telefono` char(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- --------------------------------------------------------
 
@@ -194,10 +237,11 @@ CREATE TABLE `Usuarios` (
 --
 
 CREATE TABLE `UsuariosTienenRoles` (
-  `id_Usuario` int(15) NOT NULL,
+  `id_Usuario` varchar(36) NOT NULL,
   `id_Rol` int(3) NOT NULL,
   `fecha_asignacion` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 --
 -- Indexes for dumped tables
@@ -270,6 +314,20 @@ ALTER TABLE `RolesTienenPermisos`
 ALTER TABLE `Sellos`
   ADD PRIMARY KEY (`id_Sello`),
   ADD KEY `Telefono` (`Telefono`);
+
+--
+-- Indexes for table `Sucursales`
+--
+ALTER TABLE `Sucursales`
+  ADD PRIMARY KEY (`id_Sucursal`),
+  ADD KEY `fk_establecimiento_sucursal` (`id_Establecimiento`);
+
+--
+-- Indexes for table `SucursalesTieneUsuarios`
+--
+ALTER TABLE `SucursalesTieneUsuarios`
+  ADD PRIMARY KEY (`id_Sucursal`,`id_Usuario`),
+  ADD KEY `fk_sucursal_usuario_usuario` (`id_Usuario`);
 
 --
 -- Indexes for table `Tarjetas`
@@ -346,6 +404,19 @@ ALTER TABLE `RolesTienenPermisos`
 --
 ALTER TABLE `Sellos`
   ADD CONSTRAINT `Sellos_ibfk_1` FOREIGN KEY (`Telefono`) REFERENCES `Tarjetas` (`Telefono`);
+
+--
+-- Constraints for table `Sucursales`
+--
+ALTER TABLE `Sucursales`
+  ADD CONSTRAINT `fk_establecimiento_sucursal` FOREIGN KEY (`id_Establecimiento`) REFERENCES `Establecimientos` (`id_Establecimiento`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `SucursalesTieneUsuarios`
+--
+ALTER TABLE `SucursalesTieneUsuarios`
+  ADD CONSTRAINT `fk_sucursal_usuario_sucursal` FOREIGN KEY (`id_Sucursal`) REFERENCES `Sucursales` (`id_Sucursal`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_sucursal_usuario_usuario` FOREIGN KEY (`id_Usuario`) REFERENCES `Usuarios` (`id_Usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `Tarjetas`

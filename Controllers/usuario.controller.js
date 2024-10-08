@@ -1,5 +1,6 @@
 const { response, request } = require('express');
 const Usuario = require('../Models/usuario.models');
+const Establecimiento = require('../Models/establecimientos.models');
 const isAuth = require('../Util/is-auth');
 const { v4: uuidv4 } = require('uuid'); 
 
@@ -14,7 +15,8 @@ exports.getLogin = (request, response, next) => {
             isLoggedIn: isLoggedIn,
             permisos: request.session.permisos || [],
             usuario: request.session.usuario || {},
-            error: error
+            error: error,
+            establecimientos: [],
         });
     } else {
         response.redirect('/misTarjetas');
@@ -39,7 +41,20 @@ exports.postLogin = (request, response, next) => {
                 request.session.isLoggedIn = true;
                 request.session.usuario = rows[0];
                 console.log('Usuario encontrado, redirigiendo a misTarjetas');
-                return response.redirect('/misTarjetas');
+
+                Establecimiento.buscarEstablecimientos(telefono).then(([establecimientos, fieldData]) => {
+                    console.log(fieldData);
+                    console.log(establecimientos);
+                    request.session.establecimientos = establecimientos;
+                    return response.redirect('/misTarjetas');
+                    
+                }).catch((err) => {
+        
+                    console.error(err);
+                    response.status(500).send('Error al buscar establecimientos');
+                });
+
+
             } else {
                 // Usuario no encontrado
                 request.session.error = 'Número de teléfono no encontrado';
@@ -87,7 +102,9 @@ exports.postRegistrar = (req, res, next) => {
     // Validar que los datos estén completos
     if (!Nombre || !Apellido || !Telefono) {
         req.session.error = 'Todos los campos son obligatorios';
-        return res.redirect('/registro');  // Asegúrate de que la ruta sea correcta
+        return res.redirect('/registro', {
+            establecimientos: request.session.establecimientos || []
+        });  // Asegúrate de que la ruta sea correcta
     }
 
     // Generar un id único para el usuario usando UUID v4
@@ -97,12 +114,16 @@ exports.postRegistrar = (req, res, next) => {
     Usuario.registrar({ id_Usuario, Nombre, Apellido, Telefono })
         .then(() => {
             req.session.success = 'Usuario registrado con éxito';
-            res.redirect('/usuario/login');  // Redirige al login tras registrarse
+            res.redirect('/usuario/login', {
+                establecimientos: request.session.establecimientos || [], 
+            });  // Redirige al login tras registrarse
         })
         .catch(err => {
             console.error('Error al registrar el usuario:', err);
             req.session.error = 'Hubo un error al registrar el usuario';
-            res.redirect('/registro');  // Asegúrate de que la ruta sea correcta
+            res.redirect('/registro', {
+                establecimientos: request.session.establecimientos || [], 
+            });  // Asegúrate de que la ruta sea correcta
         });
 };
 
@@ -113,6 +134,7 @@ exports.getRegistrar = (req, res, next) => {
     res.render('registro', {
         pagePrimaryTitle: 'Registro de Usuario',
         error: error,
-        isLoggedIn: false  // El usuario no está logueado en la pantalla de registro
+        isLoggedIn: false ,
+        establecimientos: request.session.establecimientos || [],  // El usuario no está logueado en la pantalla de registro
     });
 };

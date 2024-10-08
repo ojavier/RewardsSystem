@@ -1,4 +1,4 @@
-<%- include('partials/head.ejs') %>
+<%- include('partials/head.ejs', {establecimientos: establecimientos}) %>
     <br>
 
     <h1 class="title title-large" style="margin-left: 10%;">Mis Clientes</h1>
@@ -7,6 +7,13 @@
           <%= notification %>
         </div>
       <% } %>
+    <% if (typeof notificationOrder !== 'undefined') { %>
+        <div class="notification is-<%= type %>">
+          <%= notificationOrder %>
+        </div>
+    <% } %>
+      
+
     <button class="button is-primary is-rounded" style="margin-left: 10%;" onclick="window.location.href='/registro';">Registrar Cliente</button>
 
     <br><br>
@@ -50,10 +57,27 @@
                         <p class="subtitle is-size-5"><strong>Sellos:</strong> No hay sellos registrados</p>
                     <% } %>
                     
-                    <form action="/sello/registrar" method="post">
-                        <input type="hidden" name="telefono" value="<%= Clientes.Telefono %>">
-                        <button class="button is-primary has-text-centered is-rounded">Registrar sello</button>
-                    </form>
+                    <button class="button is-primary has-text-centered is-rounded" id="SelloPopup">Registrar sello</button>    
+                    
+                    <div class="modal" id="RegistrarSelloPopup">
+                        <div class="modal-background"></div>
+                        <div class="modal-content">
+                            <div class="box">
+                                <h1 class="title is-centered">Registrar Sello</h1>
+                                <form action="/Orden/Registrar" method="post">
+                                    <input  class="input" type="text" placeholder="Monto de compra" name="nivel_Satisfaccion" id="nivel_Satisfaccion">
+                                    <br>
+                                    <input  class="input" type="text" placeholder="Nota adicional" name="Feedback" id="Feedback">
+                                </form>
+                                <br>
+                                <br>
+                                <form action="/sello/registrar" method="post">
+                                    <input type="hidden" name="telefono" value="<%= Clientes.Telefono %>">
+                                </form>
+                            </div>
+                        </div>
+                        <button class="modal-close is-large" aria-label="cerrar"></button>
+                    </div>
                 </div>
 
                 <div class="column is-half">
@@ -66,3 +90,4 @@
         <% } else { %>
             <p>No se encontraron clientes.</p>
             <% } %>
+<script src="/Public/js/RegistrarSelloPopupButton.js"></script>

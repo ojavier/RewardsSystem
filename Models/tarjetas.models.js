@@ -10,14 +10,22 @@ class Tarjeta {
     }
 
     // Método para obtener las versiones de tarjeta de un establecimiento
-    static obtenerPorEstablecimiento(idEstablecimiento) {
+    static obtenerPorEstablecimiento(idEstablecimientos) {
+
+
         const query = `
             SELECT DISTINCT Version, Emision, id_Establecimiento
             FROM Tarjetas
-            WHERE id_Establecimiento = ?
+            WHERE 1 = 1 `;
+
+        for(let id in idEstablecimientos) {
+            query +=  ` OR id_Establecimiento = ${id} `;
+        }
+
+        query = `
             GROUP BY Version
         `;
-        return db.execute(query, [idEstablecimiento]);
+        return db.execute(query);
     }
 }
 
