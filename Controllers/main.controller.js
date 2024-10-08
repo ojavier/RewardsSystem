@@ -16,6 +16,10 @@ exports.getRoot = (request, response, next) => {
     });
 };
 
+exports.getEstablecimientos = (request, response, next) => {
+    response.render('misEstablecimientos');
+};
+
 exports.getRegistro = (request, response, next) => {
     response.render('registro');
 }; 
