@@ -103,7 +103,7 @@ exports.postRegistrar = (req, res, next) => {
     if (!Nombre || !Apellido || !Telefono) {
         req.session.error = 'Todos los campos son obligatorios';
         return res.redirect('/registro', {
-            establecimientos: request.session.establecimientos || []
+            establecimientos: request.session.establecimientos || [],
         });  // Asegúrate de que la ruta sea correcta
     }
 
@@ -135,6 +135,6 @@ exports.getRegistrar = (req, res, next) => {
         pagePrimaryTitle: 'Registro de Usuario',
         error: error,
         isLoggedIn: false ,
-        establecimientos: request.session.establecimientos || [],  // El usuario no está logueado en la pantalla de registro
+        establecimientos: [],  // El usuario no está logueado en la pantalla de registro
     });
 };

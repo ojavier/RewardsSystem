@@ -152,11 +152,12 @@ exports.buscarClienteSearch = (request, response, next) => {
 
 exports.registrarSello = async (request, response, next) => {
     try {
-        console.log(request.body)
-        const TelefonoUsuario = request.session.telefono;
-        const Telefono = request.body.telefono;
+        console.log(request.body);
+        console.log(request.session.usuario.Telefono);
+        const TelefonoUsuario = request.session.usuario.Telefono;
+        const TelefonoCliente = request.body.telefono;
 
-        await Sello.registrarSelloTel(Telefono, TelefonoUsuario);
+        await Sello.registrarSelloTel(TelefonoCliente, TelefonoUsuario);
 
         const [results] = await Clientes.buscarClienteSearch(Telefono);
         const cliente= results[0];

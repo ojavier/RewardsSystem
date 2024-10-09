@@ -26,7 +26,7 @@ class Clientes{
     }
 
     static buscarSellosCliente(Telefono, callback){
-      const query = "SELECT COUNT(*) AS cantidad_sellos FROM Sellos WHERE Telefono =?";
+      const query = "SELECT COUNT(*) AS cantidad_sellos FROM Sellos WHERE TelefonoCliente =?";
       return db.execute(query,[Telefono]);
     }
 
