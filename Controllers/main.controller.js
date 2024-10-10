@@ -180,4 +180,3 @@ exports.registrarSello = async (request, response, next) => {
         response.status(500).send({ message: "Error al registrar Sello" })
     }
 };
-
