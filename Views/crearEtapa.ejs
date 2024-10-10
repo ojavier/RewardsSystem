@@ -2,47 +2,52 @@
     <br>
 
     <h1 class="title title-large" style="margin-left: 10%;"> Crear Etapa</h1>
+    <% if (notification) { %>
+        <div class="notification is-<%= type %>">
+            <%= notification %>
+        </div>
+        <% } %>
 
-    <br><br><br>
+            <br><br><br>
 
-    <div class="columns is-vcentered" style="padding-left: 10%;">
-        <div class="column is-half">
-            <div class="box">
-                <form action="/etapa/crear" method="post">
+            <div class="columns is-vcentered" style="padding-left: 10%;">
+                <div class="column is-half">
+                    <div class="box">
+                        <form action="/post/crear" method="post">
 
-                    <div class="control">
-                        <p class="subtitle is-size-4"><strong>Cantidad de Sellos</strong></p>
-                        <input class="input" type="text" placeholder="Ej. 10" name="sellos_cantidad" />
+                            <div class="control">
+                                <p class="subtitle is-size-4"><strong>Cantidad de Sellos</strong></p>
+                                <input class="input" type="text" placeholder="Ej. 10" name="sellos_cantidad" />
+                            </div>
+
+                            <br>
+
+                            <div class="control">
+                                <p class="subtitle is-size-4"><strong>Minimo de Compra</strong></p>
+                                <input class="input" type="text" placeholder="Ej. 100" name="compra_minima" />
+                            </div>
+
+                            <br>
+
+                            <div class="control">
+                                <p class="subtitle is-size-4"><strong>Descuento</strong></p>
+                                <input class="input" type="text" placeholder="Ej. 10" name="descuento" />
+                            </div>
+
+                            <div class="control">
+                                <p class="subtitle is-size-4"><strong>Producto</strong></p>
+                                <input class="input" type="text" placeholder="Ej. Chilaquiles" name="nombre_producto" />
+                            </div>
+
+                            <br><br><br>
+
+                            <button class="button is-primary is-rounded is-extended">Crear</button>
+
+                        </form>
                     </div>
 
-                    <br>
-
-                    <div class="control">
-                        <p class="subtitle is-size-4"><strong>Minimo de Compra</strong></p>
-                        <input class="input" type="text" placeholder="Ej. 100" name="compra_minima" />
-                    </div>
-
-                    <br>
-
-                    <div class="control">
-                        <p class="subtitle is-size-4"><strong>Descuento</strong></p>
-                        <input class="input" type="text" placeholder="Ej. 10" name="descuento" />
-                    </div>
-
-                    <div class="control">
-                        <p class="subtitle is-size-4"><strong>Producto</strong></p>
-                        <input class="input" type="text" placeholder="Ej. Chilaquiles" name="nombre_producto" />
-                    </div>
-
-                    <br><br><br>
-
-                    <button class="button is-primary is-rounded is-extended">Crear</button>
-
-                </form>
+                </div>
+                <div class="column is-half">
+                    <!-- Aquí va la imagen de la etapa -->
+                </div>
             </div>
-
-        </div>
-        <div class="column is-half">
-            <!-- Aquí va la imagen de la etapa -->
-        </div>
-    </div>
