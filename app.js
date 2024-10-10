@@ -17,8 +17,6 @@ app.use(express.json()); // Añade esto para manejar solicitudes JSON
 // Middleware para procesar datos URL-encoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
-<<<<<<< HEAD
-=======
 // Middleware para mostrar en consola
 app.use((request, response, next) => {
     console.log('Middleware!');
@@ -26,7 +24,6 @@ app.use((request, response, next) => {
 });
 
 app.use(establecimientosController.getEstablecimientos);
->>>>>>> Claudio/fixCrearEtapa
 
 const session = require('express-session');
 app.use(session({
