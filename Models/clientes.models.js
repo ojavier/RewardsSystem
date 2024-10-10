@@ -9,12 +9,6 @@ class Clientes{
         this.id_usuario = id_usuario;
     }
 
-    static buscarClienteSearch(Telefono, callback){
-        const query = "SELECT * FROM Clientes WHERE Telefono = ?";
-        return db.execute(query,[Telefono]);
-    }
-
-
     static async obtenerTodos() {
         try {
           const query = 'SELECT * FROM Clientes';

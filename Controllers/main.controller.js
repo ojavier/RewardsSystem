@@ -84,8 +84,9 @@ exports.getSucursales = async (request, response, next) => {
     console.log(id_Usuario);
     console.log(request.session);
     Sucursales.getSucursales(id_Usuario).then(([sucursales, fieldData]) => {
+        establecimientos = request.session.establecimientos;
         return response.render("misSucursales", {
-            establecimientos: request.sesssion.establecimientos || [],
+            establecimientos: establecimientos || [],
             sucursales: sucursales || [],
         })
 
@@ -116,7 +117,7 @@ exports.getClientes = async (request, response, next) => {
 exports.buscarClienteSearch = (request, response, next) => {
     const Telefono = request.query.SearchTarjeta;
     //Metodo de clase cliente que hace la query de busqueda
-    Clientes.buscarClienteSearch(Telefono)
+    Usuario.buscarClienteSearch(Telefono)
         .then(([results, fieldData]) => {
             if (results.length === 0) {
                 return response.render("misClientes", {
@@ -165,7 +166,7 @@ exports.registrarSello = async (request, response, next) => {
         //Llama el método de la clase de sellos
         await Sello.registrarSelloTel(TelefonoCliente, TelefonoUsuario);
         //Vuelve a buscar el cliente por el Telefono
-        const [results] = await Clientes.buscarClienteSearch(TelefonoCliente);
+        const [results] = await Usuario.buscarClienteSearch(TelefonoCliente);
         const cliente= results[0];
         //Renderiza vista mis clientes con información
         response.render('misClientes', {

@@ -42,14 +42,12 @@
                 <div class="column is-half">
                     <h2 class="is-size-4 has-text-weight-bold">Información:</h2>
 
-                    <p class="subtitle is-size-5"><strong>Fecha de Nacimiento:</strong>
-                        <%= Clientes.fecha_Nacimiento %>
+                    <p class="subtitle is-size-5"><strong>Nombre:</strong>
+                        <%= Clientes.Nombre %> <%= Clientes.Apellido %>
                     </p>
                     <p class="subtitle is-size-5"><strong>Genero:</strong>
-                        <%= Clientes.Genero %>
                     </p>
                     <p class="subtitle is-size-5"><strong>Entidad:</strong>
-                        <%= Clientes.Entidad %>
                     </p>
                     <% if (typeof sellos !== 'undefined' && sellos !== null) { %>
                         <p class="subtitle is-size-5"><strong>Sellos:</strong> <%= sellos %></p>

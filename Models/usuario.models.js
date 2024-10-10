@@ -35,6 +35,11 @@ class Usuario {
             });
     }
 
+    static buscarClienteSearch(Telefono, callback){
+        const query = "SELECT * FROM Usuarios WHERE Telefono = ?";
+        return db.execute(query,[Telefono]);
+    }
+
 }
 
 module.exports = Usuario;
