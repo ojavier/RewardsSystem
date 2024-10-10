@@ -49,15 +49,16 @@ exports.modificarEtapa = (req, res) => {
     });
 };
 
-exports.crearEtapa = async (req, res, next) => {
+// GET: Renderizar la página para crear una etapa
+exports.getCrearEtapa = async (req, res, next) => {
     try {
         // Obtener los datos del cuerpo de la solicitud
-        const sellos_cantidad = req.body.sellos_cantidad;
-        const compra_minima = req.body.compra_minima;
-        const descuento = req.body.descuento;
-        const nombre_producto = req.body.nombre_producto;
+        const sellos_cantidad = req.query.sellos_cantidad;
+        const compra_minima = req.query.compra_minima;
+        const descuento = req.query.descuento;
+        const nombre_producto = req.query.nombre_producto;
 
-        // Validar que los datos estén completos y sean validos
+        // Validar que los datos estén completos y sean válidos
         if (!sellos_cantidad || isNaN(sellos_cantidad) || !compra_minima || isNaN(compra_minima) || !descuento || isNaN(descuento) || !nombre_producto) {
             return res.status(400).send({
                 message: 'Todos los campos son requeridos y deben ser válidos.'
@@ -84,6 +85,38 @@ exports.crearEtapa = async (req, res, next) => {
         const id_Producto = resProducto[0].id_Producto;
         console.log('ID del producto encontrado:', id_Producto);
 
+        // Renderizar la página con los productos y campos
+        res.render("crearEtapa", {
+            notification: '',
+            type: '',
+            sellos_cantidad,
+            compra_minima,
+            descuento,
+            nombre_producto,
+            id_Producto
+        });
+
+    } catch (err) {
+        console.error('Error al preparar la página de creación de etapa:', err);
+        res.status(500).send({
+            message: "Error al preparar la página de creación de etapa."
+        });
+    }
+};
+
+// POST: Crear la nueva etapa en la base de datos
+exports.postCrearEtapa = async (req, res, next) => {
+    try {
+        // Obtener los datos del cuerpo de la solicitud
+        const { sellos_cantidad, compra_minima, descuento, id_Producto } = req.body;
+
+        // Validar que los datos estén completos
+        if (!sellos_cantidad || !compra_minima || !descuento || !id_Producto) {
+            return res.status(400).send({
+                message: 'Todos los campos son requeridos.'
+            });
+        }
+
         // Generar un nuevo id_Etapa
         const id_Etapa = uuidv4();
         console.log('ID de la etapa generado:', id_Etapa);
@@ -92,7 +125,11 @@ exports.crearEtapa = async (req, res, next) => {
         await Etapa.crearEtapa(id_Etapa, sellos_cantidad, compra_minima, descuento, id_Producto);
 
         // Renderizar la vista de confirmación
-        res.render("crearEtapa", { message: 'Etapa creada exitosamente.' });
+        res.render("crearEtapa", {
+            notification: 'Etapa creada exitosamente.',
+            type: 'success',
+        });
+
     } catch (err) {
         console.error('Error al crear la etapa:', err);
         res.status(500).send({

@@ -22,7 +22,7 @@ exports.getRegistro = (request, response, next) => {
     response.render('registro', {
         establecimientos: request.session.establecimientos || [],
     });
-}; 
+};
 
 exports.getConfig = (request, response, next) => {
     response.render('configuracion', {
@@ -40,11 +40,6 @@ exports.getInfo = (request, response, next) => {
     });
 };
 
-exports.getcrearEtap = (request, response, next) => {
-    response.render('crearEtapa', {
-        establecimientos: request.session.establecimientos || [],
-    })
-};
 
 exports.getmodEtap = (req, res, next) => {
     const telefono = req.params.telefono;
@@ -54,9 +49,9 @@ exports.getmodEtap = (req, res, next) => {
             if (rows.length === 0) {
                 return res.render('modificarEtapas', { etapas: [] }); // Si no hay etapas, pasa un arreglo vacío
             }
-            res.render('modificarEtapas', { 
+            res.render('modificarEtapas', {
                 etapas: rows,
-                establecimientos: request.session.establecimientos || [], 
+                establecimientos: request.session.establecimientos || [],
             }); // Pasa las etapas a la vista
         })
         .catch(err => {
@@ -92,11 +87,11 @@ exports.getmodTar = (request, response, next) => {
 exports.getClientes = async (request, response, next) => {
     try {
         const clientes = await Clientes.obtenerTodos();
-        response.render('misClientes', { 
-            Clientes: clientes, 
+        response.render('misClientes', {
+            Clientes: clientes,
             notification: null,
             establecimientos: request.session.establecimientos || [],
-         });
+        });
     } catch (err) {
         console.error(err);
         response.status(500).send({ message: 'Error al obtener clientes' });
@@ -109,9 +104,9 @@ exports.buscarClienteSearch = (request, response, next) => {
     Clientes.buscarClienteSearch(Telefono)
         .then(([results, fieldData]) => {
             if (results.length === 0) {
-                return response.render("misClientes", { 
-                    Clientes: null, 
-                    error: "Cliente no encontrado", 
+                return response.render("misClientes", {
+                    Clientes: null,
+                    error: "Cliente no encontrado",
                     notification: null,
                     establecimientos: request.session.establecimientos || [],
                 });
@@ -125,9 +120,9 @@ exports.buscarClienteSearch = (request, response, next) => {
                     const sellos = results[0][0].cantidad_sellos;
                     console.log(results[0]);
                     console.log(results[0][0].cantidad_sellos);
-                    return response.render("misClientes", { 
-                        Clientes: cliente, 
-                        sellos: sellos, 
+                    return response.render("misClientes", {
+                        Clientes: cliente,
+                        sellos: sellos,
                         notification: null,
                         establecimientos: request.session.establecimientos || [],
                     });
@@ -152,10 +147,10 @@ exports.registrarSello = async (request, response, next) => {
         await Sello.registrarSelloTel(Telefono);
 
         const [results] = await Clientes.buscarClienteSearch(Telefono);
-        const cliente= results[0];
+        const cliente = results[0];
         response.render('misClientes', {
-            notification: 'Sello registrado correctamente', 
-            type: 'success', 
+            notification: 'Sello registrado correctamente',
+            type: 'success',
             Clientes: cliente,
             establecimientos: request.session.establecimientos || [],
         });

@@ -11,7 +11,6 @@ const establecimientosController = require("../Controllers/establecimientos.cont
 const ordenesController = require("../Controllers/ordenes.controller")
 
 
-router.get('/crearEtapa', isAuth, mainController.getcrearEtap);
 
 router.get('/modificarEtapas', isAuth, mainController.getmodEtap);
 
@@ -38,7 +37,6 @@ router.get("/misClientes", isAuth, mainController.getClientes);
 router.get("/modificarTarjeta", isAuth, mainController.getmodTar)
 
 // Rutas para Etapa
-router.post('/etapa/crear', isAuth, etapaController.crearEtapa); // Crear etapa
 router.post('/etapa/modificar', isAuth, etapaController.modificarEtapa); // Modificar etapa
 router.get('/etapa/:id_Etapa', isAuth, etapaController.buscarEtapa); // Buscar etapa por ID
 router.get('/etapa/portarjeta', isAuth, etapaController.obtenerEtapasPorTarjeta); // Obtener etapas por tarjeta
