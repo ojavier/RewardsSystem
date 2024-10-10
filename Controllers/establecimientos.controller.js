@@ -1,7 +1,7 @@
 const { response, request } = require('express');
-const Establecimiento = require('../Models/establecimientos.models'); // Importamos el modelo de Establecimiento
+const Establecimiento = require('../models/establecimientos.models'); // Importamos el modelo de Establecimiento
 const isAuth = require('../Util/is-auth');
-const Usuario = require('../Models/usuario.models');
+const Usuario = require('../models/usuario.models');
 
 exports.buscarEstablecimientos = (request, response, next) => {
     try{

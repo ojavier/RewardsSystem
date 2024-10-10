@@ -1,6 +1,6 @@
 const { response, request } = require('express');
-const Usuario = require('../Models/usuario.models');
-const Establecimiento = require('../Models/establecimientos.models');
+const Usuario = require('../models/usuario.models');
+const Establecimiento = require('../models/establecimientos.models');
 const isAuth = require('../Util/is-auth');
 const { v4: uuidv4 } = require('uuid'); 
 

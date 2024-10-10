@@ -1,9 +1,9 @@
 const { request, response } = require("express");
-const Clientes = require('../Models/clientes.models');
-const Sello = require("../Models/selloActual.models");
+const Clientes = require('../models/clientes.models');
+const Sello = require("../models/selloActual.models");
 const Etapa = require('../models/etapas.models');
-const Establecimiento = require("../Models/establecimientos.models");
-const Usuario = require("../Models/usuario.models");
+const Establecimiento = require("../models/establecimientos.models");
+const Usuario = require("../models/usuario.models");
 
 exports.getRoot = (request, response, next) => {
     const isLoggedIn = request.session.isLoggedIn || false;
