@@ -17,21 +17,33 @@ app.use(express.json()); // Añade esto para manejar solicitudes JSON
 // Middleware para procesar datos URL-encoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Middleware para mostrar en consola
+app.use((request, response, next) => {
+    console.log('Middleware!');
+    next();
+});
+
+app.use(establecimientosController.getEstablecimientos);
 
 const session = require('express-session');
 app.use(session({
-  secret: 'mySecretKey', 
-  resave: false, //La sesión no se guardará en cada petición, sino sólo se guardará si algo cambió 
-  saveUninitialized: false, //Asegura que no se guarde una sesión para una petición que no lo necesita
+    secret: 'mySecretKey',
+    resave: false, //La sesión no se guardará en cada petición, sino sólo se guardará si algo cambió 
+    saveUninitialized: false, //Asegura que no se guarde una sesión para una petición que no lo necesita
 }));
+
+// Rutas de usuario
+const usuarioRoutes = require('./Routes/usuario.routes.js');
+app.use('/usuario', usuarioRoutes);
+
+// Rutas de etapa
+const etapaRoutes = require('./Routes/etapa.routes.js');
+app.use('/etapa', etapaRoutes);
 
 // Rutas principales
 const mainRoutes = require('./Routes/main.routes.js');
 app.use('/', mainRoutes);
 
-// Rutas de usuario
-const usuarioRoutes = require('./Routes/usuario.routes.js');
-app.use('/usuario', usuarioRoutes);
 
 // Manejo de errores 404
 app.use((request, response, next) => {

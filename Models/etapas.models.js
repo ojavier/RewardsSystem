@@ -30,8 +30,7 @@ class Etapa {
         return db.execute(query, params);
     }
 
-    static crearEtapa(Cant_Sellos, Minimo_Compra, Descuento, id_Producto) {
-        const id_Etapa = "002"
+    static crearEtapa(id_Etapa, Cant_Sellos, Minimo_Compra, Descuento, id_Producto) {
         const query = "INSERT INTO Etapa (id_Etapa, Cant_Sellos, Minimo_Compra, Descuento, id_Producto) VALUES(?, ?, ?, ?, ?)";
         return db.execute(query, [id_Etapa, Cant_Sellos, Minimo_Compra, Descuento, id_Producto]);
     }

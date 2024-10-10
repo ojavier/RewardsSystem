@@ -6,7 +6,6 @@ async function fetchTopTenderos() {
     }
     return await response.json();
 }
-
 // Función para crear el gráfico
 async function createTopTenderosChart() {
     const ctx = document.getElementById('topTenderosChart').getContext('2d');
@@ -29,15 +28,16 @@ async function createTopTenderosChart() {
         },
         options: {
             responsive: true,
+            indexAxis: 'y', 
             scales: {
-                y: {
+                x: {
                     beginAtZero: true,
                     title: {
                         display: true,
                         text: 'Número de Sellos'
                     }
                 },
-                x: {
+                y: {
                     title: {
                         display: true,
                         text: 'Tenderos'
