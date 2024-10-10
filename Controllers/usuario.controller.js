@@ -102,9 +102,8 @@ exports.postRegistrar = (req, res, next) => {
     // Validar que los datos estén completos
     if (!Nombre || !Apellido || !Telefono) {
         req.session.error = 'Todos los campos son obligatorios';
-        return res.redirect('/registro', {
-            establecimientos: request.session.establecimientos || [],
-        });  // Asegúrate de que la ruta sea correcta
+        req.session.establecimientos = req.session.establecimientos || [];
+        return res.redirect('/registro');  // Redirige sin pasar el objeto directamente
     }
 
     // Generar un id único para el usuario usando UUID v4
@@ -114,27 +113,26 @@ exports.postRegistrar = (req, res, next) => {
     Usuario.registrar({ id_Usuario, Nombre, Apellido, Telefono })
         .then(() => {
             req.session.success = 'Usuario registrado con éxito';
-            res.redirect('/usuario/login', {
-                establecimientos: request.session.establecimientos || [], 
-            });  // Redirige al login tras registrarse
+            req.session.establecimientos = req.session.establecimientos || [];
+            res.redirect('/usuario/login');  // Redirige sin pasar el objeto directamente
         })
         .catch(err => {
             console.error('Error al registrar el usuario:', err);
             req.session.error = 'Hubo un error al registrar el usuario';
-            res.redirect('/registro', {
-                establecimientos: request.session.establecimientos || [], 
-            });  // Asegúrate de que la ruta sea correcta
+            req.session.establecimientos = req.session.establecimientos || [];
+            res.redirect('/registro');  // Redirige sin pasar el objeto directamente
         });
 };
 
 // Renderizar el formulario de registro
 exports.getRegistrar = (req, res, next) => {
     const error = req.session.error || null;
+    const establecimientos = req.session.establecimientos || [];  // Obtén los establecimientos de la sesión
 
     res.render('registro', {
         pagePrimaryTitle: 'Registro de Usuario',
         error: error,
-        isLoggedIn: false ,
-        establecimientos: [],  // El usuario no está logueado en la pantalla de registro
+        isLoggedIn: false,
+        establecimientos: establecimientos,  // Pásalos a la vista
     });
 };
