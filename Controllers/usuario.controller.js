@@ -8,6 +8,7 @@ const { v4: uuidv4 } = require('uuid');
 exports.getLogin = (request, response, next) => {
     const error = request.session.error || null;
     const isLoggedIn = request.session.isLoggedIn || false;
+    const establecimientos = request.session.establecimientos || [];
 
     if (!isLoggedIn) {
         response.render('login', {
@@ -16,7 +17,7 @@ exports.getLogin = (request, response, next) => {
             permisos: request.session.permisos || [],
             usuario: request.session.usuario || {},
             error: error,
-            establecimientos: [],
+            establecimientos: establecimientos || [],
         });
     } else {
         response.redirect('/misTarjetas');
@@ -130,11 +131,12 @@ exports.postRegistrar = (req, res, next) => {
 // Renderizar el formulario de registro
 exports.getRegistrar = (req, res, next) => {
     const error = req.session.error || null;
+    console.log(request.session.establecimientos);
 
     res.render('registro', {
         pagePrimaryTitle: 'Registro de Usuario',
         error: error,
         isLoggedIn: false ,
-        establecimientos: [],  // El usuario no está logueado en la pantalla de registro
+        establecimientos: request.session.establecimientos || [],  // El usuario no está logueado en la pantalla de registro
     });
 };

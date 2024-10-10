@@ -2,6 +2,7 @@ const { request } = require('express');
 const db = require('../Util/database');
 
 class Sello {
+    //Constructor de los atributos
     constructor(id_sello,Fecha_Sello,Hora_Sello,TelefonoCliente,TelefonoUsuario){
         this.id_sello = id_sello;
         this.Fecha_Sello = Fecha_Sello;
@@ -10,9 +11,9 @@ class Sello {
         this.id_Usuario = TelefonoUsuario;
         
     }
-
+    //Método estatico para registrar sello en base al telefono
     static registrarSelloTel(TelefonoCliente, TelefonoUsuario){
-
+        // Genera un numero al azar para el id
         function generaridsello(){
             const randint = Math.floor(Math.random() * 2147483648);
             return randint;
@@ -26,6 +27,7 @@ class Sello {
         console.log("numid: ", id_sello);
         console.log("telefono:", TelefonoCliente);
         console.log("Telefono_usuario: ", TelefonoUsuario);
+        //query insertada a base de datos
         const query = 'INSERT INTO Sellos (id_sello, Fecha_sello, Hora_sello, TelefonoCliente, TelefonoUsuario) VALUES(?, ?, ?, ?, ?) ';
         return db.execute(query, [id_sello,fechaActual,horaActual,TelefonoCliente,TelefonoUsuario]);
     }

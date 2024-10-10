@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
-const establecimientosController = require("./Controllers/establecimientos.controller.js");
+
 
 // Middleware para servir archivos estáticos
 app.use(express.static('public'));

@@ -150,17 +150,19 @@ exports.buscarClienteSearch = (request, response, next) => {
         });
 };
 
+//Registra Sello en base de datos
 exports.registrarSello = async (request, response, next) => {
     try {
         console.log(request.body);
         console.log(request.session.usuario.Telefono);
         const TelefonoUsuario = request.session.usuario.Telefono;
         const TelefonoCliente = request.body.telefono;
-
+        //Llama el método de la clase de sellos
         await Sello.registrarSelloTel(TelefonoCliente, TelefonoUsuario);
-
+        //Vuelve a buscar el cliente por el Telefono
         const [results] = await Clientes.buscarClienteSearch(Telefono);
         const cliente= results[0];
+        //Renderiza vista mis clientes con información
         response.render('misClientes', {
             notification: 'Sello registrado correctamente', 
             type: 'success', 

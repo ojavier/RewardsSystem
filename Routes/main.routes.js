@@ -50,6 +50,7 @@ router.post('/etapa/eliminar/:id_Etapa', isAuth, etapaController.eliminarEtapa);
 //Rutas para clientes
 router.get("/clientes/buscar", isAuth, mainController.buscarClienteSearch);
 
+//Rutas para Sellos
 router.post("/sello/registrar", isAuth, mainController.registrarSello);
 
 //Ruta para usuario
