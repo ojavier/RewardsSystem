@@ -103,9 +103,10 @@ exports.getClientes = async (request, response, next) => {
     }
 };
 
+//Busca cliente por teléfono
 exports.buscarClienteSearch = (request, response, next) => {
     const Telefono = request.query.SearchTarjeta;
-
+    //Metodo de clase cliente que hace la query de busqueda
     Clientes.buscarClienteSearch(Telefono)
         .then(([results, fieldData]) => {
             if (results.length === 0) {
@@ -119,7 +120,7 @@ exports.buscarClienteSearch = (request, response, next) => {
 
             const cliente = results[0];
             console.log(cliente);
-
+            // Método para buscar los sellos del cliente
             Clientes.buscarSellosCliente(Telefono)
                 .then((results) => {
                     const sellos = results[0][0].cantidad_sellos;
