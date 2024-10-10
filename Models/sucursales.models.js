@@ -8,9 +8,9 @@ class Sucursales {
         this.id_Establecimiento = id_Establecimiento;
     }
 
-    static getSucursales(Telefono){
-        const query = "SELECT * FROM Sucursales, SucursalesTieneUsuarios WHERE Sucursales.id_Sucursal = SucursalesTieneUsuarios.id_Sucursal AND Telefono = ? "
-        db.execute(query, [Telefono]);
+    static getSucursales(id_Usuario){
+        const query = "SELECT * FROM Sucursales, SucursalesTieneUsuarios WHERE Sucursales.id_Sucursal = SucursalesTieneUsuarios.id_Sucursal AND id_Usuario = ? "
+        db.execute(query, [id_Usuario]);
     }
 }
 

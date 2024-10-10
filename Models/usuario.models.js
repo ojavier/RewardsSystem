@@ -13,6 +13,11 @@ class Usuario {
         const query = 'SELECT * FROM Usuarios WHERE Telefono = ?';
         return db.execute(query, [Telefono]);
     }
+
+    static buscarIDconTel(Telefono) {
+        const query = "SELECT id_Usuario FROM  Usuarios WHERE Telefono = ?"
+        return db.execute(query, [Telefono]);
+    }
     
    // Método para registrar un nuevo usuario
    static registrar({ id_Usuario, Nombre, Apellido, Telefono }) {

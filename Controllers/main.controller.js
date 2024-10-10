@@ -3,6 +3,7 @@ const Clientes = require('../Models/clientes.models');
 const Sello = require("../Models/selloActual.models");
 const Etapa = require('../models/etapas.models');
 const Establecimiento = require("../Models/establecimientos.models");
+const Usuario = require("../Models/usuario.models");
 
 exports.getRoot = (request, response, next) => {
     const isLoggedIn = request.session.isLoggedIn || false;
@@ -16,6 +17,10 @@ exports.getRoot = (request, response, next) => {
         sellos: 1,
         establecimientos: request.session.establecimientos || [],
     });
+};
+
+exports.getEstablecimientos = (request, response, next) => {
+    response.render('misEstablecimientos');
 };
 
 exports.getRegistro = (request, response, next) => {
@@ -147,9 +152,12 @@ exports.buscarClienteSearch = (request, response, next) => {
 
 exports.registrarSello = async (request, response, next) => {
     try {
-        console.log(request.body)
-        const Telefono = request.body.telefono;
-        await Sello.registrarSelloTel(Telefono);
+        console.log(request.body);
+        console.log(request.session.usuario.Telefono);
+        const TelefonoUsuario = request.session.usuario.Telefono;
+        const TelefonoCliente = request.body.telefono;
+
+        await Sello.registrarSelloTel(TelefonoCliente, TelefonoUsuario);
 
         const [results] = await Clientes.buscarClienteSearch(Telefono);
         const cliente= results[0];

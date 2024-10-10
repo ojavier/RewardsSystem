@@ -158,7 +158,8 @@ CREATE TABLE `Sellos` (
   `id_Sello` varchar(36) NOT NULL,
   `Fecha_Sello` date NOT NULL,
   `Hora_Sello` time(6) NOT NULL,
-  `Telefono` char(10) DEFAULT NULL
+  `TelefonoCliente` char(10) DEFAULT NULL,
+  `TelefonoUsuario` char(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
@@ -313,7 +314,8 @@ ALTER TABLE `RolesTienenPermisos`
 --
 ALTER TABLE `Sellos`
   ADD PRIMARY KEY (`id_Sello`),
-  ADD KEY `Telefono` (`Telefono`);
+  ADD KEY `TelefonoUsuario` (`TelefonoUsuario`),
+  ADD KEY `TelefonoCliente` (`TelefonoCliente`);
 
 --
 -- Indexes for table `Sucursales`
@@ -347,7 +349,8 @@ ALTER TABLE `TarjetasOfrecenEtapa`
 -- Indexes for table `Usuarios`
 --
 ALTER TABLE `Usuarios`
-  ADD PRIMARY KEY (`id_Usuario`);
+  ADD PRIMARY KEY (`id_Usuario`),
+  ADD KEY `Telefono` (`Telefono`);
 
 --
 -- Indexes for table `UsuariosTienenRoles`
@@ -403,7 +406,8 @@ ALTER TABLE `RolesTienenPermisos`
 -- Constraints for table `Sellos`
 --
 ALTER TABLE `Sellos`
-  ADD CONSTRAINT `Sellos_ibfk_1` FOREIGN KEY (`Telefono`) REFERENCES `Tarjetas` (`Telefono`);
+  ADD CONSTRAINT `Sellos_ibfk_1` FOREIGN KEY (`TelefonoUsuario`) REFERENCES `Tarjetas` (`Telefono`),
+  ADD CONSTRAINT `Sellos_ibfk_2` FOREIGN KEY (`TelefonoCliente`) REFERENCES `Usuarios` (`Telefono`);
 
 --
 -- Constraints for table `Sucursales`
