@@ -4,6 +4,7 @@ const Sello = require("../Models/selloActual.models");
 const Etapa = require('../models/etapas.models');
 const Establecimiento = require("../Models/establecimientos.models");
 const Usuario = require("../Models/usuario.models");
+const Sucursales = require("../Models/sucursales.models");
 
 exports.getRoot = (request, response, next) => {
     const isLoggedIn = request.session.isLoggedIn || false;
@@ -77,10 +78,18 @@ exports.getEquipo = (request, response, next) => {
     })
 };
 
-exports.getSucursales = (request, response, next) => {
-    response.render("misSucursales", {
-        establecimientos: request.session.establecimientos || [],
-    })
+exports.getSucursales = async (request, response, next) => {
+    const id_Usuario = request.session.usuario.id_Usuario;
+    console.log("GET Sucursales");
+    console.log(id_Usuario);
+    console.log(request.session);
+    Sucursales.getSucursales(id_Usuario).then(([sucursales, fieldData]) => {
+        return response.render("misSucursales", {
+            establecimientos: request.sesssion.establecimientos || [],
+            sucursales: sucursales || [],
+        })
+
+    }).catch(err => {console.log(err)})
 };
 
 exports.getmodTar = (request, response, next) => {
@@ -156,7 +165,7 @@ exports.registrarSello = async (request, response, next) => {
         //Llama el método de la clase de sellos
         await Sello.registrarSelloTel(TelefonoCliente, TelefonoUsuario);
         //Vuelve a buscar el cliente por el Telefono
-        const [results] = await Clientes.buscarClienteSearch(Telefono);
+        const [results] = await Clientes.buscarClienteSearch(TelefonoCliente);
         const cliente= results[0];
         //Renderiza vista mis clientes con información
         response.render('misClientes', {

@@ -16,17 +16,19 @@
 </section>
 
 <section>
-    <div class="container">
-        <br><br>
-        <% console.log(sucursales) %>
-        <% for (sucursal of sucursales) { %>
-            <div class="box cambio-cursor">
-                <img  class="is-rounded" style="border-radius: 10px;" src="/Public/Images/chilako.png" alt="Foto chilako">
-                <h1 class="title has-text-centered"><%sucursal.Direccion%></h1>
-                <div class="has-text-right">
-                    Entidad: <%sucursal.Entidad%> <br><br>
+    <form action="/sucursales/buscar" method="get">
+        <div class="container">
+            <br><br>
+            <% console.log(sucursales) %>
+            <% for (sucursal of sucursales) { %>
+                <div class="box cambio-cursor">
+                    <img  class="is-rounded" style="border-radius: 10px;" src="/Public/Images/chilako.png" alt="Foto chilako">
+                    <h1 class="title has-text-centered"><%sucursal.Direccion%></h1>
+                    <div class="has-text-right">
+                        Entidad: <%sucursal.Entidad%> <br><br>
+                    </div>
                 </div>
-            </div>
-        <% } %>
-    </div>
+            <% } %>
+        </div>
+    </form>
 </section>
