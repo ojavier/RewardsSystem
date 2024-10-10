@@ -7,7 +7,7 @@ const tarjetasController = require('../Controllers/tarjetas.controller');
 const etapaController = require('../Controllers/etapa.controller');
 const selloActualController = require("../Controllers/selloActual.controller");
 const usuarioController = require("../Controllers/usuario.controller");
-const establecimientosController = require("../Controllers/establecimientos.controller");
+const establecimientosController = require("../controllers/establecimientos.controller");
 const ordenesController = require("../Controllers/ordenes.controller");
 const reportesController = require('../controllers/reportes.controller');
 
