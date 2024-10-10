@@ -17,14 +17,6 @@ app.use(express.json()); // Añade esto para manejar solicitudes JSON
 // Middleware para procesar datos URL-encoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Middleware para mostrar en consola
-app.use((request, response, next) => {
-    console.log('Middleware!');
-    next();
-});
-
-app.use(establecimientosController.getEstablecimientos);
-
 const session = require('express-session');
 app.use(session({
     secret: 'mySecretKey',

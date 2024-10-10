@@ -8,7 +8,9 @@ exports.buscarEstablecimientos = (request, response, next) => {
         const Telefono = request.session.Telefono;
         console.log("Si está jalando");
         const [nombres] = Establecimiento.buscarEstablecimientos(Telefono);
-        response.render("misEstablecimientos", {nombres: establecimientos});
+        response.render("misEstablecimientos", {
+            nombres: establecimientos,
+        });
     }
     catch(err){
             console.error(err);

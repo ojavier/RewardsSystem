@@ -8,6 +8,6 @@ exports.getSucursales = async (request,response, next) => {
     const [sucursales] = await Sucursales.getSucursales(id_Usuario);
     response.render("misSucursales", {
         establecimientos: request.sesssion.establecimientos || [],
-        sucursales: sucursales
+        sucursales: sucursales,
     })
 }

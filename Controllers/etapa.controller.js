@@ -91,7 +91,7 @@ exports.getCrearEtapa = async (req, res, next) => {
             compra_minima,
             descuento,
             nombre_producto,
-            id_Producto
+            id_Producto,
         });
 
     } catch (err) {
