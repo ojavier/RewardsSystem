@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
-const establecimientosController = require("./Controllers/establecimientos.controller.js");
+const establecimientosController = require("./controllers/establecimientos.controller.js");
 
 // Middleware para servir archivos estáticos
 app.use(express.static('public'));
@@ -26,11 +26,11 @@ app.use(session({
 }));
 
 // Rutas principales
-const mainRoutes = require('./Routes/main.routes.js');
+const mainRoutes = require('./routes/main.routes.js');
 app.use('/', mainRoutes);
 
 // Rutas de usuario
-const usuarioRoutes = require('./Routes/usuario.routes.js');
+const usuarioRoutes = require('./routes/usuario.routes.js');
 app.use('/usuario', usuarioRoutes);
 
 // Manejo de errores 404
