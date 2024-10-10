@@ -1,6 +1,5 @@
 const Sello = require('../Models/selloActual.models.js');
 
-// Función para mostrar los sellos de un usuario por su telefono
 // Función para mostrar los sellos de un usuario por su teléfono
 exports.mostrarSellos = (req, res, next) => {
   const { Telefono } = req.params; // Obtener el teléfono de los parámetros
