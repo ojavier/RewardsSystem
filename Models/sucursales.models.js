@@ -18,7 +18,10 @@ class Sucursales {
     static searchSucursal(id_Usuario, Direccion){
         const direccionparecida = `${Direccion}%`; 
         const query = "SELECT * FROM Sucursales, SucursalesTieneUsuarios WHERE Sucursales.id_Sucursal = SucursalesTieneUsuarios.id_Sucursal AND id_Usuario = ? AND Direccion LIKE '? ';";
-        return db.execute(query, [id_Usuario, direccionparecida]);
+        return db.execute(query, [
+            id_Usuario, 
+            direccionparecida,
+        ]);
     }
 }
 
