@@ -4,27 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <link rel="stylesheet" href="/Estilos.css"> <!-- External CSS file -->
+    <link rel="stylesheet" href="/Estilos.css"> <!-- Archivo CSS externo -->
 </head>
 <body style="background: (#041E3F); padding-top: 60px;">
     <nav class="navbar is-fixed-top" id="main-navbar">
         <div class="navbar-brand">
-            <a class="navbar-item" href="#">
+            <a class="navbar-item" href="<%= process.env.PATH_SERVER %>">
                 <img src="/Images/logo.png" alt="Logo" id="navbar-logo">
             </a>
         </div>
 
         <span class="control select" style="margin-top: 12px;">
             <form action="<%= process.env.PATH_SERVER %>/establecimientos/buscar" method="get">
-                <select name="" id="">
-                    <option>Selecciona establecimiento</option>
+                <select name="establecimiento" id="establecimiento-select">
+                    <option value="">Selecciona establecimiento</option>
                     <% console.log(establecimientos) %>
-                    <% for (establecimiento of establecimientos) { %>
+                    <% for (let establecimiento of establecimientos) { %>
                         <option value="<%= establecimiento.id %>"><%= establecimiento.nombre %></option>
                     <% } %>
                 </select>
             </form>
-            
         </span>
     
         <div class="navbar-end">
