@@ -27,11 +27,11 @@ app.use(session({
 
 // Rutas principales
 const mainRoutes = require('./routes/main.routes.js');
-app.use('${process.env.PATH_SERVER}/', mainRoutes);
+app.use('/', mainRoutes);
 
 // Rutas de usuario
 const usuarioRoutes = require('./routes/usuario.routes.js');
-app.use('${process.env.PATH_SERVER}/usuario', usuarioRoutes);
+app.use('/usuario', usuarioRoutes);
 
 // Manejo de errores 404
 app.use((request, response, next) => {
