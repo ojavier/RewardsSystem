@@ -9,14 +9,14 @@
 
 <div>
     <div id="tarjetaCampos" style="display: block;">
-        <form action="/registro" method="POST"> <!-- Asegúrate de que esta sea la ruta correcta para registrar -->
+        <form action="<%= process.env.PATH_SERVER %>/registro" method="POST">
             <div class="box mx-6">
                 <article class="message">
                     <div class="message-header" id="colorarticulo">
                         <p>Nombre</p>
                     </div>
                     <div class="message-body">
-                        <input class="input" type="text" name="Nombre" placeholder="Ingresa tu nombre" value="" style="width: 100%;">
+                        <input class="input" type="text" name="Nombre" placeholder="Ingresa tu nombre" style="width: 100%;">
                     </div>
                 </article>
             </div>
@@ -27,7 +27,7 @@
                         <p>Apellido</p>
                     </div>
                     <div class="message-body">
-                        <input class="input" type="text" name="Apellido" placeholder="Ingresa tu apellido" value="" style="width: 100%;">
+                        <input class="input" type="text" name="Apellido" placeholder="Ingresa tu apellido" style="width: 100%;">
                     </div>
                 </article>
             </div>
@@ -38,7 +38,7 @@
                         <p>Teléfono</p>
                     </div>
                     <div class="message-body">
-                        <input class="input" type="tel" name="Telefono" placeholder="Ingresa tu teléfono" value="" style="width: 100%;">
+                        <input class="input" type="tel" name="Telefono" placeholder="Ingresa tu teléfono" style="width: 100%;">
                     </div>
                 </article>
             </div>
@@ -60,5 +60,3 @@
         </form>
     </div>
 </div>
-
-

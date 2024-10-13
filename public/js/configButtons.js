@@ -57,7 +57,7 @@ async function aceptarCambios() {
     });
 
     try {
-        const response = await fetch('/etapa/modificar', {
+        const response = await fetch('${process.env.PATH_SERVER}/etapa/modificar', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

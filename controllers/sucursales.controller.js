@@ -1,5 +1,6 @@
 const { request, response } = require("express");
-const Sucursales = require("../Models/sucursales.models");
+const Sucursales = require("../models/sucursales.models");
+const Usuario = require("../models/usuario.models");
 
 exports.getSucursalesSearchBar = async (request,response, next) => {
     const id_Usuario = request.session.usuario.id_Usuario;
