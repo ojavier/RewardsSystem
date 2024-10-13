@@ -41,5 +41,5 @@ function handleLogin(e) {
 function handleRegister() {
     console.log('Botón de registro clickeado'); // Para depuración
     // Redirigir a la página de registro
-    window.location.href = '<%= process.env.PATH_SERVER %>/registro';
+    window.location.href = '${process.env.PATH_SERVER}/registro';
 }
