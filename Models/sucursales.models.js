@@ -9,9 +9,12 @@ class Sucursales {
     }
 
     //Metodo para encontrar todas las sucursales que tiene un usuario
-    static getSucursales(id_Usuario){
-        const query = "SELECT * FROM Sucursales, SucursalesTieneUsuarios WHERE Sucursales.id_Sucursal = SucursalesTieneUsuarios.id_Sucursal AND id_Usuario = ? ";
-        return db.execute(query, [id_Usuario]);
+    static getSucursales(id_Usuario, id_Establecimiento){
+        const query = "SELECT * FROM Sucursales, SucursalesTieneUsuarios WHERE Sucursales.id_Sucursal = SucursalesTieneUsuarios.id_Sucursal AND id_Usuario = ? AND id_Establecimiento = ?";
+        return db.execute(query, [
+            id_Usuario,
+            id_Establecimiento,
+        ]);
     }
 
     //Metodo para encontrar una sola sucursal con la direccion

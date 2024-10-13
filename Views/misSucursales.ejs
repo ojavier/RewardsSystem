@@ -1,4 +1,6 @@
-<%- include('partials/head.ejs', {establecimientos: establecimientos}) %>
+<%- include('partials/head.ejs', {
+     establecimientos: establecimientos, 
+    }) %>
 <br>
 <br>
 <br>
@@ -34,6 +36,7 @@
                 <form action="/sucursal/modificar" method="post">
                     <button class="button is-primary"> Modificar </button>
                 </form>
+                <br>
                 <form action="/sucursal/eliminar" method="post">
                     <button class="button is-danger"> Eliminar </button>
                 </form>

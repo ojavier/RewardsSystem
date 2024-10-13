@@ -15,14 +15,14 @@
         </div>
 
         <span class="control select" style="margin-top: 12px;">
-            <form action="/establecimientos/buscar" method="get">
-                <select name="id_Establecimiento" id="id_Establecimiento">
-                    <% console.log(establecimientos) %>
+            <form action="/establecimientos/buscar" method="get" id="establecimientoForm">
+                <select name="id_Establecimiento" id="id_Establecimiento" onchange="document.getElementById('establecimientoForm').submit()">
                     <% for (establecimiento of establecimientos) { %>
                         <option value="<%= establecimiento.id %>"><%= establecimiento.nombre %></option>
                     <% } %>
                 </select>
             </form>
+            
             
         </span>
     
