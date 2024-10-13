@@ -1,6 +1,6 @@
 // Función para obtener datos del servidor
 async function fetchTopTenderos() {
-    const response = await fetch('${process.env.PATH_SERVER}/reportes/topTenderos'); 
+    const response = await fetch('<%= process.env.PATH_SERVER %>/reportes/topTenderos'); 
     if (!response.ok) {
         throw new Error('Error al obtener datos de los Tenderos');
     }
