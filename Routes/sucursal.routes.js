@@ -6,3 +6,5 @@ sucursalesController = require("../Controllers/sucursales.controller")
 
 router.get("/sucursal/searchBar", isAuth, sucursalesController.getSucursalesSearchBar);
 
+router.post("sucursal/modificar", isAuth, sucursalesController.sucursalModificar)
+

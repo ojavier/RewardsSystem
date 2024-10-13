@@ -23,6 +23,23 @@ class Sucursales {
             direccionparecida,
         ]);
     }
+
+    static eliminarSucursal(id_Sucursal){
+        const query = "";
+        return db.execute(query,[
+            id_Sucursal,
+        ])
+    }
+
+    static modificarSucursal(id_Sucursal, Direccion, Entidad, id_Establecimiento){
+        const query = "";
+        return db.execute(query, [
+            id_Sucursal, 
+            Direccion,
+            Entidad,
+            id_Establecimiento,
+        ])
+    }
 }
 
 module.exports = Sucursales;

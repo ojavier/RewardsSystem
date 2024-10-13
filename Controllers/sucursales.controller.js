@@ -13,3 +13,27 @@ exports.getSucursalesSearchBar = async (request,response, next) => {
         sucursales: sucursales || [],
     })
 }
+
+exports.sucursalModificar = (request, response) => {
+    const id_Sucursal = "";
+    const Direccion = "";
+    const Entidad = "";
+    const id_Establecimiento = request.body.id_Establecimiento;
+    const establecimientos = request.session.establecimientos;
+    console.log("id_Sucursal: ", id_Sucursal);
+    console.log("Direccion: ", Direccion);
+    console.log("Entidad: ", Entidad);
+    console.log("id_Establecimiento: ", id_Establecimiento);
+    Sucursales.modificarSucursal(id_Sucursal,Direccion,Entidad,id_Establecimiento)
+        .then((results) => {
+            return response.render("misSucursales", {
+                sucursales: sucursales,
+                establecimientos:establecimientos,
+            })
+        })
+        .catch((err) => {
+            console.log(err);
+            return response.status(500).send({ message: "Error al buscar sellos del cliente" });
+        });
+    
+}
