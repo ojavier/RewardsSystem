@@ -37,3 +37,19 @@ exports.sucursalModificar = (request, response) => {
         });
     
 }
+
+exports.eliminarSucursal = (request, response) => {
+    const id_Sucursal = "";
+    console.log("id_Sucursal", id_Sucursal);
+    Sucursales.eliminarSucursal(id_Sucursal) 
+        .then((results) => {
+            return response.render("misSucursales", {
+                sucursales: sucursales,
+                establecimientos:establecimientos,
+            })
+        })
+        .catch((err) => {
+            console.log(err);
+            return response.status(500).send({ message: "Error al buscar sellos del cliente" });
+        });
+}
