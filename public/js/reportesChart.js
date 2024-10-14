@@ -1,11 +1,4 @@
-// Función para obtener datos del servidor
-async function fetchTopTenderos() {
-    const response = await fetch('/reportes/topTenderos'); 
-    if (!response.ok) {
-        throw new Error('Error al obtener datos de los Tenderos');
-    }
-    return await response.json();
-}
+
 // Función para crear el gráfico
 async function createTopTenderosChart() {
     const ctx = document.getElementById('topTenderosChart').getContext('2d');

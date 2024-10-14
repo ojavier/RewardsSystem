@@ -69,7 +69,7 @@
                 <div class="content">
                     <h2 class="subtitle has-text-weight-semibold">Top Tenderos</h2>
                     <p>
-                        Aquí puedes mostrar información adicional o una breve descripción sobre los tenderod con más sellos.
+                        Aquí puedes mostrar información adicional o una breve descripción sobre los tenderos con más sellos.
                     </p>
                 </div>
             </div>
@@ -81,5 +81,16 @@
 
     <!-- Incluir Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+// Función para obtener datos del servidor
+async function fetchTopTenderos() {
+    const response = await fetch('<%= process.env.PATH_SERVER %>reportes/topTenderos'); 
+    if (!response.ok) {
+        throw new Error('Error al obtener datos de los Tenderos');
+    }
+    return await response.json();
+}
+</script>
 <!-- Incluir tu script personalizado -->
-<script src="/js/reportesChart.js"></script>
+<script src="<%= process.env.PATH_SERVER %>js/reportesChart.js"></script>

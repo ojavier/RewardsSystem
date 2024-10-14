@@ -37,9 +37,3 @@ function handleLogin(e) {
     $('#loginForm').submit(); // Asegúrate de que se envíe el formulario correcto
 }
 
-// Función para manejar el registro
-function handleRegister() {
-    console.log('Botón de registro clickeado'); // Para depuración
-    // Redirigir a la página de registro
-    window.location.href = '/registro';
-}

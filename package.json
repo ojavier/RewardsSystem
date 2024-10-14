@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "cross-env NODE_ENV=production PATH_SERVER='/gacode/' node app.js",
+    "start:dev": "cross-env NODE_ENV=development PATH_SERVER='/' node --watch app.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
   },
   "homepage": "https://github.com/ojavier/RewardsSystem#readme",
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "nodemon": "^3.1.7"
   },
   "dependencies": {

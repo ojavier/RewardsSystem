@@ -1,15 +1,15 @@
 const { request, response } = require("express");
-const Clientes = require('../Models/clientes.models');
-const Sello = require("../Models/selloActual.models");
+const Clientes = require('../models/clientes.models');
+const Sello = require("../models/selloActual.models");
 const Etapa = require('../models/etapas.models');
-const Establecimiento = require("../Models/establecimientos.models");
-const Usuario = require("../Models/usuario.models");
-const Sucursales = require("../Models/sucursales.models");
+const Establecimiento = require("../models/establecimientos.models");
+const Usuario = require("../models/usuario.models");
+const Sucursales = require("../models/sucursales.models")
 
 exports.getRoot = (request, response, next) => {
     const isLoggedIn = request.session.isLoggedIn || false;
     if (!isLoggedIn) {
-        return response.redirect('/usuario/login');
+        return response.redirect('${process.env.PATH_SERVER}usuario/login');
     }
     response.render('misTarjetas', {
         pagePrimaryTitle: 'Mis Tarjetas',
@@ -106,7 +106,7 @@ exports.getClientes = async (request, response, next) => {
     try {
         const clientes = await Clientes.obtenerTodos();
         response.render('misClientes', {
-            Clientes: clientes,
+            cliente: clientes,
             notification: null,
             establecimientos: request.session.establecimientos || [],
         });

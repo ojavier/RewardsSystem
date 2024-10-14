@@ -3,7 +3,6 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 
-
 // Middleware para servir archivos estáticos
 app.use(express.static('public'));
 
@@ -25,15 +24,15 @@ app.use(session({
 }));
 
 // Rutas de usuario
-const usuarioRoutes = require('./Routes/usuario.routes.js');
+const usuarioRoutes = require('./routes/usuario.routes.js');
 app.use('/usuario', usuarioRoutes);
 
 // Rutas de etapa
-const etapaRoutes = require('./Routes/etapa.routes.js');
+const etapaRoutes = require('./routes/etapa.routes.js');
 app.use('/etapa', etapaRoutes);
 
 // Rutas principales
-const mainRoutes = require('./Routes/main.routes.js');
+const mainRoutes = require('./routes/main.routes.js');
 app.use('/', mainRoutes);
 
 
@@ -47,7 +46,9 @@ app.use((request, response, next) => {
 });
 
 // Iniciar el servidor
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3010;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
+//Socios
