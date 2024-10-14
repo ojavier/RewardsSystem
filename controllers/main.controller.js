@@ -17,6 +17,7 @@ exports.getRoot = (request, response, next) => {
         usuario: request.session.usuario || {},
         sellos: 1,
         establecimientos: request.session.establecimientos || [],
+        id_Establecimiento: request.query.id_Establecimiento || [],
     });
 };
 
@@ -27,12 +28,14 @@ exports.getEstablecimientos = (request, response, next) => {
 exports.getRegistro = (request, response, next) => {
     response.render('registro', {
         establecimientos: request.session.establecimientos || [],
+        id_Establecimiento: request.query.id_Establecimiento || [],
     });
 };
 
 exports.getConfig = (request, response, next) => {
     response.render('configuracion', {
         establecimientos: request.session.establecimientos || [],
+        id_Establecimiento: request.query.id_Establecimiento || [],
     });
 };
 
@@ -43,6 +46,7 @@ exports.getInfo = (request, response, next) => {
         usuario: usuario,
         isLoggedIn: request.session.isLoggedIn || false,
         establecimientos: request.session.establecimientos || [],
+        id_Establecimiento: request.query.id_Establecimiento || [],
     });
 };
 
@@ -58,6 +62,7 @@ exports.getmodEtap = (req, res, next) => {
             res.render('modificarEtapas', {
                 etapas: rows,
                 establecimientos: request.session.establecimientos || [],
+                id_Establecimiento: request.query.id_Establecimiento || [],
             }); // Pasa las etapas a la vista
         })
         .catch(err => {
@@ -69,12 +74,14 @@ exports.getmodEtap = (req, res, next) => {
 exports.getReportes = (request, response, next) => {
     response.render('Reportes', {
         establecimientos: request.session.establecimientos || [],
+        id_Establecimiento: request.query.id_Establecimiento || [],
     });
 };
 
 exports.getEquipo = (request, response, next) => {
     response.render('miEquipo', {
         establecimientos: request.session.establecimientos || [],
+        id_Establecimiento: request.query.id_Establecimiento || [],
     })
 };
 
@@ -91,6 +98,7 @@ exports.getSucursales = async (request, response, next) => {
         return response.render("misSucursales", {
             establecimientos: establecimientos || [],
             sucursales: sucursales || [],
+            id_Establecimiento: request.query.id_Establecimiento || [],
         })
 
     }).catch(err => {console.log(err)})
@@ -99,6 +107,7 @@ exports.getSucursales = async (request, response, next) => {
 exports.getmodTar = (request, response, next) => {
     response.render("modificarTarjeta", {
         establecimientos: request.session.establecimientos || [],
+        id_Establecimiento: request.query.id_Establecimiento || [],
     })
 };
 
@@ -109,6 +118,7 @@ exports.getClientes = async (request, response, next) => {
             cliente: clientes,
             notification: null,
             establecimientos: request.session.establecimientos || [],
+            id_Establecimiento: request.query.id_Establecimiento || [],
         });
     } catch (err) {
         console.error(err);
@@ -128,6 +138,7 @@ exports.buscarClienteSearch = (request, response, next) => {
                     error: "Cliente no encontrado",
                     notification: null,
                     establecimientos: request.session.establecimientos || [],
+                    id_Establecimiento: request.query.id_Establecimiento || [],
                 });
             }
 
@@ -144,6 +155,7 @@ exports.buscarClienteSearch = (request, response, next) => {
                         sellos: sellos,
                         notification: null,
                         establecimientos: request.session.establecimientos || [],
+                        id_Establecimiento: request.query.id_Establecimiento || [],
                     });
                 })
 
@@ -177,6 +189,7 @@ exports.registrarSello = async (request, response, next) => {
             type: 'success',
             Clientes: cliente,
             establecimientos: request.session.establecimientos || [],
+            id_Establecimiento: request.query.id_Establecimiento || [],
         });
     }
     catch (err) {

@@ -42,6 +42,7 @@ app.use((request, response, next) => {
         pagePrimaryTitle: 'Página no encontrada',
         isLoggedIn: request.session.isLoggedIn || false,
         establecimientos: request.session.establecimientos || [],
+        id_Establecimiento: request.query.id_Establecimiento || [],
     });
 });
 

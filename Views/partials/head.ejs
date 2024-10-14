@@ -15,10 +15,12 @@
 
     <span class="control select" style="margin-top: 12px;">
         <form action="<%= process.env.PATH_SERVER %>establecimientos/buscar" method="get">
-            <select name="establecimiento" id="establecimiento-select">
-                <option value="">Selecciona establecimiento</option>
+            <select name="establecimiento" id="establecimiento-select" onchange="this.form.submit()">
                 <% for (let establecimiento of establecimientos) { %>
-                    <option value="<%= establecimiento.id %>"><%= establecimiento.nombre %></option>
+                    <option value="<%= establecimiento.id %>" 
+                        <% if (establecimiento.id == id_Establecimiento) { %>selected<% } %>>
+                        <%= establecimiento.nombre %>
+                    </option>
                 <% } %>
             </select>
         </form>

@@ -28,7 +28,7 @@ class Sucursales {
     }
 
     static eliminarSucursal(id_Sucursal){
-        const query = "";
+        const query = "UPDATE Sucursal SET Delete_At = CURRENT_TIMESTAMP WHERE id_Sucursal = ?";
         return db.execute(query,[
             id_Sucursal,
         ])
