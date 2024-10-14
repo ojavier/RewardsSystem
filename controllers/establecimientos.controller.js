@@ -4,7 +4,7 @@ const isAuth = require('../Util/is-auth');
 const Usuario = require('../models/usuario.models');
 
 exports.buscarEstablecimientos = (request, response, next) => {
-    try{
+    try {
         const Telefono = request.session.Telefono;
         console.log("Si está jalando");
         const [nombres] = Establecimiento.buscarEstablecimientos(Telefono);
@@ -12,11 +12,21 @@ exports.buscarEstablecimientos = (request, response, next) => {
             nombres: establecimientos,
         });
     }
-    catch(err){
-            console.error(err);
-            response.status(500).send('Error al buscar establecimientos');
+    catch (err) {
+        console.error(err);
+        response.status(500).send('Error al buscar establecimientos');
     };
 };
 
 
+exports.pushEliminaEstablecimiento = (req, res, next) => {
+    const { id_Establecimiento } = req.params;
+
+    Etapa.eliminaEstablecimientos(id_Establecimiento)
+        .then(() => res.status(200).send('Establecimiento eliminada correctamente'))
+        .catch((err) => {
+            console.error('Error al eliminar el establecimiento:', err);
+            return res.status(500).send('Error al eliminar el establecimiento');
+        });
+};
 
