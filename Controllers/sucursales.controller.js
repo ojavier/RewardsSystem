@@ -16,8 +16,8 @@ exports.getSucursalesSearchBar = async (request,response, next) => {
 
 exports.sucursalModificar = (request, response) => {
     const id_Sucursal = "";
-    const Direccion = "";
-    const Entidad = "";
+    const Direccion = request.body.Direccion;
+    const Entidad = request.body.Entidad;
     const id_Establecimiento = request.body.id_Establecimiento;
     const establecimientos = request.session.establecimientos;
     console.log("id_Sucursal: ", id_Sucursal);

@@ -35,7 +35,7 @@ class Sucursales {
     }
 
     static modificarSucursal(id_Sucursal, Direccion, Entidad, id_Establecimiento){
-        const query = "";
+        const query = "UPDATE";
         return db.execute(query, [
             id_Sucursal, 
             Direccion,

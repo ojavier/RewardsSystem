@@ -1,4 +1,6 @@
-<%- include('partials/head.ejs', {establecimientos: establecimientos}) %>
+<%- include('partials/head.ejs', {
+    establecimientos: establecimientos,
+    }) %>
     <br>
 
     <h1 class="title title-large" style="margin-left: 10%;">Mis Clientes</h1>
@@ -41,13 +43,9 @@
 
                 <div class="column is-half">
                     <h2 class="is-size-4 has-text-weight-bold">Información:</h2>
-
+                    <br>
                     <p class="subtitle is-size-5"><strong>Nombre:</strong>
                         <%= Clientes.Nombre %> <%= Clientes.Apellido %>
-                    </p>
-                    <p class="subtitle is-size-5"><strong>Genero:</strong>
-                    </p>
-                    <p class="subtitle is-size-5"><strong>Entidad:</strong>
                     </p>
                     <% if (typeof sellos !== 'undefined' && sellos !== null) { %>
                         <p class="subtitle is-size-5"><strong>Sellos:</strong> <%= sellos %></p>

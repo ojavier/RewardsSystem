@@ -1,5 +1,5 @@
 <%- include('partials/head.ejs', {
-     establecimientos: establecimientos, 
+    establecimientos: establecimientos,
     }) %>
 <br>
 <br>
@@ -33,14 +33,27 @@
                 </div>
                 <br>
                 <br>
-                <form action="/sucursal/modificar" method="post">
-                    <button class="button is-primary"> Modificar </button>
-                </form>
-                <br>
-                <form action="/sucursal/eliminar" method="post">
-                    <button class="button is-danger"> Eliminar </button>
-                </form>
+                <button class="button is-primary" id="modTarButton"> Modificar </button><form action="/sucursal/eliminar" method="post"><input type="hidden" name="id_Sucursal" value=""><button class="button is-danger"> Eliminar </button></form>
+                <div class="modal" id="modTarPopup">
+                    <div class="modal-background"></div>
+                    <div class="modal-content">
+                        <div class="box">
+                            <h1 class="title is-centered">Modificar Tarjeta</h1>
+                            <form action="/sucursal/modificar" method="post">
+                                <input class="input" type="text" placeholder="Direccion" name="Direccion" id="Direccion">
+                                <br>
+                                <br>
+                                <input class="input" type="text" placeholder="Entidad" name="Entidad" id="Entidad">
+                                <br>
+                                <br>
+                                <button class="button is-primary"> Modificar </button>
+                            </form>
+                        </div>
+                    </div>
+                    <button class="modal-close is-large" aria-label="cerrar"></button>
+                </div>
             </div>
         <% } %>
     </div>
 </section>
+<script src="/js/modTarButton.js"></script>
