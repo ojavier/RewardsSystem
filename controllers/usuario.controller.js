@@ -19,7 +19,7 @@ exports.getLogin = (req, res, next) => {
         establecimientos: [],
       });
     }
-    return res.redirect('${process.env.PATH_SERVER}/misTarjetas');
+    return res.redirect('${process.env.PATH_SERVER}misTarjetas');
   };
   
   // Método para manejar el POST de inicio de sesión
@@ -44,7 +44,7 @@ exports.getLogin = (req, res, next) => {
               console.log(fieldData);
               console.log(establecimientos);
               req.session.establecimientos = establecimientos;
-              return res.redirect('${process.env.PATH_SERVER}/misTarjetas');
+              return res.redirect('${process.env.PATH_SERVER}misTarjetas');
             })
             .catch((err) => {
               console.error('Error al buscar establecimientos:', err);
@@ -54,12 +54,12 @@ exports.getLogin = (req, res, next) => {
   
         req.session.error = 'Número de teléfono no encontrado';
         console.log('Usuario no encontrado, redirigiendo a login');
-        return res.redirect('${process.env.PATH_SERVER}/usuario/login');
+        return res.redirect('${process.env.PATH_SERVER}usuario/login');
       })
       .catch((err) => {
         console.error('Error al buscar el usuario:', err);
         req.session.error = 'Error interno del servidor';
-        return res.redirect('${process.env.PATH_SERVER}/usuario/login');
+        return res.redirect('${process.env.PATH_SERVER}usuario/login');
       });
   };
   
@@ -97,7 +97,7 @@ exports.postRegistrar = (req, res, next) => {
     if (!Nombre || !Apellido || !Telefono) {
       req.session.error = 'Todos los campos son obligatorios';
       req.session.establecimientos = req.session.establecimientos || [];
-      return res.redirect('${process.env.PATH_SERVER}/registro');
+      return res.redirect('${process.env.PATH_SERVER}registro');
     }
   
     // Generar un id único para el usuario usando UUID v4
@@ -108,13 +108,13 @@ exports.postRegistrar = (req, res, next) => {
       .then(() => {
         req.session.success = 'Usuario registrado con éxito';
         req.session.establecimientos = req.session.establecimientos || [];
-        return res.redirect('${process.env.PATH_SERVER}/usuario/login');
+        return res.redirect('${process.env.PATH_SERVER}usuario/login');
       })
       .catch((err) => {
         console.error('Error al registrar el usuario:', err);
         req.session.error = 'Hubo un error al registrar el usuario';
         req.session.establecimientos = req.session.establecimientos || [];
-        return res.redirect('${process.env.PATH_SERVER}/registro');
+        return res.redirect('${process.env.PATH_SERVER}registro');
       });
   };
   

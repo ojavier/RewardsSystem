@@ -8,7 +8,7 @@ const Usuario = require("../models/usuario.models");
 exports.getRoot = (request, response, next) => {
     const isLoggedIn = request.session.isLoggedIn || false;
     if (!isLoggedIn) {
-        return response.redirect('/usuario/login');
+        return response.redirect('${process.env.PATH_SERVER}usuario/login');
     }
     response.render('misTarjetas', {
         pagePrimaryTitle: 'Mis Tarjetas',
