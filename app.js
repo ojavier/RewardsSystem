@@ -24,11 +24,11 @@ app.use(session({
 }));
 
 // Rutas de usuario
-const usuarioRoutes = require('./Routes/usuario.routes.js');
+const usuarioRoutes = require('./routes/usuario.routes.js');
 app.use('/usuario', usuarioRoutes);
 
 // Rutas de etapa
-const etapaRoutes = require('./Routes/etapa.routes.js');
+const etapaRoutes = require('./routes/etapa.routes.js');
 app.use('/etapa', etapaRoutes);
 
 // Rutas principales
