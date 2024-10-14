@@ -115,7 +115,7 @@ exports.getClientes = async (request, response, next) => {
     try {
         const clientes = await Clientes.obtenerTodos();
         response.render('misClientes', {
-            cliente: clientes,
+            Clientes: clientes,
             notification: null,
             establecimientos: request.session.establecimientos || [],
             id_Establecimiento: request.query.id_Establecimiento || [],
