@@ -16,11 +16,11 @@
     <% } %>
       
 
-    <button class="button is-primary is-rounded" style="margin-left: 10%;" onclick="window.location.href='/registro';">Registrar Cliente</button>
+    <button class="button is-primary is-rounded" style="margin-left: 10%;" onclick="window.location.href='<%= process.env.PATH_SERVER %>registro';">Registrar Cliente</button>
 
     <br><br>
 
-    <form action="/clientes/buscar" method="get" style="margin-left: 10%; margin-right: 10%;">
+    <form action="<%= process.env.PATH_SERVER %>clientes/buscar" method="get" style="margin-left: 10%; margin-right: 10%;">
         <div class="field iconosearchbar has-addons">
             <div class="control is-expanded">
                 <input class="input" type="text" placeholder="Tel. Cliente" name="SearchTarjeta" id="SearchTarjeta">
