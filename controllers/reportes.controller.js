@@ -1,4 +1,4 @@
-const Reportes = require('../Models/reportes.models'); // Asegúrate de que la ruta sea correcta
+const Reportes = require('../models/reportes.models'); // Asegúrate de que la ruta sea correcta
 
 // Controlador para Top Tenderos
 exports.getTopTenderos = async (req, res) => {

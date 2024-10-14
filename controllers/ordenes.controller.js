@@ -1,5 +1,5 @@
 const { request, response } = require("express")
-const Ordenes = require("../Models/ordenes.models")
+const Ordenes = require("../models/ordenes.models")
 
 exports.registrarOrden = async (request, response, next) =>{
     try{
@@ -12,7 +12,11 @@ exports.registrarOrden = async (request, response, next) =>{
 
         Ordenes.registrarOrden(id_Orden, nivel_Satisfaccion, Feedback, id_Establecimiento, Telefono);
 
-        response.render("misClientes", { notificationOrder: "Orden Registrada Correctamente", type: "success" , Telefono: Telefono})
+        response.render("misClientes", { 
+            notificationOrder: "Orden Registrada Correctamente", 
+            type: "success" , 
+            Telefono: Telefono,
+        })
     }
     catch(err){
         console.log(err);

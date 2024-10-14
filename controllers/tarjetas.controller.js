@@ -1,4 +1,4 @@
-const Tarjeta = require('../Models/tarjetas.models'); // Importamos el modelo de tarjetas
+const Tarjeta = require('../models/tarjetas.models'); // Importamos el modelo de tarjetas
 
 // Función para obtener las tarjetas de un establecimiento
 exports.getTarjetas = (request, response, next) => {

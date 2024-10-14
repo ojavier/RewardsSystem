@@ -1,4 +1,4 @@
-const Sello = require('../Models/selloActual.models.js');
+const Sello = require('../models/selloActual.models.js');
 
 // Función para mostrar los sellos de un usuario por su teléfono
 exports.mostrarSellos = (req, res, next) => {

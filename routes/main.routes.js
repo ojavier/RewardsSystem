@@ -2,13 +2,13 @@ const express = require('express');
 const router = express.Router();
 const isAuth = require('../Util/is-auth');
 
-const mainController = require('../Controllers/main.controller');
-const tarjetasController = require('../Controllers/tarjetas.controller');
-const etapaController = require('../Controllers/etapa.controller');
-const selloActualController = require("../Controllers/selloActual.controller");
-const usuarioController = require("../Controllers/usuario.controller");
-const establecimientosController = require("../Controllers/establecimientos.controller");
-const ordenesController = require("../Controllers/ordenes.controller");
+const mainController = require('../controllers/main.controller');
+const tarjetasController = require('../controllers/tarjetas.controller');
+const etapaController = require('../controllers/etapa.controller');
+const selloActualController = require("../controllers/selloActual.controller");
+const usuarioController = require("../controllers/usuario.controller");
+const establecimientosController = require("../controllers/establecimientos.controller");
+const ordenesController = require("../controllers/ordenes.controller");
 const reportesController = require('../controllers/reportes.controller');
 
 

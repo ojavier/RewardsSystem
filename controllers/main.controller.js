@@ -1,9 +1,9 @@
 const { request, response } = require("express");
-const Clientes = require('../Models/clientes.models');
-const Sello = require("../Models/selloActual.models");
+const Clientes = require('../models/clientes.models');
+const Sello = require("../models/selloActual.models");
 const Etapa = require('../models/etapas.models');
-const Establecimiento = require("../Models/establecimientos.models");
-const Usuario = require("../Models/usuario.models");
+const Establecimiento = require("../models/establecimientos.models");
+const Usuario = require("../models/usuario.models");
 
 exports.getRoot = (request, response, next) => {
     const isLoggedIn = request.session.isLoggedIn || false;
@@ -77,10 +77,22 @@ exports.getEquipo = (request, response, next) => {
     })
 };
 
-exports.getSucursales = (request, response, next) => {
-    response.render("misSucursales", {
-        establecimientos: request.session.establecimientos || [],
-    })
+exports.getSucursales = async (request, response, next) => {
+    const id_Usuario = request.session.usuario.id_Usuario;
+    const id_Establecimiento = "203";
+    console.log("GET Sucursales");
+    console.log(request.query);
+    console.log(id_Usuario);
+    console.log(request.query.id_Establecimiento);
+    console.log(request.session);
+    Sucursales.getSucursales(id_Usuario, id_Establecimiento).then(([sucursales, fieldData]) => {
+        establecimientos = request.session.establecimientos;
+        return response.render("misSucursales", {
+            establecimientos: establecimientos || [],
+            sucursales: sucursales || [],
+        })
+
+    }).catch(err => {console.log(err)})
 };
 
 exports.getmodTar = (request, response, next) => {
@@ -107,7 +119,7 @@ exports.getClientes = async (request, response, next) => {
 exports.buscarClienteSearch = (request, response, next) => {
     const Telefono = request.query.SearchTarjeta;
     //Metodo de clase cliente que hace la query de busqueda
-    Clientes.buscarClienteSearch(Telefono)
+    Usuario.buscarClienteSearch(Telefono)
         .then(([results, fieldData]) => {
             if (results.length === 0) {
                 return response.render("misClientes", {
@@ -156,7 +168,7 @@ exports.registrarSello = async (request, response, next) => {
         //Llama el método de la clase de sellos
         await Sello.registrarSelloTel(TelefonoCliente, TelefonoUsuario);
         //Vuelve a buscar el cliente por el Telefono
-        const [results] = await Clientes.buscarClienteSearch(Telefono);
+        const [results] = await Usuario.buscarClienteSearch(TelefonoCliente);
         const cliente= results[0];
         //Renderiza vista mis clientes con información
         response.render('misClientes', {
@@ -171,4 +183,3 @@ exports.registrarSello = async (request, response, next) => {
         response.status(500).send({ message: "Error al registrar Sello" })
     }
 };
-

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="<%= process.env.PATH_SERVER %>//Estilos.css"> <!-- Archivo CSS externo -->
+</head>
+<nav class="navbar is-fixed-top" id="main-navbar">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="<%= process.env.PATH_SERVER %>">
+            <img src="<%= process.env.PATH_SERVER %>/Images/logo.png" alt="Logo" id="navbar-logo">
+        </a>
+    </div>
+
+    <span class="control select" style="margin-top: 12px;">
+        <form action="<%= process.env.PATH_SERVER %>/establecimientos/buscar" method="get">
+            <select name="establecimiento" id="establecimiento-select">
+                <option value="">Selecciona establecimiento</option>
+                <% for (let establecimiento of establecimientos) { %>
+                    <option value="<%= establecimiento.id %>"><%= establecimiento.nombre %></option>
+                <% } %>
+            </select>
+        </form>
+    </span>
+    
+    <div class="navbar-end">
+        <div class="navbar-item">
+            <div class="buttons">
+                <a class="navbar-link" href="<%= process.env.PATH_SERVER %>/misClientes">Mis Clientes</a>
+                <a class="navbar-link" href="<%= process.env.PATH_SERVER %>/misSucursales">Mis Sucursales</a>
+                <a class="navbar-link" href="<%= process.env.PATH_SERVER %>/misVersiones">Mis Tarjetas</a>
+                <a class="navbar-link" href="<%= process.env.PATH_SERVER %>/miInformacion">Mi Información</a>
+                <a class="navbar-link" href="<%= process.env.PATH_SERVER %>/miEquipo">Mi Equipo</a>
+                <a class="navbar-link" href="<%= process.env.PATH_SERVER %>/reportes">Reportes</a>
+                <a class="button" id="login-button" href="<%= process.env.PATH_SERVER %>/usuario/login">
+                    Iniciar Sesión
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+</body>
+</html>
