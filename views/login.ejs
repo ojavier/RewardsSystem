@@ -10,7 +10,7 @@
 <div class="container-fluid h-custom" style="display: flex; height: 100vh; margin-left: 0px; padding-left: 0px;">
     <div style="flex-basis: 50%; background-color: #041E3F; display: flex; align-items: center; justify-content: center; margin-left: 0px ;">
         <div class="col-md-9 col-lg-6 col-xl-5">
-            <img src="/images/logo.PNG" width="400" height="330" class="is-centered" alt="Logo">
+            <img src="<%= process.env.PATH_SERVER %>images/logo.PNG" width="400" height="330" class="is-centered" alt="Logo">
         </div>
     </div>
 
@@ -19,7 +19,7 @@
             <h2 class="title is-size-1" style="font-weight: bold; text-align: center;">Iniciar Sesión</h2>
             <br>
             
-            <form id="loginForm" action="<%= process.env.PATH_SERVER %>/usuario/login" method="POST"> 
+            <form id="loginForm" action="<%= process.env.PATH_SERVER %>usuario/login" method="POST"> 
                 <div class="form-outline mb-4">
                     <label class="form-label" for="Telefono">Número de Teléfono</label>
                     <input type="text" id="Telefono" name="telefono" class="form-control form-control-lg" placeholder="Ingresa tu número de teléfono" required />
