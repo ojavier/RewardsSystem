@@ -53,4 +53,12 @@
 <!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="<%= process.env.PATH_SERVER %>/js/loginButton.js"></script>
+<script>
+    // Función para manejar el registro
+    function handleRegister() {
+        console.log('Botón de registro clickeado'); // Para depuración
+        // Redirigir a la página de registro
+        window.location.href = '<%=process.env.PATH_SERVER%>registro';
+    }
+</script>
+<script src="<%= process.env.PATH_SERVER %>js/loginButton.js"></script>

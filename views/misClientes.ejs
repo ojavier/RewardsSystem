@@ -1,0 +1,56 @@
+<%- include('partials/head.ejs') %>
+    <br>
+    <br>
+    <br>
+    <h1 class="title is-1 has-text-weight-bold" style="margin-left: 10%;"> Mis Clientes </h1>
+    <br>
+    <div class="">
+        <a class="button is-primary has-text-centered is-rounded" style="margin-left: 10%;"> Registrar Cliente </a>
+    </div>
+    <br>
+    <br>
+
+    <section>
+        <div class="container">
+            <form action="<%= process.env.PATH_SERVER %>misClientes" method="GET">
+                <div class="field iconosearchbar">
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Tel. Cliente" name="telefono" id="SearchTarjeta">
+                    </div>
+                    <button type="submit" class="button is-primary">Buscar</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <br>
+    <br>
+
+    <% if (cliente) { %>
+        <div class="box" style="margin-left: 10%; margin-right: 10%;">
+            <div class="columns is-vcentered">
+                <div class="column is-half">
+                    <h2 class="is-size-4 has-text-weight-bold">Información:</h2>
+                    <p class="subtitle is-size-5"><strong>Nombre:</strong>
+                        <%= cliente.Nombre %>
+                    </p> <!-- Aquí va el nombre -->
+                    <p class="subtitle is-size-5"><strong>Genero:</strong>
+                        <%= cliente.Genero %>
+                    </p>
+                    <p class="subtitle is-size-5"><strong>Edad:</strong>
+                        <%= cliente.Edad %>
+                    </p>
+
+                    <div class="buttons">
+                        <button class="button is-primary is-rounded">Registrar sello</button>
+                    </div>
+                </div>
+
+                <div class="column is-half">
+                    <figure class="image">
+                        <!-- Aquí va la imagen de la tarjeta -->
+                    </figure>
+                </div>
+            </div>
+        </div>
+        <% } %>
