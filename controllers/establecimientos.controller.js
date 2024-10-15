@@ -3,16 +3,36 @@ const Establecimiento = require('../models/establecimientos.models'); // Importa
 const isAuth = require('../Util/is-auth');
 
 exports.buscarEstablecimientos = (request, response, next) => {
+exports.cambiarEstablecimiento = async (request, response, next) => {
+    /*
     try{
         const Telefono = request.session.Telefono;
         console.log("Si está jalando");
+<<<<<<< HEAD
         const [nombres] = Establecimiento.buscarEstablecimientos(Telefono);
         response.render("misEstablecimientos", {nombres: Establecimientos});
+=======
+        console.log(Telefono);
+        const establecimientos =  await Establecimiento.buscarEstablecimientos(Telefono);
+        console.log(establecimientos);
+
+        const id_Establecimiento = request.query.establecimiento;
+        console.log(id_Establecimiento);
+        const id_Usuario = request.session.usuario.id_Usuario;
+        const [sucursales] = await Sucursales.getSucursales(id_Usuario, id_Establecimiento);
+        return response.render("misSucursales", {
+            establecimientos: establecimientos || [],
+            sucursales: sucursales || [],
+            id_Establecimiento: request.query.id_Establecimiento || -1,
+        })
+>>>>>>> e5807c5287be802c9b8e66518daae9dcc5edc8e5
     }
     catch(err){
             console.error(err);
             response.status(500).send('Error al buscar establecimientos');
-    };
+    };*/
+    request.session.establecimiento_id = request.body.establecimiento;
+    response.redirect(`${process.env.PATH_SERVER}misTarjetas`);
 };
 
 exports.getEstablecimientos = async (request, response, next) => {

@@ -44,6 +44,8 @@ exports.getLogin = (req, res, next) => {
               console.log(fieldData);
               console.log(establecimientos);
               req.session.establecimientos = establecimientos;
+              req.session.establecimiento_id = establecimientos[0].id || '';
+
               return res.redirect(`${process.env.PATH_SERVER}misTarjetas`);
             })
             .catch((err) => {
