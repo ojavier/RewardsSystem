@@ -1,6 +1,8 @@
 <%- include('partials/head.ejs', { establecimientos: establecimientos, id_Establecimiento: id_Establecimiento, }) %>
 
     <h1 class="title title-large" style="margin-left: 10%;">Mis Tarjetas</h1>
+    <h1 class="title title-large" style="margin-left: 10%;">Mis Tarjetas</h1>
+
 
     <br><br>
 
@@ -19,7 +21,7 @@
                             <div class="column is-half">
                                 <h2 class="is-size-4 has-text-weight-bold">Información:</h2>
                                 <p class="subtitle is-size-5"><strong>Versión:</strong>
-                                    <%= tarjeta.Version %>
+                                    <%= parseFloat(tarjeta.Version).toFixed(1) %>
                                 </p>
                                 <p class="subtitle is-size-5"><strong>Fecha de emisión:</strong>
                                     <%= tarjeta.Emision %>
