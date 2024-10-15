@@ -1,6 +1,6 @@
 <%- include('partials/head.ejs', {
     establecimientos: establecimientos,
-    id_Establecimiento: id_Establecimiento,
+    id_Establecimiento: request.session.establecimiento_id,
     }) %>
     <br>
 

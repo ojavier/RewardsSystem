@@ -10,6 +10,8 @@ exports.cambiarEstablecimiento = async (request, response, next) => {
     try{
         const Telefono = request.session.Telefono;
         console.log("Si está jalando");
+        const [nombres] = Establecimiento.buscarEstablecimientos(Telefono);
+        response.render("misEstablecimientos", {nombres: Establecimientos});
         console.log(Telefono);
         const establecimientos =  await Establecimiento.buscarEstablecimientos(Telefono);
         console.log(establecimientos);
