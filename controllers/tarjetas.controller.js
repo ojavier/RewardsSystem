@@ -2,12 +2,12 @@ const Tarjeta = require('../models/tarjetas.models'); // Importamos el modelo de
 
 // Función para obtener las tarjetas de un establecimiento
 exports.getTarjetas = (request, response, next) => {
-    const idEstablecimiento = request.session.establecimiento;
+    const id_Establecimiento = request.query.id_Establecimiento;
 
-    console.log('idEstablecimiento:', idEstablecimiento);
+    console.log('idEstablecimiento:', id_Establecimiento);
 
     // Llamamos al método del modelo para obtener las tarjetas
-    Tarjeta.obtenerPorEstablecimiento(idEstablecimiento)
+    Tarjeta.obtenerPorEstablecimiento(id_Establecimiento)
         .then(([results]) => {
             // Renderiza la vista 'mis_versiones.ejs' y pasa las tarjetas como un objeto
             response.render('misVersiones', {
@@ -16,6 +16,7 @@ exports.getTarjetas = (request, response, next) => {
                 isLoggedIn: request.session.isLoggedIn || false,
                 usuario: request.session.usuario || {},
                 establecimientos: request.session.establecimientos || [], 
+                id_Establecimiento: id_Establecimiento || [],
             });
         })
         .catch(err => {
