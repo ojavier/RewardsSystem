@@ -35,7 +35,7 @@ router.get("/misSucursales", isAuth, mainController.getSucursales);
 
 router.get("/misClientes", isAuth, mainController.getClientes);
 
-router.get("/misEstablecimientos", isAuth, mainController.getEstablecimientos);
+router.get("/misEstablecimientos", isAuth, establecimientosController.getLocalizaciones);
 
 router.get("/modificarTarjeta", isAuth, mainController.getmodTar)
 
