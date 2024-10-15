@@ -10,13 +10,13 @@ class Tarjeta {
     }
 
     // Método para obtener las versiones de tarjeta de un establecimiento
-    static obtenerPorEstablecimiento(idEstablecimientos) {
+    static obtenerPorEstablecimiento(id_Establecimientos) {
         const query = `
             SELECT *
             FROM Tarjetas
             WHERE id_Establecimiento = ? `;
         return db.execute(query, [
-            idEstablecimientos,
+            id_Establecimientos,
         ]);
     }
 }
