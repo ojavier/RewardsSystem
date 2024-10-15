@@ -37,7 +37,7 @@ router.get("/misClientes", isAuth, mainController.getClientes);
 
 router.get("/misEstablecimientos", isAuth, establecimientosController.getLocalizaciones);
 
-router.get("/modificarTarjeta", isAuth, mainController.getmodTar)
+router.get("/modificarTarjeta", isAuth, mainController.getmodTar);
 
 // Rutas para Etapa
 router.post('/etapa/modificar', isAuth, etapaController.modificarEtapa); // Modificar etapa

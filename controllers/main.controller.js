@@ -87,7 +87,7 @@ exports.getEquipo = (request, response, next) => {
 
 exports.getSucursales = async (request, response, next) => {
     const id_Usuario = request.session.usuario.id_Usuario;
-    const id_Establecimiento = request.query.establecimiento;
+    const id_Establecimiento = request.session.establecimiento_id || '';
     console.log("GET Sucursales");
     console.log(request.body);
     console.log(id_Usuario);
@@ -98,7 +98,7 @@ exports.getSucursales = async (request, response, next) => {
         return response.render("misSucursales", {
             establecimientos: establecimientos || [],
             sucursales: sucursales || [],
-            id_Establecimiento: request.session.establecimiento_id || '',
+            id_Establecimiento: id_Establecimiento,
         })
 
     }).catch(err => {console.log(err)})
