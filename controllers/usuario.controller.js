@@ -46,7 +46,7 @@ exports.getLogin = (req, res, next) => {
               req.session.establecimientos = establecimientos;
               req.session.establecimiento_id = establecimientos[0].id || '';
 
-              return res.redirect(`${process.env.PATH_SERVER}misTarjetas`);
+              return res.redirect(`${process.env.PATH_SERVER}misVersiones`);
             })
             .catch((err) => {
               console.error('Error al buscar establecimientos:', err);
