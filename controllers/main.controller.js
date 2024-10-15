@@ -17,7 +17,7 @@ exports.getRoot = (request, response, next) => {
         usuario: request.session.usuario || {},
         sellos: 1,
         establecimientos: request.session.establecimientos || [],
-        id_Establecimiento: request.query.id_Establecimiento || [],
+        id_Establecimiento: request.session.establecimiento_id || '',
     });
 };
 
@@ -28,14 +28,14 @@ exports.getEstablecimientos = (request, response, next) => {
 exports.getRegistro = (request, response, next) => {
     response.render('registro', {
         establecimientos: request.session.establecimientos || [],
-        id_Establecimiento: request.query.id_Establecimiento || [],
+        id_Establecimiento: request.session.establecimiento_id || '',
     });
 };
 
 exports.getConfig = (request, response, next) => {
     response.render('configuracion', {
         establecimientos: request.session.establecimientos || [],
-        id_Establecimiento: request.query.id_Establecimiento || [],
+        id_Establecimiento: request.session.establecimiento_id || '',
     });
 };
 
@@ -46,7 +46,7 @@ exports.getInfo = (request, response, next) => {
         usuario: usuario,
         isLoggedIn: request.session.isLoggedIn || false,
         establecimientos: request.session.establecimientos || [],
-        id_Establecimiento: request.query.id_Establecimiento || [],
+        id_Establecimiento: request.session.establecimiento_id || '',
     });
 };
 
@@ -62,7 +62,7 @@ exports.getmodEtap = (req, res, next) => {
             res.render('modificarEtapas', {
                 etapas: rows,
                 establecimientos: request.session.establecimientos || [],
-                id_Establecimiento: request.query.id_Establecimiento || [],
+                id_Establecimiento: request.session.establecimiento_id || '',
             }); // Pasa las etapas a la vista
         })
         .catch(err => {
@@ -74,14 +74,14 @@ exports.getmodEtap = (req, res, next) => {
 exports.getReportes = (request, response, next) => {
     response.render('Reportes', {
         establecimientos: request.session.establecimientos || [],
-        id_Establecimiento: request.query.id_Establecimiento || [],
+        id_Establecimiento: request.session.establecimiento_id || '',
     });
 };
 
 exports.getEquipo = (request, response, next) => {
     response.render('miEquipo', {
         establecimientos: request.session.establecimientos || [],
-        id_Establecimiento: request.query.id_Establecimiento || [],
+        id_Establecimiento: request.session.establecimiento_id || '',
     })
 };
 
@@ -98,7 +98,7 @@ exports.getSucursales = async (request, response, next) => {
         return response.render("misSucursales", {
             establecimientos: establecimientos || [],
             sucursales: sucursales || [],
-            id_Establecimiento: request.query.id_Establecimiento || [],
+            id_Establecimiento: request.session.establecimiento_id || '',
         })
 
     }).catch(err => {console.log(err)})
@@ -107,7 +107,7 @@ exports.getSucursales = async (request, response, next) => {
 exports.getmodTar = (request, response, next) => {
     response.render("modificarTarjeta", {
         establecimientos: request.session.establecimientos || [],
-        id_Establecimiento: request.query.id_Establecimiento || [],
+        id_Establecimiento: request.session.establecimiento_id || '',
     })
 };
 
@@ -118,7 +118,7 @@ exports.getClientes = async (request, response, next) => {
             Clientes: clientes,
             notification: null,
             establecimientos: request.session.establecimientos || [],
-            id_Establecimiento: request.query.id_Establecimiento || [],
+            id_Establecimiento: request.session.establecimiento_id || '',
         });
     } catch (err) {
         console.error(err);
@@ -138,7 +138,7 @@ exports.buscarClienteSearch = (request, response, next) => {
                     error: "Cliente no encontrado",
                     notification: null,
                     establecimientos: request.session.establecimientos || [],
-                    id_Establecimiento: request.query.id_Establecimiento || [],
+                    id_Establecimiento: request.session.establecimiento_id || '',
                 });
             }
 
@@ -146,16 +146,16 @@ exports.buscarClienteSearch = (request, response, next) => {
             console.log(cliente);
             // Método para buscar los sellos del cliente
             Clientes.buscarSellosCliente(Telefono)
-                .then((results) => {
-                    const sellos = results[0][0].cantidad_sellos;
-                    console.log(results[0]);
-                    console.log(results[0][0].cantidad_sellos);
+                .then(([results, fieldData]) => {
+                    const sellos = results[0].cantidad_sellos;
+                    console.log(results);
+                    console.log(results[0].cantidad_sellos);
                     return response.render("misClientes", {
                         Clientes: cliente,
                         sellos: sellos,
                         notification: null,
                         establecimientos: request.session.establecimientos || [],
-                        id_Establecimiento: request.query.id_Establecimiento || [],
+                        id_Establecimiento: request.session.establecimiento_id || '',
                     });
                 })
 
@@ -189,7 +189,7 @@ exports.registrarSello = async (request, response, next) => {
             type: 'success',
             Clientes: cliente,
             establecimientos: request.session.establecimientos || [],
-            id_Establecimiento: request.query.id_Establecimiento || [],
+            id_Establecimiento: request.session.establecimiento_id || '',
         });
     }
     catch (err) {

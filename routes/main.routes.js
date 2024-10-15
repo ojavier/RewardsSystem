@@ -55,7 +55,7 @@ router.post("/sello/registrar", isAuth, mainController.registrarSello);
 router.post("/usuario/modificar", isAuth, usuarioController.modificarUsuario);
 
 //Rutas para Establecimientos
-router.get("/establecimientos/buscar", isAuth, establecimientosController.buscarEstablecimientos);
+router.post("/establecimientos/cambiar", isAuth, establecimientosController.cambiarEstablecimiento);
 
 //Rutas para Ordenes
 router.post("/Orden/Registrar", isAuth, ordenesController.registrarOrden);
