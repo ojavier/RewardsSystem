@@ -35,9 +35,9 @@ router.get("/misSucursales", isAuth, mainController.getSucursales);
 
 router.get("/misClientes", isAuth, mainController.getClientes);
 
-router.get("/misEstablecimientos", isAuth, mainController.getEstablecimientos);
+router.get("/misEstablecimientos", isAuth, establecimientosController.getLocalizaciones);
 
-router.get("/modificarTarjeta", isAuth, mainController.getmodTar)
+router.get("/modificarTarjeta", isAuth, mainController.getmodTar);
 
 // Rutas para Etapa
 router.post('/etapa/modificar', isAuth, etapaController.modificarEtapa); // Modificar etapa
@@ -55,7 +55,7 @@ router.post("/sello/registrar", isAuth, mainController.registrarSello);
 router.post("/usuario/modificar", isAuth, usuarioController.modificarUsuario);
 
 //Rutas para Establecimientos
-router.get("/establecimientos/buscar", isAuth, establecimientosController.buscarEstablecimientos);
+router.post("/establecimientos/cambiar", isAuth, establecimientosController.cambiarEstablecimiento);
 
 //Rutas para Ordenes
 router.post("/Orden/Registrar", isAuth, ordenesController.registrarOrden);

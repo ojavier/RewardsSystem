@@ -2,7 +2,7 @@ const Tarjeta = require('../models/tarjetas.models'); // Importamos el modelo de
 
 // Función para obtener las tarjetas de un establecimiento
 exports.getTarjetas = (request, response, next) => {
-    const id_Establecimiento = request.query.id_Establecimiento;
+    const id_Establecimiento = request.session.id_Establecimiento || '';
 
     console.log('idEstablecimiento:', id_Establecimiento);
 
@@ -16,7 +16,7 @@ exports.getTarjetas = (request, response, next) => {
                 isLoggedIn: request.session.isLoggedIn || false,
                 usuario: request.session.usuario || {},
                 establecimientos: request.session.establecimientos || [], 
-                id_Establecimiento: id_Establecimiento || [],
+                id_Establecimiento: id_Establecimiento,
             });
         })
         .catch(err => {

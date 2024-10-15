@@ -63,15 +63,13 @@
                         <div class="modal-content">
                             <div class="box">
                                 <h1 class="title is-centered">Registrar Sello</h1>
-                                <form action="/Orden/Registrar" method="post">
+                                <form action="/sello/registrar" method="post">
                                     <input  class="input" type="text" placeholder="Monto de compra" name="nivel_Satisfaccion" id="nivel_Satisfaccion">
                                     <br>
                                     <br>
                                     <input  class="input" type="text" placeholder="Nota adicional" name="Feedback" id="Feedback">
-                                </form>
-                                <br>
-                                <br>
-                                <form action="/sello/registrar" method="post">
+                                    <br>
+                                    <br>
                                     <input type="hidden" name="telefono" value="<%= Clientes.Telefono %>">
                                     <button class="button is-primary"> Registrar Sello </button>
                                 </form>

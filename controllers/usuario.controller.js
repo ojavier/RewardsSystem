@@ -44,6 +44,8 @@ exports.getLogin = (req, res, next) => {
               console.log(fieldData);
               console.log(establecimientos);
               req.session.establecimientos = establecimientos;
+              req.session.establecimiento_id = establecimientos[0].id || '';
+
               return res.redirect(`${process.env.PATH_SERVER}misTarjetas`);
             })
             .catch((err) => {
@@ -121,13 +123,13 @@ exports.postRegistrar = (req, res, next) => {
   // Renderizar el formulario de registro
   exports.getRegistrar = (req, res, next) => {
     const error = req.session.error || null;
-    const establecimientos = req.session.establecimientos || [];
   
     return res.render('registro', {
       pagePrimaryTitle: 'Registro de Usuario',
-      error,
+      error: error,
       isLoggedIn: false,
-      establecimientos,
+      establecimientos: [],
+      id_Establecimiento: '',
     });
   };
   

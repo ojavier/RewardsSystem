@@ -1,18 +1,21 @@
 const { response, request } = require('express');
 const Establecimiento = require('../models/establecimientos.models'); // Importamos el modelo de Establecimiento
-const Sucursales = require("../models/sucursales.models")
 const isAuth = require('../Util/is-auth');
-const Usuario = require('../models/usuario.models');
+
+exports.buscarEstablecimientos = (request, response, next) => { };
 
 
-
-exports.buscarEstablecimientos = (request, response, next) => {
-    try {
+exports.cambiarEstablecimiento = async (request, response, next) => {
+    /*
+    try{
         const Telefono = request.session.Telefono;
         console.log("Si está jalando");
+        const [nombres] = Establecimiento.buscarEstablecimientos(Telefono);
+        response.render("misEstablecimientos", {nombres: Establecimientos});
         console.log(Telefono);
         const establecimientos = await Establecimiento.buscarEstablecimientos(Telefono);
         console.log(establecimientos);
+
         const id_Establecimiento = request.query.establecimiento;
         console.log(id_Establecimiento);
         const id_Usuario = request.session.usuario.id_Usuario;
@@ -20,24 +23,43 @@ exports.buscarEstablecimientos = (request, response, next) => {
         return response.render("misSucursales", {
             establecimientos: establecimientos || [],
             sucursales: sucursales || [],
-            id_Establecimiento: request.query.id_Establecimiento || [],
+            id_Establecimiento: request.query.id_Establecimiento || -1,
         })
     }
-    catch (err) {
+    catch(err){
+            console.error(err);
+            response.status(500).send('Error al buscar establecimientos');
+    };*/
+    request.session.establecimiento_id = request.body.establecimiento;
+    response.redirect(`${process.env.PATH_SERVER}misTarjetas`);
+};
+
+exports.getEstablecimientos = async (request, response, next) => {
+    try {
+        const establecimientos = await Establecimiento.getAllEstablecimientos();
+        request.session.establecimientos = establecimientos;
+        next();
+    } catch (err) {
         console.error(err);
-        response.status(500).send('Error al buscar establecimientos');
-    };
+        next(err);
+    }
 };
 
+exports.getLocalizaciones = async (req, res, next) => {
+    try {
+        // Llama al modelo para obtener todas las localizaciones (establecimientos)
+        const localizaciones = await Establecimiento.getFullEstablecimientos();
 
-exports.pushEliminaEstablecimiento = (req, res, next) => {
-    const { id_Establecimiento } = req.params;
+        // Obtiene los establecimientos de la sesión
+        const establecimientos = req.session.establecimientos || [];
 
-    Etapa.eliminaEstablecimientos(id_Establecimiento)
-        .then(() => res.status(200).send('Establecimiento eliminada correctamente'))
-        .catch((err) => {
-            console.error('Error al eliminar el establecimiento:', err);
-            return res.status(500).send('Error al eliminar el establecimiento');
+        // Renderiza la vista y pasa las localizaciones como datos
+        res.render('misEstablecimientos', {
+            localizaciones: localizaciones,
+            establecimientos: establecimientos || [], // Para el dropdown
         });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error al cargar establecimiento');
+    }
 };
-
