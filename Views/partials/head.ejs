@@ -15,7 +15,7 @@
 
     <span class="control select" style="margin-top: 12px;">
         <form action="<%= process.env.PATH_SERVER %>establecimientos/buscar" method="get">
-            <select name="establecimiento" id="establecimiento-select" onchange="this.form.submit()">
+            <select name="establecimiento" id="establecimiento-select" onchange="console.log('onchange triggered'); this.form.submit()">
                 <% for (let establecimiento of establecimientos) { %>
                     <option value="<%= establecimiento.id %>" 
                         <% if (establecimiento.id == id_Establecimiento) { %>selected<% } %>>
