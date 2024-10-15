@@ -91,8 +91,7 @@ exports.getSucursales = async (request, response, next) => {
     console.log("GET Sucursales");
     console.log(request.body);
     console.log(id_Usuario);
-    console.log(request.query.establecimiento);
-    console.log(request.session);
+    console.log(id_Establecimiento);
     Sucursales.getSucursales(id_Usuario, id_Establecimiento).then(([sucursales, fieldData]) => {
         establecimientos = request.session.establecimientos;
         return response.render("misSucursales", {

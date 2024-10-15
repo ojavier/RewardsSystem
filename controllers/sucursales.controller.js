@@ -19,8 +19,9 @@ exports.sucursalModificar = (request, response) => {
     const id_Sucursal = "";
     const Direccion = request.body.Direccion;
     const Entidad = request.body.Entidad;
-    const id_Establecimiento = request.body.id_Establecimiento;
+    const id_Establecimiento = request.session.establecimiento_id;
     const establecimientos = request.session.establecimientos;
+    console.log("Esto es el mod");
     console.log("id_Sucursal: ", id_Sucursal);
     console.log("Direccion: ", Direccion);
     console.log("Entidad: ", Entidad);
@@ -30,6 +31,7 @@ exports.sucursalModificar = (request, response) => {
             return response.render("misSucursales", {
                 sucursales: sucursales,
                 establecimientos:establecimientos,
+                id_Establecimiento: request.session.establecimiento_id || '',
             })
         })
         .catch((err) => {
