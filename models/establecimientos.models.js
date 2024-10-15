@@ -1,9 +1,9 @@
 const { request } = require('express');
 const db = require('../Util/database');
 
-class Establecimiento{
+class Establecimiento {
 
-    constructor(id_Establecimiento, Nombre, Entidad){
+    constructor(id_Establecimiento, Nombre, Entidad) {
         this.id_Establecimiento = id_Establecimiento;
         this.Nombre = Nombre;
         this.Entidad = Entidad;
@@ -18,7 +18,16 @@ class Establecimiento{
         const query = "SELECT * FROM Establecimientos WHERE id_Usuario = ?";
         db.execute(query, [id_usuario]);
     }
-    
+
+    static eliminaEstablecimientos(id_Establecimiento) {
+        const query = `
+            UPDATE Establecimientos 
+            SET Delete_At = CURRENT_TIMESTAMP 
+            WHERE id_Establecimiento = ?
+        `;
+        return db.execute(query, [id_Establecimiento]);
+    }
+
 }
 
 module.exports = Establecimiento;
