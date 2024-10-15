@@ -35,6 +35,18 @@ class Establecimiento{
           throw err;
         }
       }
+
+    // Nuevo método para extraer toda la información
+    static async getFullEstablecimientos() {
+        const query = "SELECT id_Establecimiento, Nombre, Entidad FROM Establecimientos";
+        try {
+            const [rows] = await db.execute(query);
+            return rows;
+        } catch (err) {
+            console.error(err);
+            throw err;
+        }
+      }
 }
 
 module.exports = Establecimiento;
