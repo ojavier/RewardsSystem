@@ -123,13 +123,13 @@ exports.postRegistrar = (req, res, next) => {
   // Renderizar el formulario de registro
   exports.getRegistrar = (req, res, next) => {
     const error = req.session.error || null;
-    const establecimientos = req.session.establecimientos || [];
   
     return res.render('registro', {
       pagePrimaryTitle: 'Registro de Usuario',
-      error,
+      error: error,
       isLoggedIn: false,
-      establecimientos,
+      establecimientos: [],
+      id_Establecimiento: '',
     });
   };
   
