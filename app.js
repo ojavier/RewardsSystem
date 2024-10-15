@@ -21,6 +21,9 @@ app.use(session({
     secret: 'mySecretKey',
     resave: false, //La sesión no se guardará en cada petición, sino sólo se guardará si algo cambió 
     saveUninitialized: false, //Asegura que no se guarde una sesión para una petición que no lo necesita
+    cookie: {
+        maxAge: 1000 * 60 * 30 // Tiempo de vida de la cookie (15 minutos en este caso)
+    }
 }));
 
 // Rutas de usuario
