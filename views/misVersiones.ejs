@@ -38,7 +38,8 @@
                                         <button class="button is-primary is-rounded">Editar</button>
                                     </form>
 
-                                    <form action="<%= process.env.PATH_SERVER %>tarjeta/eliminar" method="post">
+                                    <form action="/tarjetas/eliminarVersion" method="post">
+                                        <input type="hidden" name="Version" value="<%= tarjeta.Version %>">
                                         <button class="button is-danger is-rounded">Eliminar</button>
                                     </form>
                                 </div>

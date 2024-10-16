@@ -39,3 +39,23 @@ exports.getCrearTarjeta = (request, response, next) => {
         id_Establecimiento: request.session.establecimiento_id || '',
     });
 };
+
+exports.postEliminarVersion = (request, response, next) => {
+    const version = request.body.Version;
+
+    Tarjetas.eliminarVersion(version)
+        .then(() => {
+            // Redireccionamos a la página de versiones después de eliminar
+            response.render('/misVersiones', {
+                pagePrimaryTitle: 'Mis Tarjetas',
+                isLoggedIn: isLoggedIn,
+                usuario: request.session.usuario || {},
+                establecimientos: request.session.establecimientos || [],
+                id_Establecimiento: request.session.establecimiento_id || '',
+            });
+        })
+        .catch(err => {
+            console.error('Error eliminando la versión de la tarjeta:', err);
+            response.status(500).send('Error eliminando la versión de la tarjeta');
+        });
+};
