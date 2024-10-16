@@ -19,6 +19,15 @@ class Tarjeta {
             id_Establecimientos,
         ]);
     }
+
+    static eliminarVersion(Version) {
+        const query = `
+            UPDATE Tarjeta 
+            SET Delete_At = CURRENT_TIMESTAMP 
+            WHERE Version = ?
+        `;
+        return db.execute(query, [id_Etapa]);
+    }
 }
 
 // Exportar la clase Tarjeta
