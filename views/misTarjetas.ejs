@@ -1,7 +1,10 @@
 <%- include('partials/head.ejs', {
-    establecimientos: establecimientos,
-    id_Establecimiento: id_Establecimiento,
-    }) %>
+    isLoggedIn: isLoggedIn, 
+    permisos: permisos, 
+    usuario: usuario, 
+    establecimientos: establecimientos, 
+    id_Establecimiento: id_Establecimiento 
+}) %>
     <div class='container'>
         <br>
         <h1 class="title title-large">Mis Tarjetas</h1>
@@ -12,12 +15,12 @@
     <div class="columns is-vcentered" style="padding-left: 10%;">
         <div class="column is-half">
             <figure style="width: 100%;">
-                <img src="/images/tarjeta.png" alt="Tarjeta de lealtad">
+                <img src="<%= process.env.PATH_SERVER %>Images/tarjeta.png" alt="Tarjeta de lealtad">
             </figure>
         </div>
         <div class="column has-text-centered" style="padding-right: 10%;">
             <figure class="image is-inline-block" style="width: 256px; height: 256px;">
-                <img src="/images/chilako.png" alt="Chilako logotipo">
+                <img src="<%= process.env.PATH_SERVER %>Images/chilako.png" alt="Chilako logotipo">
 
                 <!-- Flecha izquierda -->
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left arrow left-arrow"
@@ -48,7 +51,7 @@
         <a class="button is-primary is-rounded column" style="margin-top: 20px; margin-left: 10%;" href="/configuracion">
             Configuración
         </a>
-        <form action="/registrar-sello" method="post">
+        <form action="<%= process.env.PATH_SERVER %>registrar-sello" method="post">
             <label class="label"> Telefono </label>
             <input type="text" placeholder="Telefono" name="telefono" value="4447142524">
             <button class="button is-primary is-rounded column" style="margin-top: 20px; margin-left: 10%;" type="submit">
@@ -94,7 +97,7 @@
             <div class="columns is-vcentered">
                 <div class="column is-narrow">
                     <figure class="image is-128x128">
-                        <img src="/images/chilako.png" alt="Chilako logotipo">
+                        <img src="<%= process.env.PATH_SERVER %>Images/chilako.png" alt="Chilako logotipo">
                     </figure>
                 </div>
                 <div class="column">
@@ -108,7 +111,7 @@
             <div class="columns is-vcentered">
                 <div class="column is-narrow">
                     <figure class="image is-128x128">
-                        <img src="/images/hotdog.png" alt="Hotdako logotipo">
+                        <img src="<%= process.env.PATH_SERVER %>Images/hotdog.png" alt="Hotdako logotipo">
                     </figure>
                 </div>
                 <div class="column">
@@ -122,7 +125,7 @@
             <div class="columns is-vcentered">
                 <div class="column is-narrow">
                     <figure class="image is-128x128">
-                        <img src="/images/hamburguesa.png" alt="Hamburguesako logotipo">
+                        <img src="<%= process.env.PATH_SERVER %>Images/hamburguesa.png" alt="Hamburguesako logotipo">
                     </figure>
                 </div>
                 <div class="column">
@@ -136,7 +139,7 @@
             <div class="columns is-vcentered">
                 <div class="column is-narrow">
                     <figure class="image is-128x128">
-                        <img src="/images/pizza.png" alt="Pizzako logotipo">
+                        <img src="<%= process.env.PATH_SERVER %>Images/pizza.png" alt="Pizzako logotipo">
                     </figure>
                 </div>
                 <div class="column">

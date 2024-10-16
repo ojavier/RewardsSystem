@@ -40,6 +40,30 @@ class Usuario {
         return db.execute(query,[Telefono]);
     }
 
+    // Método para actualizar la información de un usuario
+    static modificarUsuario({ id_Usuario, Nombre, Apellido, Telefono }) {
+        const query = `
+            UPDATE Usuarios SET Nombre = ?, Apellido = ?, Telefono = ? WHERE id_Usuario = ?
+        `;
+        return db.execute(query, [Nombre, Apellido, Telefono, id_Usuario]);
+    }
+
+    // Método para actualizar el rol del usuario
+    static modificarRol(id_Usuario, id_Rol) {
+        const query = `
+            UPDATE UsuariosTienenRoles SET id_Rol = ? WHERE id_Usuario = ?
+        `;
+        return db.execute(query, [id_Rol, id_Usuario]);
+    }
+
+    // Método para buscar el rol del usuario por ID
+    static buscarRolPorId(id_Usuario) {
+        const query = `
+            SELECT id_Rol FROM UsuariosTienenRoles WHERE id_Usuario = ?
+        `;
+        return db.execute(query, [id_Usuario]);
+    }
+
 }
 
 module.exports = Usuario;

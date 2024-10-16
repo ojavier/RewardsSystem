@@ -1,4 +1,11 @@
-<%- include('partials/head.ejs', { establecimientos: establecimientos, id_Establecimiento: id_Establecimiento, }) %>
+<%- include('partials/head.ejs', {
+    isLoggedIn: isLoggedIn, 
+    permisos: permisos, 
+    usuario: usuario, 
+    establecimientos: establecimientos, 
+    id_Establecimiento: id_Establecimiento 
+}) %>
+
 
     <br><br><br>
 
@@ -31,7 +38,7 @@
                                 <div class="buttons">
                                     <button class="button is-primary is-rounded">Editar</button>
 
-                                    <form action="/tarjeta/eliminar" method="post">
+                                    <form action="<%= process.env.PATH_SERVER %>tarjeta/eliminar" method="post">
                                         <button class="button is-danger is-rounded">Eliminar</button>
                                     </form>
                                 </div>
