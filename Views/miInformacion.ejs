@@ -8,6 +8,7 @@
 
 <br>
 <br>
+
 <div class='container'>
     <br>
     <h1 id="colortextoazul" class="title title-large has-text-centered">Modificar Información del Usuario</h1>
@@ -15,56 +16,70 @@
 
 <br>
 
+<!-- Formulario para editar Usuario -->
 <div>
-    <div class="box mx-6">
-        <article class="message">
-            <div class="message-header" id="colorarticulo"><p>Nombre</p></div>
-            <div class="message-body">
-                <% if (usuario) { %>
-                    <span id="nombreUsuario"><%= usuario.Nombre %> <%= usuario.Apellido %></span>
-                <% } else { %>
-                    <p>No se encontró información del usuario.</p>
-                <% } %>
-                <img class="button cambio-cursor" src="<%= process.env.PATH_SERVER %>Images/lapiz.png" alt="Editar" id="editNombre" style="float: right; width: 20px; height: 20px;" onclick="toggleEditForm('nombre')">
-            </div>
-        </article>
+    <form method="POST" action="<%= process.env.PATH_SERVER %>usuario/modificar">
+        <div class="box mx-6">
+            <article class="message">
+                <div class="message-header" id="colorarticulo">
+                    <p>Nombre</p>
+                </div>
+                <div class="message-body">
+                    <input class="input" type="text" name="Nombre" value="<%= usuario.Nombre %>" placeholder="Ingresa tu nombre" style="width: 100%;" required>
+                </div>
+            </article>
+        </div>
 
-        <!-- Formulario para editar Usuario -->
-        <div id="editUsuarioForm" style="display: none;">
-            <form method="POST" action="<%= process.env.PATH_SERVER %>usuario/modificar">
-                <div>
-                    <label for="Nombre">Nombre:</label>
-                    <input type="text" name="Nombre" value="<%= usuario.Nombre %>" required>
+        <div class="box mx-6">
+            <article class="message">
+                <div class="message-header" id="colorarticulo">
+                    <p>Apellido</p>
                 </div>
-                <div>
-                    <label for="Apellido">Apellido:</label>
-                    <input type="text" name="Apellido" value="<%= usuario.Apellido %>" required>
+                <div class="message-body">
+                    <input class="input" type="text" name="Apellido" value="<%= usuario.Apellido %>" placeholder="Ingresa tu apellido" style="width: 100%;" required>
                 </div>
-                <div>
-                    <label for="Telefono">Teléfono:</label>
-                    <input type="text" name="Telefono" value="<%= usuario.Telefono %>" required>
+            </article>
+        </div>
+
+        <div class="box mx-6">
+            <article class="message">
+                <div class="message-header" id="colorarticulo">
+                    <p>Teléfono</p>
                 </div>
-                <% if (usuario.id_Rol === 1 || usuario.id_Rol === 2) { %>
-                    <div>
-                        <label for="id_Rol">Rol:</label>
-                        <select name="id_Rol" required>
+                <div class="message-body">
+                    <input class="input" type="tel" name="Telefono" value="<%= usuario.Telefono %>" placeholder="Ingresa tu teléfono" style="width: 100%;" required>
+                </div>
+            </article>
+        </div>
+
+        <% if (usuario.id_Rol === 1 || usuario.id_Rol === 2) { %>
+            <div class="box mx-6">
+                <article class="message">
+                    <div class="message-header" id="colorarticulo">
+                        <p>Rol</p>
+                    </div>
+                    <div class="message-body">
+                        <select class="input" name="id_Rol" required>
                             <option value="1" <% if (usuario.id_Rol === 1) { %> selected <% } %>>Administrador</option>
                             <option value="2" <% if (usuario.id_Rol === 2) { %> selected <% } %>>Gerente</option>
+                            <option value="3" <% if (usuario.id_Rol === 3) { %> selected <% } %>>Tendero</option>
                             <option value="4" <% if (usuario.id_Rol === 4) { %> selected <% } %>>Cliente</option>
                         </select>
                     </div>
-                <% } %>
-                <input type="hidden" name="id_Usuario" value="<%= usuario.id_Usuario %>">
-                <button type="submit">Guardar</button>
-                <button type="button" onclick="toggleEditForm('usuario')">Cancelar</button>
-            </form>
-        </div>
+                </article>
+            </div>
+        <% } %>
 
-        <script>
-        function toggleEditForm(type) {
-            const form = document.getElementById('editUsuarioForm');
-            form.style.display = form.style.display === 'none' ? 'block' : 'none';
-        }
-        </script>
-    </div>
+        <input type="hidden" name="id_Usuario" value="<%= usuario.id_Usuario %>">
+        <div class="has-text-centered">
+            <button type="submit" class="button" id="login-button">Guardar</button>
+        </div>
+    </form>
 </div>
+
+<script>
+function toggleEditForm(type) {
+    const form = document.getElementById('editUsuarioForm');
+    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+}
+</script>
