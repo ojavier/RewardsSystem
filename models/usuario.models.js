@@ -56,6 +56,14 @@ class Usuario {
         return db.execute(query, [id_Rol, id_Usuario]);
     }
 
+    // Método para buscar el rol del usuario por ID
+    static buscarRolPorId(id_Usuario) {
+        const query = `
+            SELECT id_Rol FROM UsuariosTienenRoles WHERE id_Usuario = ?
+        `;
+        return db.execute(query, [id_Usuario]);
+    }
+
 }
 
 module.exports = Usuario;

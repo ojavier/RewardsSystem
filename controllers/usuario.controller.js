@@ -8,62 +8,80 @@ const { v4: uuidv4 } = require('uuid');
 exports.getLogin = (req, res, next) => {
     const error = req.session.error || null;
     const isLoggedIn = req.session.isLoggedIn || false;
-  
-    if (!isLoggedIn) {
-      return res.render('login', {
-        pagePrimaryTitle: 'Sistema de recompensas',
-        isLoggedIn,
-        permisos: req.session.permisos || [],
-        usuario: req.session.usuario || {},
-        error,
-        establecimientos: [],
-      });
-    }
-    return res.redirect(`${process.env.PATH_SERVER}misTarjetas`);
-  };
-  
-  // Método para manejar el POST de inicio de sesión
-  exports.postLogin = (req, res, next) => {
-    const { telefono } = req.body;
-  
-    console.log('Iniciando sesión con teléfono:', telefono);
-  
-    req.session.error = null;
-  
-    Usuario.buscarPorTelefono(telefono)
-      .then(([rows]) => {
-        console.log('Resultado de la búsqueda:', rows);
-  
-        if (rows.length > 0) {
-          req.session.isLoggedIn = true;
-          req.session.usuario = rows[0];
-          console.log('Usuario encontrado, redirigiendo a misTarjetas');
-  
-          return Establecimiento.buscarEstablecimientos(telefono)
-            .then(([establecimientos, fieldData]) => {
-              console.log(fieldData);
-              console.log(establecimientos);
-              req.session.establecimientos = establecimientos;
-              req.session.establecimiento_id = establecimientos[0].id || '';
 
-              return res.redirect(`${process.env.PATH_SERVER}misTarjetas`);
-            })
-            .catch((err) => {
-              console.error('Error al buscar establecimientos:', err);
-              return res.status(500).send('Error al buscar establecimientos');
-            });
-        }
-  
-        req.session.error = 'Número de teléfono no encontrado';
-        console.log('Usuario no encontrado, redirigiendo a login');
-        return res.redirect(`${process.env.PATH_SERVER}usuario/login`);
-      })
-      .catch((err) => {
-        console.error('Error al buscar el usuario:', err);
-        req.session.error = 'Error interno del servidor';
-        return res.redirect(`${process.env.PATH_SERVER}usuario/login`);
-      });
-  };
+    if (!isLoggedIn) {
+        return res.render('login', {
+            pagePrimaryTitle: 'Sistema de recompensas',
+            isLoggedIn,
+            permisos: req.session.permisos || [],
+            usuario: req.session.usuario || {},
+            error,
+            establecimientos: [],
+        });
+    }
+
+    // Aquí puedes utilizar req.session.permisos para redirigir a diferentes páginas
+    if (req.session.permisos === 1) {
+        return res.redirect(`${process.env.PATH_SERVER}misVersiones`); // Administrador
+    } else if (req.session.permisos === 2) {
+        return res.redirect(`${process.env.PATH_SERVER}misTarjetas`); // Gerente
+    } else {
+        return res.redirect(`${process.env.PATH_SERVER}misTarjetas`); // Cliente u otros roles
+    }
+};
+
+// Método para manejar el POST de inicio de sesión
+exports.postLogin = (req, res, next) => {
+    const { telefono } = req.body;
+
+    console.log('Iniciando sesión con teléfono:', telefono);
+    req.session.error = null;
+
+    Usuario.buscarPorTelefono(telefono)
+        .then(([rows]) => {
+            console.log('Resultado de la búsqueda:', rows);
+
+            if (rows.length > 0) {
+                req.session.isLoggedIn = true;
+                req.session.usuario = rows[0];
+                console.log('Usuario encontrado, buscando rol');
+
+                // Obtener el rol del usuario
+                return Usuario.buscarRolPorId(rows[0].id_Usuario)
+                    .then(([rolRows]) => {
+                        if (rolRows.length > 0) {
+                            req.session.permisos = rolRows[0].id_Rol; // Almacena el id del rol en la sesión
+                            console.log('Rol encontrado:', rolRows[0].id_Rol);
+                        } else {
+                            req.session.permisos = []; // Si no hay rol, asigna un array vacío
+                        }
+
+                        return Establecimiento.buscarEstablecimientos(telefono)
+                            .then(([establecimientos, fieldData]) => {
+                                console.log(fieldData);
+                                console.log(establecimientos);
+                                req.session.establecimientos = establecimientos;
+                                req.session.establecimiento_id = establecimientos[0].id || '';
+
+                                return res.redirect(`${process.env.PATH_SERVER}misTarjetas`); // Cambia a misTarjetas
+                            })
+                            .catch((err) => {
+                                console.error('Error al buscar establecimientos:', err);
+                                return res.status(500).send('Error al buscar establecimientos');
+                            });
+                    });
+            }
+
+            req.session.error = 'Número de teléfono no encontrado';
+            console.log('Usuario no encontrado, redirigiendo a login');
+            return res.redirect(`${process.env.PATH_SERVER}usuario/login`);
+        })
+        .catch((err) => {
+            console.error('Error al buscar el usuario:', err);
+            req.session.error = 'Error interno del servidor';
+            return res.redirect(`${process.env.PATH_SERVER}usuario/login`);
+        });
+};
   
   // Método para modificar usuario
   exports.modificarUsuario = (req, res, next) => {
