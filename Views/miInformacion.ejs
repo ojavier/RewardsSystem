@@ -1,62 +1,70 @@
 <%- include('partials/head.ejs', {
-    establecimientos: establecimientos,
-    id_Establecimiento: id_Establecimiento,
-    }) %>
-    <br>
-    <br>
+    isLoggedIn: isLoggedIn, 
+    permisos: permisos, 
+    usuario: usuario, 
+    establecimientos: establecimientos, 
+    id_Establecimiento: id_Establecimiento 
+}) %>
+
+<br>
+<br>
 <div class='container'>
     <br>
-    <h1 id="colortextoazul" class="title title-large has-text-centered">Mi informacion</h1>
+    <h1 id="colortextoazul" class="title title-large has-text-centered">Modificar Información del Usuario</h1>
 </div>
 
 <br>
 
 <div>
     <div class="box mx-6">
-    <article class="message">
-        <div class="message-header" id="colorarticulo"><p>Nombre</p>
+        <article class="message">
+            <div class="message-header" id="colorarticulo"><p>Nombre</p></div>
+            <div class="message-body">
+                <% if (usuario) { %>
+                    <span id="nombreUsuario"><%= usuario.Nombre %> <%= usuario.Apellido %></span>
+                <% } else { %>
+                    <p>No se encontró información del usuario.</p>
+                <% } %>
+                <img class="button cambio-cursor" src="<%= process.env.PATH_SERVER %>Images/lapiz.png" alt="Editar" id="editNombre" style="float: right; width: 20px; height: 20px;" onclick="toggleEditForm('nombre')">
+            </div>
+        </article>
+
+        <!-- Formulario para editar Usuario -->
+        <div id="editUsuarioForm" style="display: none;">
+            <form method="POST" action="<%= process.env.PATH_SERVER %>usuario/modificar">
+                <div>
+                    <label for="Nombre">Nombre:</label>
+                    <input type="text" name="Nombre" value="<%= usuario.Nombre %>" required>
+                </div>
+                <div>
+                    <label for="Apellido">Apellido:</label>
+                    <input type="text" name="Apellido" value="<%= usuario.Apellido %>" required>
+                </div>
+                <div>
+                    <label for="Telefono">Teléfono:</label>
+                    <input type="text" name="Telefono" value="<%= usuario.Telefono %>" required>
+                </div>
+                <% if (usuario.id_Rol === 1 || usuario.id_Rol === 2) { %>
+                    <div>
+                        <label for="id_Rol">Rol:</label>
+                        <select name="id_Rol" required>
+                            <option value="1" <% if (usuario.id_Rol === 1) { %> selected <% } %>>Administrador</option>
+                            <option value="2" <% if (usuario.id_Rol === 2) { %> selected <% } %>>Gerente</option>
+                            <option value="4" <% if (usuario.id_Rol === 4) { %> selected <% } %>>Cliente</option>
+                        </select>
+                    </div>
+                <% } %>
+                <input type="hidden" name="id_Usuario" value="<%= usuario.id_Usuario %>">
+                <button type="submit">Guardar</button>
+                <button type="button" onclick="toggleEditForm('usuario')">Cancelar</button>
+            </form>
         </div>
-        <div class="message-body">
-            <% if (usuario) { %>
-                <%= usuario.Nombre %> <%= usuario.Apellido %>
-            <% } else { %>
-                <p>No se encontró información del usuario.</p>
-            <% } %>
-            <img class="button cambio-cursor" src="<%= process.env.PATH_SERVER %>Images/lapiz.png" alt="Editar" id="editNombre" style="float: right; width: 20px; height: 20px;">
-        </div>
-    </article>
-    <br>
-    <article class="message">
-        <div class="message-header" id="colorarticulo"><p>Teléfono</p>
-        </div>
-        <div class="message-body">
-            <% if (usuario) { %>
-                <%= usuario.Telefono %>
-            <% } else { %>
-                <p>No se encontró información del usuario.</p>
-            <% } %>
-            <img class="cambio-cursor" src="<%= process.env.PATH_SERVER %>Images/lapiz.png" alt="Editar" style="float: right; width: 20px; height: 20px;">
-        </div>
-    </article>
-    <br>
-    <article class="message">
-        <div class="message-header" id="colorarticulo">
-            Establecimiento
-        </div>
-        <div class="message-body">
-             Chilako Queretaro Benito Juarez #127
-             <img class="cambio-cursor" src="<%= process.env.PATH_SERVER %>Images/lapiz.png" alt="Editar" style="float: right; width: 20px; height: 20px;">
-        </div>
-    </article>
-    <article class="message">
-        <div class="message-header" id="colorarticulo">
-            Género
-        </div>
-        
-        <div class="message-body">
-            Hombre
-            <img class="cambio-cursor" src="<%= process.env.PATH_SERVER %>Images/lapiz.png" alt="Editar" style="float: right; width: 20px; height: 20px;">
-        </div>
+
+        <script>
+        function toggleEditForm(type) {
+            const form = document.getElementById('editUsuarioForm');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+        </script>
     </div>
-    </article>
 </div>

@@ -2,7 +2,7 @@ const { response, request } = require('express');
 const Usuario = require('../models/usuario.models');
 const Establecimiento = require('../models/establecimientos.models');
 const isAuth = require('../Util/is-auth');
-const { v4: uuidv4 } = require('uuid'); 
+const { v4: uuidv4 } = require('uuid');
 
 // Método para manejar el GET de inicio de sesión
 exports.getLogin = (req, res, next) => {
@@ -20,7 +20,7 @@ exports.getLogin = (req, res, next) => {
         });
     }
 
-    // Aquí puedes utilizar req.session.permisos para redirigir a diferentes páginas
+    // Redirigir según los permisos
     if (req.session.permisos === 1) {
         return res.redirect(`${process.env.PATH_SERVER}misVersiones`); // Administrador
     } else if (req.session.permisos === 2) {
@@ -57,11 +57,9 @@ exports.postLogin = (req, res, next) => {
                         }
 
                         return Establecimiento.buscarEstablecimientos(telefono)
-                            .then(([establecimientos, fieldData]) => {
-                                console.log(fieldData);
-                                console.log(establecimientos);
+                            .then(([establecimientos]) => {
                                 req.session.establecimientos = establecimientos;
-                                req.session.establecimiento_id = establecimientos[0].id || '';
+                                req.session.establecimiento_id = establecimientos[0]?.id || ''; // Evitar error si no hay establecimientos
 
                                 return res.redirect(`${process.env.PATH_SERVER}misTarjetas`); // Cambia a misTarjetas
                             })
@@ -82,11 +80,11 @@ exports.postLogin = (req, res, next) => {
             return res.redirect(`${process.env.PATH_SERVER}usuario/login`);
         });
 };
-  
-  // Método para modificar usuario
-  exports.modificarUsuario = (req, res, next) => {
+
+// Método para modificar usuario
+exports.modificarUsuario = (req, res, next) => {
     const { id_Usuario, Nombre, Apellido, Telefono, id_Rol } = req.body;
-    
+
     // Verificar si el usuario actual tiene permisos de administrador o gerente
     if (req.session.usuario.id_Rol !== 1 && req.session.usuario.id_Rol !== 2) {
         console.log('El usuario no tiene permisos para modificar el rol');
@@ -120,42 +118,42 @@ exports.postLogin = (req, res, next) => {
 // Controlador para registrar usuarios
 exports.postRegistrar = (req, res, next) => {
     const { Nombre, Apellido, Telefono } = req.body;
-  
+
     // Validar que los datos estén completos
     if (!Nombre || !Apellido || !Telefono) {
-      req.session.error = 'Todos los campos son obligatorios';
-      req.session.establecimientos = req.session.establecimientos || [];
-      return res.redirect(`${process.env.PATH_SERVER}registro`);
-    }
-  
-    // Generar un id único para el usuario usando UUID v4
-    const id_Usuario = uuidv4();
-  
-    // Registrar el nuevo usuario
-    Usuario.registrar({ id_Usuario, Nombre, Apellido, Telefono })
-      .then(() => {
-        req.session.success = 'Usuario registrado con éxito';
-        req.session.establecimientos = req.session.establecimientos || [];
-        return res.redirect(`${process.env.PATH_SERVER}usuario/login`);
-      })
-      .catch((err) => {
-        console.error('Error al registrar el usuario:', err);
-        req.session.error = 'Hubo un error al registrar el usuario';
+        req.session.error = 'Todos los campos son obligatorios';
         req.session.establecimientos = req.session.establecimientos || [];
         return res.redirect(`${process.env.PATH_SERVER}registro`);
-      });
-  };
-  
-  // Renderizar el formulario de registro
-  exports.getRegistrar = (req, res, next) => {
+    }
+
+    // Generar un id único para el usuario usando UUID v4
+    const id_Usuario = uuidv4();
+
+    // Registrar el nuevo usuario
+    Usuario.registrar({ id_Usuario, Nombre, Apellido, Telefono })
+        .then(() => {
+            req.session.success = 'Usuario registrado con éxito';
+            req.session.establecimientos = req.session.establecimientos || [];
+            return res.redirect(`${process.env.PATH_SERVER}usuario/login`);
+        })
+        .catch((err) => {
+            console.error('Error al registrar el usuario:', err);
+            req.session.error = 'Hubo un error al registrar el usuario';
+            req.session.establecimientos = req.session.establecimientos || [];
+            return res.redirect(`${process.env.PATH_SERVER}registro`);
+        });
+};
+
+// Renderizar el formulario de registro
+exports.getRegistrar = (req, res, next) => {
     const error = req.session.error || null;
-  
+
     return res.render('registro', {
-      pagePrimaryTitle: 'Registro de Usuario',
-      error: error,
-      isLoggedIn: false,
-      establecimientos: [],
-      id_Establecimiento: '',
+        pagePrimaryTitle: 'Registro de Usuario',
+        error: error,
+        isLoggedIn: false,
+        establecimientos: [],
+        id_Establecimiento: '',
     });
-  };
-  
+};
+
