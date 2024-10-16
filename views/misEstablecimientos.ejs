@@ -1,7 +1,10 @@
 <%- include('partials/head.ejs', {
-    establecimientos: establecimientos,
-    id_Establecimiento: id_Establecimiento,
-    }) %>
+    isLoggedIn: isLoggedIn, 
+    permisos: permisos, 
+    usuario: usuario, 
+    establecimientos: establecimientos, 
+    id_Establecimiento: id_Establecimiento 
+}) %>
     <br>
 
     <h1 class="title title-large" style="margin-left: 10%;">Mis Establecimientos</h1>
@@ -9,34 +12,42 @@
     <br><br>
 
     <button class="button is-primary is-rounded" style="margin-left: 10%;">Crear nuevo establecimiento</button>
-    
+
     <br> <br>
-    
-    <div class="box" style="margin-left: 10%; margin-right: 10%;">
-        <div class="columns is-vcentered">
-            <div class="column is-half">
-                <h2 class="is-size-4 has-text-weight-bold">Informacion: </h2>
 
-                <br><br>
+    <div class="establecimientos">
+        <% if (tarjetas.length===0) { %>
+            <p class="title is-3" style="margin-left: 10%;">Este usuario no cuenta con establecimientos</p>
+            <% } else { %>
+                <% establecimiento.forEach(establecimiento=> { %>
+                    <div class="box" style="margin-left: 10%; margin-right: 10%;">
+                        <div class="columns is-vcentered">
+                            <div class="column is-half">
+                                <h2 class="is-size-4 has-text-weight-bold">Informacion: </h2>
 
-                <p class="subtitle is-size-5"><strong>Nombre del establecimiento:</strong>
-                <br><br>
-                <p class="subtitle is-size-5"><strong>Entidad:</strong>
-            
-                <br> <br> <br>
+                                <p class="subtitle is-size-5"><strong>Nombre del establecimiento:</strong>
+                                    <%= establecimiento.Nombre %>
+                                </p>
+                                <br><br>
+                                <p class="subtitle is-size-5"><strong>Entidad:</strong>
+                                    <%= establecimiento.Entidad %>
+                                </p>
 
-                <button class="button is-primary is-rounded">Modificar</button> 
-                
-                <button class="button is-danger is-rounded">Eliminar</a>
-            </div>
+                                <br> <br> <br>
 
-            <div class="column is-one-quarter" style = "text-align: right;">
-                <figure class="image" style="display: inline-block;">
-                    <img src="/Images/chilako.png" alt="Logo chilako">
-                </figure>
-            </div>
-        </div>
+                                <button class="button is-primary is-rounded">Modificar</button>
+
+                                <button class="button is-danger is-rounded">Eliminar</a>
+                            </div>
+
+                            <div class="column is-one-quarter" style="text-align: right;">
+                                <figure class="image" style="display: inline-block;">
+                                    <img src="<%= process.env.PATH_SERVER %>Images/chilako.png" alt="Logo chilako">
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <% }) %>
+                        <% } %>
     </div>
-    
-    
-

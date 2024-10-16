@@ -1,7 +1,10 @@
 <%- include('partials/head.ejs', {
-    establecimientos: establecimientos,
-    id_Establecimiento: id_Establecimiento,
-    }) %>
+    isLoggedIn: isLoggedIn, 
+    permisos: permisos, 
+    usuario: usuario, 
+    establecimientos: establecimientos, 
+    id_Establecimiento: id_Establecimiento 
+}) %>
 <br>
 <br>
 <br>
@@ -48,7 +51,7 @@
         
                     <div class="column is-one-quarter" style = "text-align: right;">
                         <figure class="image" style="display: inline-block;">
-                            <img src="/Images/chilako.png" alt="Logo chilako">
+                            <img src="<%= process.env.PATH_SERVER %>Images/chilako.png" alt="Logo chilako">
                         </figure>
                     </div>
                 </div>

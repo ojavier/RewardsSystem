@@ -1,7 +1,10 @@
 <%- include('partials/head.ejs', {
-    establecimientos: establecimientos,
-    id_Establecimiento: id_Establecimiento,
-    }) %>
+    isLoggedIn: isLoggedIn, 
+    permisos: permisos, 
+    usuario: usuario, 
+    establecimientos: establecimientos, 
+    id_Establecimiento: id_Establecimiento 
+}) %>
 <div class='container'>
     <br>
     <h1 class="title title-large">Configuración</h1>
@@ -91,7 +94,7 @@
             <!-- Columna derecha con la imagen -->
             <div class="column is-half">
                 <figure style="width: 100%;">
-                    <img src="/images/tarjeta.png" alt="Tarjeta de lealtad">
+                    <img src="<%= process.env.PATH_SERVER %>Images/tarjeta.png" alt="Tarjeta de lealtad">
                 </figure>
 
                 <!-- Botones circulares debajo de la imagen -->
@@ -112,5 +115,5 @@
 </section>
 
 
-<script src="<%= process.env.PATH_SERVER %>registrojs/configButtons.js"></script>
-<script src="<%= process.env.PATH_SERVER %>registrojs/searchBar.js"></script>
+<script src="<%= process.env.PATH_SERVER %>js/configButtons.js"></script>
+<script src="<%= process.env.PATH_SERVER %>js/searchBar.js"></script>

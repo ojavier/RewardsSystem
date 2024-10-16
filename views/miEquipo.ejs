@@ -1,7 +1,10 @@
 <%- include('partials/head.ejs', {
-    establecimientos: establecimientos,
-    id_Establecimiento: id_Establecimiento,
-    }) %>
+    isLoggedIn: isLoggedIn, 
+    permisos: permisos, 
+    usuario: usuario, 
+    establecimientos: establecimientos, 
+    id_Establecimiento: id_Establecimiento 
+}) %>
 <br>
 <br>
 <br>
@@ -12,7 +15,7 @@
                 <article class="message">
                     <div id="colorarticulo" class="message-header has-text-centered"> Kanye West </div>
                     <div class="message-body"> 
-                        <img class="image" src="/public/Images/ye.jpg" alt="Foto de Ye">
+                        <img class="image" src="<%= process.env.PATH_SERVER %>Images/ye.jpg" alt="Foto de Ye">
                         Edad: 47  <br>
                         Domicilio: Chicago <br>
                         Telefono : +52 4447142524    
@@ -52,7 +55,7 @@
                 <article class="message">
                     <div id="colorarticulo" class="message-header has-text-centered"> Kendrick Lamar </div>
                     <div class="message-body"> 
-                        <img class="image" src="/public/Images/kdot.jpg" alt="Foto de Kendrick">
+                        <img class="image" src="<%= process.env.PATH_SERVER %>Images/kdot.jpg" alt="Foto de Kendrick">
                         Edad: 37 <br>
                         Domicilio: Compton <br>
                         Telefono : +52 4447142524    

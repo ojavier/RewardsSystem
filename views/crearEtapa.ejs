@@ -1,7 +1,10 @@
 <%- include('partials/head.ejs', {
-    establecimientos: establecimientos,
-    id_Establecimiento: id_Establecimiento,
-    }) %>
+    isLoggedIn: isLoggedIn, 
+    permisos: permisos, 
+    usuario: usuario, 
+    establecimientos: establecimientos, 
+    id_Establecimiento: id_Establecimiento 
+}) %>
     <br>
 
     <h1 class="title title-large" style="margin-left: 10%;"> Crear Etapa</h1>
@@ -16,7 +19,7 @@
             <div class="columns is-vcentered" style="padding-left: 10%;">
                 <div class="column is-half">
                     <div class="box">
-                        <form action="<%= process.env.PATH_SERVER %>registropost/crear" method="post">
+                        <form action="<%= process.env.PATH_SERVER %>post/crear" method="post">
 
                             <div class="control">
                                 <p class="subtitle is-size-4"><strong>Cantidad de Sellos</strong></p>
