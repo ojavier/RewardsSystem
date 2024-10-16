@@ -14,7 +14,7 @@ class Tarjeta {
         const query = `
             SELECT *
             FROM Tarjetas
-            WHERE id_Establecimiento = ? `;
+            WHERE id_Establecimiento = ? AND Delete_At IS NULL `;
         return db.execute(query, [
             id_Establecimientos,
         ]);
