@@ -22,7 +22,8 @@ class Ordenes{
     }
 
     static crearID(){
-        const id_Orden = 1;
+        const id_Orden = Math.floor(Math.random() * 203941) + 1;
+        return id_Orden;
     }
     
 }

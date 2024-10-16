@@ -4,7 +4,8 @@ const Sello = require("../models/selloActual.models");
 const Etapa = require('../models/etapas.models');
 const Establecimiento = require("../models/establecimientos.models");
 const Usuario = require("../models/usuario.models");
-const Sucursales = require("../models/sucursales.models")
+const Sucursales = require("../models/sucursales.models");
+const Ordenes = require("../models/ordenes.models");
 
 exports.getRoot = (request, response, next) => {
     const isLoggedIn = request.session.isLoggedIn || false;
@@ -173,10 +174,15 @@ exports.buscarClienteSearch = (request, response, next) => {
 //Registra Sello en base de datos
 exports.registrarSello = async (request, response, next) => {
     try {
-        console.log(request.body);
-        console.log(request.session.usuario.Telefono);
+        const Feedback = request.body.Feedback;
+        const nivel_Satisfaccion = request.body.nivel_Satisfaccion;
+        const id_Orden = Ordenes.crearID();
+        const id_Establecimiento = request.session.establecimiento_id;
         const TelefonoUsuario = request.session.usuario.Telefono;
         const TelefonoCliente = request.body.telefono;
+        console.log(request.body);
+        console.log(request.session.usuario.Telefono);
+        await Ordenes.registrarOrden(id_Orden, nivel_Satisfaccion, Feedback, id_Establecimiento, TelefonoCliente);
         //Llama el método de la clase de sellos
         await Sello.registrarSelloTel(TelefonoCliente, TelefonoUsuario);
         //Vuelve a buscar el cliente por el Telefono
@@ -189,6 +195,7 @@ exports.registrarSello = async (request, response, next) => {
             Clientes: cliente,
             establecimientos: request.session.establecimientos || [],
             id_Establecimiento: request.session.establecimiento_id || '',
+            Telefono: Telefono,
         });
     }
     catch (err) {

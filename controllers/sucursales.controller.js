@@ -16,7 +16,7 @@ exports.getSucursalesSearchBar = async (request,response, next) => {
 }
 
 exports.sucursalModificar = (request, response) => {
-    const id_Sucursal = "";
+    const id_Sucursal = request.body.id_Sucursal;
     const Direccion = request.body.Direccion;
     const Entidad = request.body.Entidad;
     const id_Establecimiento = request.session.establecimiento_id;
@@ -42,7 +42,7 @@ exports.sucursalModificar = (request, response) => {
 }
 
 exports.eliminarSucursal = (request, response) => {
-    const id_Sucursal = "";
+    const id_Sucursal = request.body.id_Sucursal;
     console.log("id_Sucursal", id_Sucursal);
     Sucursales.eliminarSucursal(id_Sucursal) 
         .then((results) => {
@@ -55,4 +55,29 @@ exports.eliminarSucursal = (request, response) => {
             console.log(err);
             return response.status(500).send({ message: "Error al buscar sellos del cliente" });
         });
+}
+
+exports.crearSucursal = (request, response) => {
+    function crearIDSucursal(){
+        const id_sucursal = Math.floor(Math.random() * 203941) + 1;
+        return id_sucursal;
+    }
+    const id_Establecimiento = request.session.establecimiento_id;
+    const Direccion = request.body.Direccion;
+    const Entidad = request.body.Entidad;
+    const id_Sucursal = crearIDSucursal();
+    console.log("id_Establecimiento", id_Establecimiento);
+    Sucursales.crearSucursal(id_Sucursal, Direccion, Entidad, id_Establecimiento)
+    .then(() => {
+        return response.render(`${process.env.PATH_SERVER}misSucursales`,{
+            establecimientos: request.session.establecimientos || [],
+            id_Establecimiento: request.session.establecimiento_id || '',
+            notification: "Sucursal creada con éxito",
+            type: success,
+        }); // Redirigir a /misSucursales
+    })
+    .catch(err => {
+        console.log(err);
+        return res.status(500).send('Error al crear sucursal');
+    });
 }

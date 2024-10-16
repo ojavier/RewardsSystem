@@ -10,6 +10,12 @@
 <br>
 <h1 class="title is-1 has-text-weight-bold has-text-centered"> Mis Sucursales </h1>
 <br>
+<% if (typeof notification !== 'undefined') { %>
+    <div class="notification is-<%= type %>">
+      <%= notification %>
+    </div>
+  <% } %>
+<br>
 <section>
     <div class="container">
         <form action="<%= process.env.PATH_SERVER %>sucursal/searchBar" method="get">
