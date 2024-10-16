@@ -65,30 +65,38 @@ exports.getLogin = (req, res, next) => {
       });
   };
   
-
-exports.modificarUsuario = (request, response, next) => {
-    const { Nombre } = request;
+  // Método para modificar usuario
+  exports.modificarUsuario = (req, res, next) => {
+    const { id_Usuario, Nombre, Apellido, Telefono, id_Rol } = req.body;
     
-    if (!Nombre) {
-        console.log('Datos recibidos para modificar', request.body);
-        return response.status(400).send('Todos los campos son requeridos');
+    // Verificar si el usuario actual tiene permisos de administrador o gerente
+    if (req.session.usuario.id_Rol !== 1 && req.session.usuario.id_Rol !== 2) {
+        console.log('El usuario no tiene permisos para modificar el rol');
+        
+        // Si no tiene permisos, permitimos sólo la actualización de información personal
+        const nuevosDatos = { Nombre, Apellido, Telefono };
+
+        return Usuario.modificarPorId(id_Usuario, nuevosDatos)
+            .then(() => {
+                return res.status(200).json({ mensaje: 'Información actualizada con éxito' });
+            })
+            .catch(err => {
+                console.log(err);
+                return res.status(500).json({ mensaje: 'Error al actualizar la información' });
+            });
     }
 
-    console.log('Datos recibidos para modificar', request.body);
+    // Si tiene permisos, permitir la actualización de todos los campos, incluido el rol
+    const nuevosDatos = { Nombre, Apellido, Telefono, id_Rol };
 
-    const nuevosDatos = {
-        Nombre
-    };
-
-    Usuarios.modificarUPorId(id_Usuario, nuevosDatos).then(() => {
-
-        return response.status(200).json({ 'mensaje': 'OK' });
-    }).catch(err => {
-        console.log(err);
-        return response.status(500).json({ 'mensaje': 'Internal server error'});
-    });
-    
-
+    Usuario.modificarPorId(id_Usuario, nuevosDatos)
+        .then(() => {
+            return res.status(200).json({ mensaje: 'Usuario actualizado con éxito' });
+        })
+        .catch(err => {
+            console.log(err);
+            return res.status(500).json({ mensaje: 'Error al actualizar el usuario' });
+        });
 };
 
 // Controlador para registrar usuarios
