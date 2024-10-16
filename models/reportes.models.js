@@ -19,7 +19,26 @@ class Reportes{
         LIMIT 10;
     `;
 
-    return db.execute(query);
-}}
+        return db.execute(query);
+
+    }
+
+    static obtenerSellosPorHora() {
+        const query = `
+        SELECT 
+            HOUR(Hora_Sello) AS hora,
+            COUNT(id_Sello) AS total_sellos
+        FROM 
+            Sellos
+        GROUP BY 
+            HOUR(Hora_Sello)
+        ORDER BY 
+            hora;
+    `;
+
+        return db.execute(query);
+
+    }
+}
 
 module.exports = Reportes
