@@ -10,7 +10,7 @@ app.use(express.static('public'));
 
 // Configuración de la vista
 app.set('view engine', 'ejs');
-app.set('views', 'views');
+app.set('views', path.join(__dirname, 'views'));
 
 // Middleware para procesar JSON
 app.use(express.json());

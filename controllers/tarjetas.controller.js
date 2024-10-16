@@ -1,3 +1,4 @@
+const { request, response } = require('express');
 const Tarjeta = require('../models/tarjetas.models'); // Importamos el modelo de tarjetas
 
 // Función para obtener las tarjetas de un establecimiento
@@ -23,4 +24,18 @@ exports.getTarjetas = (request, response, next) => {
         .catch(err => {
             return response.status(500).send('Error al obtener las tarjetas');
         });
+};
+
+exports.getCrearTarjeta = (request, response, next) => {
+    const isLoggedIn = request.session.isLoggedIn || false;
+    if (!isLoggedIn) {
+        return response.redirect('${process.env.PATH_SERVER}usuario/login');
+    }
+    response.render('crearTarjeta', {
+        pagePrimaryTitle: 'Crear tarjeta',
+        isLoggedIn: isLoggedIn,
+        usuario: request.session.usuario || {},
+        establecimientos: request.session.establecimientos || [],
+        id_Establecimiento: request.session.establecimiento_id || '',
+    });
 };
