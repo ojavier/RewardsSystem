@@ -83,37 +83,47 @@ exports.postLogin = (req, res, next) => {
 
 // Método para modificar usuario
 exports.modificarUsuario = (req, res, next) => {
-    const { id_Usuario, Nombre, Apellido, Telefono, id_Rol } = req.body;
+  const { id_Usuario, Nombre, Apellido, Telefono, id_Rol } = req.body;
 
-    // Verificar si el usuario actual tiene permisos de administrador o gerente
-    if (req.session.usuario.id_Rol !== 1 && req.session.usuario.id_Rol !== 2) {
-        console.log('El usuario no tiene permisos para modificar el rol');
-        
-        // Si no tiene permisos, permitimos sólo la actualización de información personal
-        const nuevosDatos = { Nombre, Apellido, Telefono };
+  // Verificar si el usuario actual tiene permisos de administrador o gerente
+  if (req.session.usuario.id_Rol !== 1 && req.session.usuario.id_Rol !== 2) {
+      console.log('El usuario no tiene permisos para modificar el rol');
+      
+      // Si no tiene permisos, permitimos sólo la actualización de información personal
+      const nuevosDatos = { id_Usuario, Nombre, Apellido, Telefono };
 
-        return Usuario.modificarPorId(id_Usuario, nuevosDatos)
-            .then(() => {
-                return res.status(200).json({ mensaje: 'Información actualizada con éxito' });
-            })
-            .catch(err => {
-                console.log(err);
-                return res.status(500).json({ mensaje: 'Error al actualizar la información' });
-            });
-    }
+      return Usuario.modificarUsuario(nuevosDatos)
+          .then(() => {
+              req.session.mensaje = 'Información actualizada con éxito'; // Guardar mensaje en la sesión
+              return res.redirect(`${process.env.PATH_SERVER}miInformacion`); // Redirigir a /miInformacion
+          })
+          .catch(err => {
+              console.log(err);
+              return res.status(500).send('Error al actualizar la información');
+          });
+  }
 
-    // Si tiene permisos, permitir la actualización de todos los campos, incluido el rol
-    const nuevosDatos = { Nombre, Apellido, Telefono, id_Rol };
+  // Si tiene permisos, permitir la actualización de todos los campos, incluido el rol
+  const nuevosDatos = { id_Usuario, Nombre, Apellido, Telefono };
 
-    Usuario.modificarPorId(id_Usuario, nuevosDatos)
-        .then(() => {
-            return res.status(200).json({ mensaje: 'Usuario actualizado con éxito' });
-        })
-        .catch(err => {
-            console.log(err);
-            return res.status(500).json({ mensaje: 'Error al actualizar el usuario' });
-        });
+  // También se puede actualizar el rol si tienes permisos
+  Usuario.modificarUsuario(nuevosDatos)
+      .then(() => {
+          if (id_Rol) {
+              return Usuario.modificarRol(id_Usuario, id_Rol);
+          }
+          return Promise.resolve(); // Resuelve la promesa si no hay cambio de rol
+      })
+      .then(() => {
+          req.session.mensaje = 'Usuario actualizado con éxito'; // Guardar mensaje en la sesión
+          return res.redirect(`${process.env.PATH_SERVER}miInformacion`); // Redirigir a /miInformacion
+      })
+      .catch(err => {
+          console.log(err);
+          return res.status(500).send('Error al actualizar el usuario');
+      });
 };
+
 
 // Controlador para registrar usuarios
 exports.postRegistrar = (req, res, next) => {
