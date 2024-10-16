@@ -7,9 +7,36 @@ id_Establecimiento: id_Establecimiento,
     <br>
     <br>
     <br>
+    <% if (typeof notification !== 'undefined') { %>
+        <div class="notification is-<%= type %>">
+          <%= notification %>
+        </div>
+    <% } %>
     <h1 class="title is-1 has-text-weight-bold" style="margin-left: 10%; margin-right: 10%;"> Mis Sucursales </h1>
     <br>
+    
     <section>
+        <button class="button is-primary is-rounded" id="crearSucursalButton"> Crear Sucursal </button>
+
+        <div class="modal" id="crearSucursalButton">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="box">
+                    <h1 class="title is-centered">Crear Sucursal</h1>
+                    <form action="<%= process.env.PATH_SERVER %>sucursal/crear" method="post">
+                        <input class="input" type="text" placeholder="Direccion" name="Direccion" id="Direccion">
+                        <br>
+                        <br>
+                        <input class="input" type="text" placeholder="Entidad" name="Entidad" id="Entidad">
+                        <br>
+                        <br>
+                        <button class="button is-primary is is-centered is-expanded"> Crear </button>
+                    </form>
+                </div>
+            </div>
+            <button class="modal-close is-large" aria-label="cerrar"></button>
+        </div>
+
         <div class="container" style="margin-left: 10%;">
             <form action="<%= process.env.PATH_SERVER %>sucursal/searchBar" method="get">
                 <div class="field iconosearchbar">
@@ -44,10 +71,8 @@ id_Establecimiento: id_Establecimiento,
                                             <form style="display: inline;"
                                                 action="<%= process.env.PATH_SERVER %>sucursal/eliminar"
                                                 method="post">
-                                                <input type="hidden" name="id_Sucursal"
-                                                    value="<%= sucursal.id_Sucursal %>">
-                                                <button class="button is-rounded is-danger"> Eliminar
-                                                </button>
+                                                <input type="hidden" name="id_Sucursal" value="<%= sucursal.id_Sucursal %>">
+                                                <button class="button is-rounded is-danger"> Eliminar</button>
                                             </form>
                                         </div>
                     </div>
@@ -62,17 +87,15 @@ id_Establecimiento: id_Establecimiento,
                 <div class="modal-background"></div>
                 <div class="modal-content">
                     <div class="box">
-                        <h1 class="title is-centered">Modificar Tarjeta</h1>
+                        <h1 class="title is-centered">Modificar Sucursal</h1>
                         <form action="<%= process.env.PATH_SERVER %>sucursal/modificar" method="post">
-                            <input class="input" type="text" placeholder="Direccion" name="Direccion"
-                                id="Direccion">
+                            <input class="input" type="text" placeholder="Direccion" name="Direccion" id="Direccion">
                             <br>
                             <br>
                             <input class="input" type="text" placeholder="Entidad" name="Entidad" id="Entidad">
                             <br>
                             <br>
-                            <input type="hidden" name="id_Sucursal" id="id_Sucursal"
-                                value="<%= sucursal.id_Sucursal %>">
+                            <input type="hidden" name="id_Sucursal" id="id_Sucursal" value="<%= sucursal.id_Sucursal %>">
                             <button class="button is-primary"> Modificar </button>
                         </form>
                     </div>

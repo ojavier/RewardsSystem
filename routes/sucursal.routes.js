@@ -10,3 +10,5 @@ router.post("sucursal/modificar", isAuth, sucursalesController.sucursalModificar
 
 router.post("sucursal/eliminar", isAuth, sucursalesController.eliminarSucursal);
 
+router.post("sucursal/crear", isAuth, sucursalesController.crearSucursal);
+
