@@ -74,13 +74,13 @@ async function createSellosPorDiaChart() {
                     beginAtZero: true,
                     title: {
                         display: true,
-                        text: 'Dias de la semana'
+                        text: 'Sellos'
                     }
                 },
                 y: {
                     title: {
                         display: true,
-                        text: 'Sellos'
+                        text: 'Día de la semana'
                     }
                 }
             }
