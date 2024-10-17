@@ -21,11 +21,13 @@ exports.getSellosPorHora = async (req, res) => {
         // Obtener los datos de sellos por hora
         const [sellosPorHora] = await Reportes.obtenerSellosPorHora();
 
+        // Revisar el formato de sellosPorHora
+        console.log("Datos enviados al cliente:", sellosPorHora);
+
         // Devolver los datos en formato JSON
-        console.log(sellosPorHora);
-        res.json(SellosPorHora);
+        res.json(sellosPorHora);
     } catch (error) {
         console.error('Error al obtener los sellos por hora: ', error);
-        res.status(500).json({ message: 'Error al obtener los datos sellos por hora' });
+        res.status(500).json({ message: 'Error al obtener los datos de sellos por hora' });
     }
 };
