@@ -195,7 +195,7 @@ exports.registrarSello = async (request, response, next) => {
             Clientes: cliente,
             establecimientos: request.session.establecimientos || [],
             id_Establecimiento: request.session.establecimiento_id || '',
-            Telefono: Telefono,
+            Telefono: TelefonoUsuario,
         });
     }
     catch (err) {

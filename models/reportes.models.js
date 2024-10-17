@@ -20,6 +20,22 @@ class Reportes{
     `;
 
     return db.execute(query);
-}}
+    }
+
+    static obtenerTopDiasSellos(){
+        const query = `
+        SELECT 
+            DAYNAME(Fecha_Sello) AS DiaSemana, 
+            COUNT(*) AS total_sellos
+        FROM 
+            Sellos
+        GROUP BY 
+            DiaSemana
+        ORDER BY 
+            FIELD(DiaSemana, 'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado');
+    `
+        return db.execute(query);
+    }
+}
 
 module.exports = Reportes

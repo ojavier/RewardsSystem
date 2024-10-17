@@ -10,6 +10,7 @@ const usuarioController = require("../controllers/usuario.controller");
 const establecimientosController = require("../controllers/establecimientos.controller");
 const ordenesController = require("../controllers/ordenes.controller");
 const reportesController = require('../controllers/reportes.controller');
+const sucursalesController = require("../controllers/sucursales.controller");
 
 
 router.get('/crearTarjeta', isAuth, tarjetasController.getCrearTarjeta)
@@ -63,5 +64,13 @@ router.post("/Orden/Registrar", isAuth, ordenesController.registrarOrden);
 
 //Rutas para Reportes
 router.get('/reportes/topTenderos', reportesController.getTopTenderos);
+
+router.get("/sucursal/searchBar", isAuth, sucursalesController.getSucursalesSearchBar);
+
+router.post("sucursal/modificar", isAuth, sucursalesController.sucursalModificar);
+
+router.post("sucursal/eliminar", isAuth, sucursalesController.eliminarSucursal);
+
+router.post("sucursal/crear", isAuth, sucursalesController.crearSucursal);
 
 module.exports = router; 

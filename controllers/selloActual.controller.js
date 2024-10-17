@@ -15,7 +15,7 @@ exports.mostrarSellos = (req, res, next) => {
 
           // Asegúrate de pasar 'sellos' a la vista
           const selloActuales = resultados[0].sellos;
-          res.render("misTarjetas", { 
+          res.render("misClientes", { 
             Telefono, sellos: selloActuales,
             establecimientos: request.sesssion.establecimientos || [],
         }); // Asegúrate de pasar 'sellos'
