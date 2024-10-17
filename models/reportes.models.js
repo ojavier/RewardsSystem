@@ -1,8 +1,8 @@
 const db = require('../Util/database');
 
-class Reportes{
+class Reportes {
     static obtenerTopTenderos() {
-    const query = `
+        const query = `
         SELECT 
             u.Nombre,
             u.Apellido,
@@ -19,10 +19,10 @@ class Reportes{
         LIMIT 10;
     `;
 
-    return db.execute(query);
+        return db.execute(query);
     }
 
-    static obtenerTopDiasSellos(){
+    static obtenerTopDiasSellos() {
         const query = `
         SELECT 
             DAYNAME(Fecha_Sello) AS DiaSemana, 
@@ -54,6 +54,20 @@ class Reportes{
 
         return db.execute(query);
 
+    }
+
+    static obtenerTopClientesSellos() {
+        const query = `
+        SELECT c.Telefono, c.Nombre, COUNT(s.id_Sello) AS total_sellos
+        FROM Clientes c
+        JOIN Sellos s ON c.Telefono = s.Telefono_Cliente
+        GROUP BY c.Telefono
+        ORDER BY total_sellos DESC
+        LIMIT 10;
+
+    `;
+
+        return db.execute(query);
     }
 }
 

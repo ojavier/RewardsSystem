@@ -34,7 +34,7 @@ exports.getSellosPorHora = async (req, res) => {
 };
 //Controlador sellos por dia
 exports.getSellosPorDia = async (request, response) => {
-    try{
+    try {
         //Obtiene sellos por dia
         const [sellosPorDia] = await Reportes.obtenerTopDiasSellos();
         //Devuelve en json
@@ -42,9 +42,23 @@ exports.getSellosPorDia = async (request, response) => {
     }
     catch (error) {
         console.error('Error al obtener los sellos por dia: ', error);
-        res.status(500).json({ 
-            message: 'Error al obtener los datos de sellos por dia' 
+        res.status(500).json({
+            message: 'Error al obtener los datos de sellos por dia'
         });
     }
 
+};
+
+exports.getTopClientesSellos = async (req, res) => {
+    try {
+        // Llama al modelo para obtener el top de clientes con más sellos
+        const [topClientes] = await Reportes.obtenerTopClientesSellos();
+
+        //Devuelve en json
+        res.json(createTopClientesSellos)
+    }
+    catch (error) {
+        console.error('Error al obtener el reporte de top clientes con más sellos:', error);
+        res.status(500).send('Error interno del servidor');
+    }
 };

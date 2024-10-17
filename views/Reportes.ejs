@@ -1,10 +1,5 @@
-<%- include('partials/head.ejs', {
-    isLoggedIn: isLoggedIn,
-    permisos: permisos,
-    usuario: usuario,
-    establecimientos: establecimientos,
-    id_Establecimiento: id_Establecimiento
-}) %>
+<%- include('partials/head.ejs', { isLoggedIn: isLoggedIn, permisos: permisos, usuario: usuario, establecimientos:
+    establecimientos, id_Establecimiento: id_Establecimiento }) %>
     <div class='container'>
         <br>
         <br>
@@ -25,9 +20,7 @@
                 </div>
             </div>
             <div class="column is-half">
-                <figure class="image is-4by3">
-                    <img src="/images/TopClientes.jfif" alt="Días con más sellos">
-                </figure>
+                <canvas id="topClientesSellos" width="400" height="200"></canvas>
             </div>
         </div>
     </div>
@@ -76,7 +69,8 @@
                 <div class="content">
                     <h2 class="subtitle has-text-weight-semibold">Top Tenderos</h2>
                     <p>
-                        Aquí puedes mostrar información adicional o una breve descripción sobre los tenderos con más sellos.
+                        Aquí puedes mostrar información adicional o una breve descripción sobre los tenderos con más
+                        sellos.
                     </p>
                 </div>
             </div>
@@ -87,66 +81,76 @@
     </div>
 
 
-<!-- Sección para el gráfico de calor de Sellos por Hora -->
-<div class="box mx-6">
-    <div class="columns is-vcentered">
-        <div class="column is-half">
-            <div class="content">
-                <h2 class="subtitle has-text-weight-semibold">Mapa de Calor de Sellos por Hora</h2>
-                <p>
-                    Aquí puedes mostrar información adicional o una breve descripción sobre la distribución de sellos a lo largo del día.
-                </p>
+    <!-- Sección para el gráfico de calor de Sellos por Hora -->
+    <div class="box mx-6">
+        <div class="columns is-vcentered">
+            <div class="column is-half">
+                <div class="content">
+                    <h2 class="subtitle has-text-weight-semibold">Mapa de Calor de Sellos por Hora</h2>
+                    <p>
+                        Aquí puedes mostrar información adicional o una breve descripción sobre la distribución de
+                        sellos a lo largo del día.
+                    </p>
+                </div>
+            </div>
+            <div class="column is-half">
+                <canvas id="heatmapChart" width="400" height="200"></canvas>
             </div>
         </div>
-        <div class="column is-half">
-            <canvas id="heatmapChart" width="400" height="200"></canvas>
-        </div>
     </div>
-</div>
 
 
     <!-- Incluir Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<!-- Incluir el plugin de Matrix Chart -->
-<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@2.0.0"></script>
+    <!-- Incluir el plugin de Matrix Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@2.0.0"></script>
 
 
-<script>
-// Función para obtener datos del servidor
-async function fetchTopTenderos() {
-    const response = await fetch('<%= process.env.PATH_SERVER %>reportes/topTenderos');
-    if (!response.ok) {
-        throw new Error('Error al obtener datos de los Tenderos');
-    }
-    return await response.json();
-}
-</script>
-
-<script>
-    // Función para obtener datos del servidor para el Mapa de Calor
-    async function fetchSellosPorHora() {
-        const response = await fetch('<%= process.env.PATH_SERVER %>reportes/sellosPorHora');
-        if (!response.ok) {
-            throw new Error('Error al obtener datos de sellos por hora');
+    <script>
+        // Función para obtener datos del servidor
+        async function fetchTopTenderos() {
+            const response = await fetch('<%= process.env.PATH_SERVER %>reportes/topTenderos');
+            if (!response.ok) {
+                throw new Error('Error al obtener datos de los Tenderos');
+            }
+            return await response.json();
         }
-        return await response.json();
-    }
-</script>
+    </script>
 
-<script>
-    // Función para obtener datos del servidor para el Mapa de Calor
-    async function fetchSellosPorDia() {
-        const response = await fetch('<%= process.env.PATH_SERVER %>reportes/sellosPorDia');
-        if (!response.ok) {
-            throw new Error('Error al obtener datos de sellos por dia');
+    <script>
+        // Función para obtener datos del servidor para el Mapa de Calor
+        async function fetchSellosPorHora() {
+            const response = await fetch('<%= process.env.PATH_SERVER %>reportes/sellosPorHora');
+            if (!response.ok) {
+                throw new Error('Error al obtener datos de sellos por hora');
+            }
+            return await response.json();
         }
-        return await response.json();
-    }
-</script>
+    </script>
+
+    <script>
+        // Función para obtener datos del servidor para el Mapa de Calor
+        async function fetchSellosPorDia() {
+            const response = await fetch('<%= process.env.PATH_SERVER %>reportes/sellosPorDia');
+            if (!response.ok) {
+                throw new Error('Error al obtener datos de sellos por dia');
+            }
+            return await response.json();
+        }
+    </script>
+
+    <script>
+        // Función para obtener datos del servidor 
+        async function fetchTopClientesSellos() {
+            const response = await fetch('<%= process.env.PATH_SERVER %>reportes/topClientesSellos');
+            if (!response.ok) {
+                throw new Error('Error al obtener datos de sellos por dia');
+            }
+            return await response.json();
+        }
+    </script>
 
 
-
-<!-- Incluir tu script personalizado -->
-<script src="<%= process.env.PATH_SERVER %>js/reportesChart.js"></script>
-
+    <!-- Incluir tu script personalizado -->
+    <script src="<%= process.env.PATH_SERVER %>js/reportesChart.js"></script>

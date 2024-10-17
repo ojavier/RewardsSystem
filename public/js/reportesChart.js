@@ -45,7 +45,7 @@ async function createTopTenderosChart() {
 document.addEventListener('DOMContentLoaded', createTopTenderosChart);
 
 //Funcion para sellos por dia
-async function createSellosPorDiaChart(){
+async function createSellosPorDiaChart() {
     const ctx = document.getElementById('sellosDiasChart').getContext('2d');
     const data = await fetchSellosPorDia();
     console.log(data); //muestra lo obtenido
@@ -53,7 +53,7 @@ async function createSellosPorDiaChart(){
     const labels = data.map(item => item.DiaSemana);
     const valores = data.map(item => item.total_sellos);
 
-  // Configuración del chart
+    // Configuración del chart
     const chart = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -176,3 +176,48 @@ async function createHeatmapChart() {
 
 // Llamar a la función para crear el gráfico de calor cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', createHeatmapChart);
+
+
+// Función para crear el gráfico
+async function createTopClientesSellos() {
+    const ctx = document.getElementById('topClientesSellos').getContext('2d');
+    const data = await fetchTopClientesSellos();
+
+    const labels = data.map(item => item.Nombre);
+    const total_sellos = data.map(item => item.total_sellos);
+
+    const topTenderosChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Total de Sellos',
+                data: total_sellos,
+                backgroundColor: 'rgba(16, 213, 177, 0.6)',
+                borderColor: 'rgba(16, 213, 177, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            indexAxis: 'y',
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Nombre del cliente'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Total sellos'
+                    }
+                }
+            }
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', createTopClientesSellos);
