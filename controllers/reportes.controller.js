@@ -55,7 +55,7 @@ exports.getTopClientesSellos = async (req, res) => {
         const [topClientes] = await Reportes.obtenerTopClientesSellos();
 
         //Devuelve en json
-        res.json(createTopClientesSellos)
+        res.json(topClientes)
     }
     catch (error) {
         console.error('Error al obtener el reporte de top clientes con más sellos:', error);

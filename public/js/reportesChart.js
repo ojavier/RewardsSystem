@@ -183,7 +183,7 @@ async function createTopClientesSellos() {
     const ctx = document.getElementById('topClientesSellos').getContext('2d');
     const data = await fetchTopClientesSellos();
 
-    const labels = data.map(item => item.Nombre);
+    const labels = data.map(item => item.Telefono);
     const total_sellos = data.map(item => item.total_sellos);
 
     const topTenderosChart = new Chart(ctx, {
@@ -206,7 +206,7 @@ async function createTopClientesSellos() {
                     beginAtZero: true,
                     title: {
                         display: true,
-                        text: 'Nombre del cliente'
+                        text: 'Telefono del cliente'
                     }
                 },
                 y: {

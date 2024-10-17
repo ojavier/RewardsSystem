@@ -58,7 +58,7 @@ class Reportes {
 
     static obtenerTopClientesSellos() {
         const query = `
-        SELECT c.Telefono, c.Nombre, COUNT(s.id_Sello) AS total_sellos
+        SELECT c.Telefono, COUNT(s.id_Sello) AS total_sellos
         FROM Clientes c
         JOIN Sellos s ON c.Telefono = s.Telefono_Cliente
         GROUP BY c.Telefono
