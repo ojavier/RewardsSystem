@@ -46,11 +46,9 @@ exports.postEliminarVersion = (request, response, next) => {
     Tarjetas.eliminarVersion(version)
         .then(() => {
             // Redireccionamos a la página de versiones después de eliminar
+            const establecimientos = request.session.establecimientos
             response.render('/misVersiones', {
-                pagePrimaryTitle: 'Mis Tarjetas',
-                isLoggedIn: isLoggedIn,
-                usuario: request.session.usuario || {},
-                establecimientos: request.session.establecimientos || [],
+                establecimientos: establecimientos,
                 id_Establecimiento: request.session.establecimiento_id || '',
             });
         })
