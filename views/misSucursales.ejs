@@ -1,82 +1,107 @@
-<%- include('partials/head.ejs', {
+<%- include('partials/head.ejs', { 
     isLoggedIn: isLoggedIn, 
     permisos: permisos, 
-    usuario: usuario, 
-    establecimientos: establecimientos, 
-    id_Establecimiento: id_Establecimiento 
+    usuario: usuario,
+    establecimientos:establecimientos, 
+    id_Establecimiento: id_Establecimiento,
 }) %>
-<br>
-<br>
-<br>
-<h1 class="title is-1 has-text-weight-bold has-text-centered"> Mis Sucursales </h1>
-<br>
-<section>
-    <div class="container">
-        <form action="<%= process.env.PATH_SERVER %>sucursal/searchBar" method="get">
-            <div class="field iconosearchbar">
-                <div class="control">
-                    <input class="input" type="text" placeholder="Sucursal" name="SearchSucursal" id="SearchSucursal">
-                </div>
-                <img src="https://icones.pro/wp-content/uploads/2021/06/icone-loupe-gris.png" alt="lupa">
-            </div>
-        </form>
-    </div>
-</section>
+    <br>
+    <br>
+    <br>
+    <% if (typeof notification !== 'undefined') { %>
+        <div class="notification is-<%= type %>">
+          <%= notification %>
+        </div>
+    <% } %>
+    <h1 class="title is-1 has-text-weight-bold" style="margin-left: 10%; margin-right: 10%;"> Mis Sucursales </h1>
+    <br>
+    
+    <section>
+        <button class="button is-primary is-rounded" id="crearSucursalButton"> Crear Sucursal </button>
 
-<section>
-    <div class="container">
-        <br><br>
-        <% console.log(sucursales) %>
-        <% for (sucursal of sucursales) { %>
-            <% console.log(sucursal);%>
+        <div class="modal" id="crearSucursalPopup">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="box">
+                    <h1 class="title is-centered">Crear Sucursal</h1>
+                    <form action="<%= process.env.PATH_SERVER %>sucursal/crear" method="post">
+                        <input class="input" type="text" placeholder="Direccion" name="Direccion" id="Direccion">
+                        <br>
+                        <br>
+                        <input class="input" type="text" placeholder="Entidad" name="Entidad" id="Entidad">
+                        <br>
+                        <br>
+                        <button class="button is-primary is is-centered is-expanded"> Crear </button>
+                    </form>
+                </div>
+            </div>
+            <button class="modal-close is-large" aria-label="cerrar"></button>
+        </div>
+
+        <div class="container" style="margin-left: 10%;">
+            <form action="<%= process.env.PATH_SERVER %>sucursal/searchBar" method="get">
+                <div class="field iconosearchbar">
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Sucursal" name="SearchSucursal"
+                            id="SearchSucursal">
+                    </div>
+                    <img src="https://icones.pro/wp-content/uploads/2021/06/icone-loupe-gris.png" alt="lupa">
+                </div>
+            </form>
+        </div>
+    </section>
+    <br><br>
+
+    <% for (sucursal of sucursales) { %>
+        <% console.log(sucursal);%>
             <div class="box" style="margin-left: 10%; margin-right: 10%;">
                 <div class="columns is-vcentered">
                     <div class="column is-half">
                         <h2 class="is-size-4 has-text-weight-bold">Informacion: </h2>
-        
                         <br><br>
-        
-                        <p class="subtitle is-size-5"><strong>Direccion: </strong> <%= sucursal.Direccion %>
-                        <br><br>
-                        <p class="subtitle is-size-5"><strong>Entidad:</strong> <%= sucursal.Entidad %>
-                    
-                        <br> <br> <br>
-        
-                        <button class="button is-primary" id="modTarButton"> Modificar </button> 
-                        <form style="display: inline;" action="<%= process.env.PATH_SERVER %>sucursal/eliminar" method="post">
-                            <input type="hidden" name="id_Sucursal" value="<%= sucursal.id_Sucursal %>"> 
-                            <button class="button is-danger"> Eliminar </button>
-                        </form>
+                        <p class="subtitle is-size-5"><strong>Direccion: </strong>
+                            <%= sucursal.Direccion %>
+                                <br><br>
+                                <p class="subtitle is-size-5"><strong>Entidad:</strong>
+                                    <%= sucursal.Entidad %>
+                                        <br> <br> <br>
+                                        <div class="buttons">
+                                            <button class="button is-rounded is-primary" id="modTarButton">
+                                                Modificar
+                                            </button>
+                                            <form style="display: inline;"
+                                                action="<%= process.env.PATH_SERVER %>sucursal/eliminar"
+                                                method="post">
+                                                <input type="hidden" name="id_Sucursal" value="<%= sucursal.id_Sucursal %>">
+                                                <button class="button is-rounded is-danger"> Eliminar</button>
+                                            </form>
+                                        </div>
                     </div>
-        
-                    <div class="column is-one-quarter" style = "text-align: right;">
+                    <div class="column is-one-quarter" style="text-align: right;">
                         <figure class="image" style="display: inline-block;">
                             <img src="<%= process.env.PATH_SERVER %>Images/chilako.png" alt="Logo chilako">
                         </figure>
                     </div>
                 </div>
             </div>
-                <div class="modal" id="modTarPopup">
-                    <div class="modal-background"></div>
-                    <div class="modal-content">
-                        <div class="box">
-                            <h1 class="title is-centered">Modificar Tarjeta</h1>
-                            <form action="<%= process.env.PATH_SERVER %>sucursal/modificar" method="post">
-                                <input class="input" type="text" placeholder="Direccion" name="Direccion" id="Direccion">
-                                <br>
-                                <br>
-                                <input class="input" type="text" placeholder="Entidad" name="Entidad" id="Entidad">
-                                <br>
-                                <br>
-                                <input type="hidden" name="id_Sucursal" id="id_Sucursal" value="<%= sucursal.id_Sucursal %>">
-                                <button class="button is-primary"> Modificar </button>
-                            </form>
-                        </div>
+            <div class="modal" id="modTarPopup">
+                <div class="modal-background"></div>
+                <div class="modal-content">
+                    <div class="box">
+                        <h1 class="title is-centered">Modificar Sucursal</h1>
+                        <form action="<%= process.env.PATH_SERVER %>sucursal/modificar" method="post">
+                            <input class="input" type="text" placeholder="Direccion" name="Direccion" id="Direccion">
+                            <br>
+                            <br>
+                            <input class="input" type="text" placeholder="Entidad" name="Entidad" id="Entidad">
+                            <br>
+                            <br>
+                            <input type="hidden" name="id_Sucursal" id="id_Sucursal" value="<%= sucursal.id_Sucursal %>">
+                            <button class="button is-primary"> Modificar </button>
+                        </form>
                     </div>
-                    <button class="modal-close is-large" aria-label="cerrar"></button>
                 </div>
+                <button class="modal-close is-large" aria-label="cerrar"></button>
             </div>
-        <% } %>
-    </div>
-</section>
+    <% } %>
 <script src="<%= process.env.PATH_SERVER %>js/modTarButton.js"></script>

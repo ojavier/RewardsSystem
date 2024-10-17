@@ -14,10 +14,19 @@ class Tarjeta {
         const query = `
             SELECT *
             FROM Tarjetas
-            WHERE id_Establecimiento = ? `;
+            WHERE id_Establecimiento = ? AND Delete_At IS NULL `;
         return db.execute(query, [
             id_Establecimientos,
         ]);
+    }
+
+    static eliminarVersion(Version) {
+        const query = `
+            UPDATE Tarjeta 
+            SET Delete_At = CURRENT_TIMESTAMP 
+            WHERE Version = ?
+        `;
+        return db.execute(query, [id_Etapa]);
     }
 }
 

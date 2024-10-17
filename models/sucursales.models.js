@@ -34,12 +34,22 @@ class Sucursales {
         ])
     }
 
-    static modificarSucursal(id_Sucursal, Direccion, Entidad, id_Establecimiento){
-        const query = "UPDATE Sucursales SET Direccion = ? AND Entidad = ? WHERE id_Sucursal = ? ";
+    static modificarSucursal(id_Sucursal, Direccion, Entidad){
+        const query = "UPDATE Sucursales SET Direccion = ?, Entidad = ? WHERE id_Sucursal = ?";
         return db.execute(query, [
             Direccion,
             Entidad,
             id_Sucursal, 
+        ])
+    }
+
+    static crearSucursal(id_Sucursal,Direccion,Entidad, id_Establecimiento){
+        const query = "INSERT INTO Sucursales (id_Sucursal,Direccion,Entidad, id_Establecimiento) VALUES (?, ?, ?, ?)";
+        return db.execute(query, [
+            id_Sucursal,
+            Direccion,
+            Entidad,
+            id_Establecimiento,
         ])
     }
 }

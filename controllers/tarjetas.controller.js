@@ -1,3 +1,4 @@
+const { request, response } = require('express');
 const Tarjeta = require('../models/tarjetas.models'); // Importamos el modelo de tarjetas
 
 // Función para obtener las tarjetas de un establecimiento
@@ -22,5 +23,39 @@ exports.getTarjetas = (request, response, next) => {
         })
         .catch(err => {
             return response.status(500).send('Error al obtener las tarjetas');
+        });
+};
+
+exports.getCrearTarjeta = (request, response, next) => {
+    const isLoggedIn = request.session.isLoggedIn || false;
+    if (!isLoggedIn) {
+        return response.redirect('${process.env.PATH_SERVER}usuario/login');
+    }
+    response.render('crearTarjeta', {
+        pagePrimaryTitle: 'Crear tarjeta',
+        isLoggedIn: isLoggedIn,
+        usuario: request.session.usuario || {},
+        establecimientos: request.session.establecimientos || [],
+        id_Establecimiento: request.session.establecimiento_id || '',
+    });
+};
+
+exports.postEliminarVersion = (request, response, next) => {
+    const version = request.body.Version;
+
+    Tarjetas.eliminarVersion(version)
+        .then(() => {
+            // Redireccionamos a la página de versiones después de eliminar
+            response.render('/misVersiones', {
+                pagePrimaryTitle: 'Mis Tarjetas',
+                isLoggedIn: isLoggedIn,
+                usuario: request.session.usuario || {},
+                establecimientos: request.session.establecimientos || [],
+                id_Establecimiento: request.session.establecimiento_id || '',
+            });
+        })
+        .catch(err => {
+            console.error('Error eliminando la versión de la tarjeta:', err);
+            response.status(500).send('Error eliminando la versión de la tarjeta');
         });
 };
