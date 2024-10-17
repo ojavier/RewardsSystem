@@ -1,6 +1,7 @@
 const { request, response } = require("express");
 const Sucursales = require("../models/sucursales.models");
 const Usuario = require("../models/usuario.models");
+const { UUID } = require("mongodb");
 
 exports.getSucursalesSearchBar = async (request,response, next) => {
     const id_Usuario = request.session.usuario.id_Usuario;
@@ -29,7 +30,7 @@ exports.sucursalModificar = (request, response) => {
     console.log("Entidad: ", Entidad);
     console.log("id_Establecimiento: ", id_Establecimiento);
     Sucursales.modificarSucursal(id_Sucursal,Direccion,Entidad,id_Establecimiento)
-        .then((results) => {
+        .then(() => {
             return response.render("misSucursales", {
                 notification: "La sucursal se modificó correctamente",
                 type: "success",
@@ -64,7 +65,7 @@ exports.eliminarSucursal = (request, response) => {
 
 exports.crearSucursal = (request, response) => {
     function crearIDSucursal(){
-        const id_sucursal = Math.floor(Math.random() * 203941) + 1;
+        const id_sucursal = uuidv4();
         return id_sucursal;
     }
     const id_Establecimiento = request.session.establecimiento_id;
@@ -73,16 +74,16 @@ exports.crearSucursal = (request, response) => {
     const id_Sucursal = crearIDSucursal();
     console.log("id_Establecimiento", id_Establecimiento);
     Sucursales.crearSucursal(id_Sucursal, Direccion, Entidad, id_Establecimiento)
-    .then(() => {
-        return response.render(`${process.env.PATH_SERVER}misSucursales`,{
-            establecimientos: request.session.establecimientos || [],
-            id_Establecimiento: request.session.establecimiento_id || '',
-            notification: "Sucursal creada con éxito",
-            type: success,
-        }); // Redirigir a /misSucursales
-    })
-    .catch(err => {
-        console.log(err);
-        return res.status(500).send('Error al crear sucursal');
-    });
+        .then(() => {
+            return response.render(`${process.env.PATH_SERVER}misSucursales`,{
+                establecimientos: request.session.establecimientos || [],
+                id_Establecimiento: request.session.establecimiento_id || '',
+                notification: "Sucursal creada con éxito",
+                type: "success",
+            }); // Redirigir a /misSucursales
+        })
+        .catch(err => {
+            console.log(err);
+            return res.status(500).send('Error al crear sucursal');
+        });
 }

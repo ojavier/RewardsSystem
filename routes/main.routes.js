@@ -65,14 +65,18 @@ router.post("/Orden/Registrar", isAuth, ordenesController.registrarOrden);
 //Rutas para Reportes
 router.get('/reportes/topTenderos', reportesController.getTopTenderos);
 
+router.get('/reportes/sellosPorHora', reportesController.getSellosPorHora);
+
+router.get('/reportes/sellosPorDia', reportesController.getSellosPorDia);
+
+//rutas para sucursal
 router.get("/sucursal/searchBar", isAuth, sucursalesController.getSucursalesSearchBar);
 
 router.post("sucursal/modificar", isAuth, sucursalesController.sucursalModificar);
 
 router.post("sucursal/eliminar", isAuth, sucursalesController.eliminarSucursal);
 
-router.post("sucursal/crear", isAuth, sucursalesController.crearSucursal);
+router.post("sucursal/crear", sucursalesController.crearSucursal);
 
-router.get('/reportes/sellosPorHora', reportesController.getSellosPorHora);
 
 module.exports = router; 

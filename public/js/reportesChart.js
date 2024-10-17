@@ -44,6 +44,51 @@ async function createTopTenderosChart() {
 // Llamar a la función para crear el gráfico cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', createTopTenderosChart);
 
+//Funcion para sellos por dia
+async function createSellosPorDiaChart(){
+    const ctx = document.getElementById('sellosDiasChart').getContext('2d');
+    const data = await fetchSellosPorDia();
+    console.log(data); //muestra lo obtenido
+    //Agarra los valores para usarlos en el chart
+    const labels = data.map(item => item.DiaSemana);
+    const valores = data.map(item => item.total_sellos);
+
+  // Configuración del chart
+    const chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Total de Sellos',
+                data: valores,
+                backgroundColor: 'rgba(16, 213, 177, 0.6)',
+                borderColor: 'rgba(16, 213, 177, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            indexAxis: 'y',
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Dias de la semana'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Sellos'
+                    }
+                }
+            }
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', createSellosPorDiaChart);
 
 // Función para crear el gráfico de calor
 async function createHeatmapChart() {

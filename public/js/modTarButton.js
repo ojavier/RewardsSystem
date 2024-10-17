@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const Popup = document.getElementById('modTarPopup');
-    const abrirPopupBtn = document.getElementById('modTarButton');  
+    const Popup = document.getElementById('modSucPopup');
+    const abrirPopupBtn = document.getElementById('modSucButton');  
     const cerrarPopupBtns = document.querySelectorAll('.modal-background, .modal-close');  
 
     abrirPopupBtn.addEventListener('click', () => {

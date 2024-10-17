@@ -51,6 +51,8 @@ app.use('/', mainRoutes);
 app.use((request, response, next) => {
     response.status(404).render('404', {
         pagePrimaryTitle: 'Página no encontrada',
+        establecimientos: request.session.establecimientos || [],
+        id_Establecimiento: request.session.establecimiento_id || '',
     });
 });
 

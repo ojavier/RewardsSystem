@@ -1,3 +1,4 @@
+const { request, response } = require('express');
 const Reportes = require('../models/reportes.models'); // Asegúrate de que la ruta sea correcta
 
 // Controlador para Top Tenderos
@@ -30,4 +31,20 @@ exports.getSellosPorHora = async (req, res) => {
         console.error('Error al obtener los sellos por hora: ', error);
         res.status(500).json({ message: 'Error al obtener los datos de sellos por hora' });
     }
+};
+//Controlador sellos por dia
+exports.getSellosPorDia = async (request, response) => {
+    try{
+        //Obtiene sellos por dia
+        const [sellosPorDia] = await Reportes.obtenerTopDiasSellos();
+        //Devuelve en json
+        response.json(sellosPorDia);
+    }
+    catch (error) {
+        console.error('Error al obtener los sellos por dia: ', error);
+        res.status(500).json({ 
+            message: 'Error al obtener los datos de sellos por dia' 
+        });
+    }
+
 };

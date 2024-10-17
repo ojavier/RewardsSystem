@@ -63,9 +63,7 @@
                 </div>
             </div>
             <div class="column is-half">
-                <figure class="image is-4by3">
-                    <img src="/images/DiasSellos.jfif" alt="Días con más sellos">
-                </figure>
+                <canvas id="sellosDiasChart" width="400" height="200"></canvas>
             </div>
         </div>
     </div>
@@ -135,6 +133,18 @@ async function fetchTopTenderos() {
         return await response.json();
     }
 </script>
+
+<script>
+    // Función para obtener datos del servidor para el Mapa de Calor
+    async function fetchSellosPorDia() {
+        const response = await fetch('<%= process.env.PATH_SERVER %>reportes/sellosPorDia');
+        if (!response.ok) {
+            throw new Error('Error al obtener datos de sellos por dia');
+        }
+        return await response.json();
+    }
+</script>
+
 
 
 <!-- Incluir tu script personalizado -->
