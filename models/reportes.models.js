@@ -60,7 +60,7 @@ class Reportes {
         const query = `
         SELECT c.Telefono, COUNT(s.id_Sello) AS total_sellos
         FROM Clientes c
-        JOIN Sellos s ON c.Telefono = s.Telefono_Cliente
+        JOIN Sellos s ON c.Telefono = s.TelefonoCliente
         GROUP BY c.Telefono
         ORDER BY total_sellos DESC
         LIMIT 10;
