@@ -64,4 +64,6 @@ router.post("/Orden/Registrar", isAuth, ordenesController.registrarOrden);
 //Rutas para Reportes
 router.get('/reportes/topTenderos', reportesController.getTopTenderos);
 
+router.get('/reportes/sellosPorHora', reportesController.getsellosPorHora);
+
 module.exports = router; 
