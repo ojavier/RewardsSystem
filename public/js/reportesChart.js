@@ -206,13 +206,13 @@ async function createTopClientesSellos() {
                     beginAtZero: true,
                     title: {
                         display: true,
-                        text: 'Telefono del cliente'
+                        text: 'Total sellos'
                     }
                 },
                 y: {
                     title: {
                         display: true,
-                        text: 'Total sellos'
+                        text: 'Telefono del cliente'
                     }
                 }
             }
