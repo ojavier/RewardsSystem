@@ -1,4 +1,3 @@
-
 // Función para crear el gráfico
 async function createTopTenderosChart() {
     const ctx = document.getElementById('topTenderosChart').getContext('2d');
@@ -43,3 +42,82 @@ async function createTopTenderosChart() {
 
 // Llamar a la función para crear el gráfico cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', createTopTenderosChart);
+
+// Función para crear el gráfico de calor
+async function createHeatmapChart() {
+    const ctx = document.getElementById('heatmapChart').getContext('2d');
+    const data = await fetchSellosPorHora();
+
+    // Generar los datos de sellos por hora
+    const horas = Array.from({ length: 24 }, (_, i) => i); // Horas de 0 a 23
+    const dias = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom']; // Días de la semana
+
+    // Inicializar un array de datos para cada hora
+    const heatmapData = horas.map((hora) => ({
+        x: hora,
+        y: dias,
+        v: dias.map(() => 0) // Inicializar con ceros
+    }));
+
+    // Población de datos desde la base de datos
+    data.forEach((sello) => {
+        const hora = new Date(sello.Hora_Sello).getHours();
+        const dia = new Date(sello.Fecha_Sello).getDay();
+        heatmapData[hora].v[dia]++;
+    });
+
+    // Configurar el gráfico de calor
+    const heatmapChart = new Chart(ctx, {
+        type: 'matrix', // Asumiendo que estás usando Chart.js con el plugin de heatmap
+        data: {
+            datasets: [{
+                label: 'Sellos por Hora y Día',
+                data: heatmapData.flatMap((horaData, hora) =>
+                    horaData.y.map((dia, diaIndex) => ({
+                        x: horaData.x,
+                        y: dia,
+                        v: horaData.v[diaIndex]
+                    }))
+                ),
+                backgroundColor(context) {
+                    const value = context.dataset.data[context.dataIndex].v;
+                    const alpha = value / 10; // Ajustar valor alfa según la cantidad
+                    return `rgba(16, 213, 177, ${alpha})`;
+                },
+                width: ({ chart }) => (chart.chartArea || {}).width / horas.length,
+                height: ({ chart }) => (chart.chartArea || {}).height / dias.length
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    type: 'category',
+                    labels: horas,
+                    title: {
+                        display: true,
+                        text: 'Horas del Día'
+                    }
+                },
+                y: {
+                    type: 'category',
+                    labels: dias,
+                    title: {
+                        display: true,
+                        text: 'Día de la Semana'
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: (context) => `Sellos: ${context.raw.v}`
+                    }
+                }
+            }
+        }
+    });
+}
+
+// Llamar a la función para crear el gráfico de calor cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', createHeatmapChart);
