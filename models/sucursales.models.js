@@ -43,14 +43,24 @@ class Sucursales {
         ])
     }
 
-    static crearSucursal(id_Sucursal,Direccion,Entidad, id_Establecimiento){
-        const query = "INSERT INTO Sucursales (id_Sucursal,Direccion,Entidad, id_Establecimiento) VALUES (?, ?, ?, ?)";
-        return db.execute(query, [
-            id_Sucursal,
-            Direccion,
-            Entidad,
-            id_Establecimiento,
+    static crearSucursal(id_Sucursal, Direccion, Entidad, id_Establecimiento, id_Usuario, FechaIncorporacion) {
+        const query1 = "INSERT INTO Sucursales (id_Sucursal, Direccion, Entidad, id_Establecimiento) VALUES (?, ?, ?, ?)";
+        const query2 = "INSERT INTO SucursalesTieneUsuarios (id_Sucursal, id_Usuario, FechaIncorporacion) VALUES (?, ?, ?)";
+      
+        return db.query(query1, [
+          id_Sucursal, 
+          Direccion, 
+          Entidad, 
+          id_Establecimiento
         ])
+        .then(() => db.query(query2, [
+          id_Sucursal,
+          id_Usuario,
+          FechaIncorporacion,
+        ]))
+        .catch((err) => {
+          console.log(err);
+        });
     }
 }
 

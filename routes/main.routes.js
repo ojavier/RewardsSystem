@@ -74,11 +74,11 @@ router.get('/reportes/topClientesSellos', reportesController.getTopClientesSello
 //rutas para sucursal
 router.get("/sucursal/searchBar", isAuth, sucursalesController.getSucursalesSearchBar);
 
-router.post("sucursal/modificar", isAuth, sucursalesController.sucursalModificar);
+router.post("/sucursal/modificar", isAuth, sucursalesController.sucursalModificar);
 
-router.post("sucursal/eliminar", isAuth, sucursalesController.eliminarSucursal);
+router.post("/sucursal/eliminar", isAuth, sucursalesController.eliminarSucursal);
 
-router.post("sucursal/crear", sucursalesController.crearSucursal);
+router.post("/sucursal/crear", sucursalesController.crearSucursal);
 
 
 module.exports = router; 

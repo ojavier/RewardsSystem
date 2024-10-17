@@ -70,9 +70,7 @@
                                             <button class="button is-rounded is-primary" id="modSucButton">
                                                 Modificar
                                             </button>
-                                            <form style="display: inline;"
-                                                action="<%= process.env.PATH_SERVER %>sucursal/eliminar"
-                                                method="post">
+                                            <form style="display: inline;" action="<%= process.env.PATH_SERVER %>sucursal/eliminar" method="post">
                                                 <input type="hidden" name="id_Sucursal" value="<%= sucursal.id_Sucursal %>">
                                                 <button class="button is-rounded is-danger"> Eliminar</button>
                                             </form>
