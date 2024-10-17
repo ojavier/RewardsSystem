@@ -73,4 +73,6 @@ router.post("sucursal/eliminar", isAuth, sucursalesController.eliminarSucursal);
 
 router.post("sucursal/crear", isAuth, sucursalesController.crearSucursal);
 
+router.get('/reportes/sellosPorHora', reportesController.getSellosPorHora);
+
 module.exports = router; 

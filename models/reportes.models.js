@@ -35,6 +35,25 @@ class Reportes{
             FIELD(DiaSemana, 'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado');
     `
         return db.execute(query);
+        return db.execute(query);
+
+    }
+
+    static obtenerSellosPorHora() {
+        const query = `
+        SELECT 
+            HOUR(Hora_Sello) AS hora,
+            COUNT(id_Sello) AS total_sellos
+        FROM 
+            Sellos
+        GROUP BY 
+            HOUR(Hora_Sello)
+        ORDER BY 
+            hora;
+    `;
+
+        return db.execute(query);
+
     }
 }
 

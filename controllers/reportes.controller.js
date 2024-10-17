@@ -14,3 +14,20 @@ exports.getTopTenderos = async (req, res) => {
         res.status(500).json({ message: 'Error al obtener los datos de los tenderos' });
     }
 };
+
+// Controlador para Sellos por hora
+exports.getSellosPorHora = async (req, res) => {
+    try {
+        // Obtener los datos de sellos por hora
+        const [sellosPorHora] = await Reportes.obtenerSellosPorHora();
+
+        // Revisar el formato de sellosPorHora
+        console.log("Datos enviados al cliente:", sellosPorHora);
+
+        // Devolver los datos en formato JSON
+        res.json(sellosPorHora);
+    } catch (error) {
+        console.error('Error al obtener los sellos por hora: ', error);
+        res.status(500).json({ message: 'Error al obtener los datos de sellos por hora' });
+    }
+};
