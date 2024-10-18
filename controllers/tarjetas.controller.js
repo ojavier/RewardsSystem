@@ -63,3 +63,41 @@ exports.postEliminarVersion = (request, response, next) => {
             response.status(500).send('Error eliminando la versión de la tarjeta');
         });
 };
+
+/*
+exports.getModificarTarjeta = (request, response, next) => {
+    response.render("modificarTarjeta", {
+        establecimientos: request.session.establecimientos || [],
+        id_Establecimiento: request.session.establecimiento_id || '',
+    })
+};
+*/
+
+
+exports.getModificarTarjeta = async (request, response, next) => {
+    // Obtener la tarjeta a modificar
+    const id_Establecimiento = request.session.establecimiento_id;
+    const version = request.body.version; // Agregar esta línea para obtener la versión de la tarjeta
+    const tarjetas = await Tarjeta.getTarjeta(id_Establecimiento, version)
+
+    // Llamar al modelo para obtener los datos de la tarjeta
+    response.render("modificarTarjeta", {
+        establecimientos: request.session.establecimientos || [],
+        id_Establecimiento: id_Establecimiento,
+        tarjetas: tarjetas,
+    });
+};
+
+exports.postModificarTarjeta = (request, response, next) => {
+    const id_Establecimiento = request.session.establecimiento_id;
+    const version = request.body.version;
+
+    // Llamar al modelo para modificar la tarjeta
+    Tarjeta.modificarVersion(version, id_Establecimiento)
+        .then(() => {
+            console.log("todo funciona chido");
+        })
+        .catch((err) => {
+            next(err);
+        });
+};
