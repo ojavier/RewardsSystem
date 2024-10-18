@@ -59,6 +59,7 @@ exports.eliminarSucursal = async (request, response) => {
         await Sucursales.eliminarSucursal(id_Sucursal);
         console.log("Sucursal Eliminada")
         const sucursales = await Sucursales.getSucursales(id_Usuario, id_Establecimiento);
+        console.log(sucursales);
         return response.render("misSucursales", {
             sucursales: sucursales,
             establecimientos:establecimientos,

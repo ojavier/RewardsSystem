@@ -1,0 +1,28 @@
+<%- include('partials/head.ejs', { 
+    isLoggedIn: isLoggedIn, 
+    permisos: permisos, 
+    usuario: usuario,
+    establecimientos:establecimientos, 
+    id_Establecimiento: id_Establecimiento,
+}) %>
+<style>
+    html, body {
+        height: 100%;
+    }
+    .is-fullheight {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+</style>
+
+<section class="section is-fullheight">
+    <div class="container">
+        <h1 class="title is-1 has-text-centered" id="colortextoazul">
+            Bienvenido 
+            <br>
+            <%usuario.Nombre%> 
+        </h1>
+    </div>
+</section>

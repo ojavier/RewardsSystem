@@ -12,11 +12,9 @@ exports.getRoot = (request, response, next) => {
     if (!isLoggedIn) {
         return response.redirect('${process.env.PATH_SERVER}usuario/login');
     }
-    response.render('misTarjetas', {
-        pagePrimaryTitle: 'Mis Tarjetas',
+    response.render('bienvenido', {
         isLoggedIn: isLoggedIn,
         usuario: request.session.usuario || {},
-        sellos: 1,
         establecimientos: request.session.establecimientos || [],
         id_Establecimiento: request.session.establecimiento_id || '',
     });
