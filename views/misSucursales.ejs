@@ -40,11 +40,10 @@
         </div>
 
         <div class="container" style="margin-left: 10%;">
-            <form action="<%= process.env.PATH_SERVER %>sucursal/searchBar" method="get">
+            <form action="<%= process.env.PATH_SERVER %>sucursal/searchBar" method="post">
                 <div class="field iconosearchbar">
                     <div class="control">
-                        <input class="input" type="text" placeholder="Sucursal" name="SearchSucursal"
-                            id="SearchSucursal">
+                        <input class="input" type="text" placeholder="Sucursal" name="SearchSucursal" id="SearchSucursal">
                     </div>
                     <img src="https://icones.pro/wp-content/uploads/2021/06/icone-loupe-gris.png" alt="lupa">
                 </div>

@@ -5,14 +5,16 @@ const { v4: uuidv4 } = require('uuid');
 
 exports.getSucursalesSearchBar = async (request,response, next) => {
     const id_Usuario = request.session.usuario.id_Usuario;
-    const direccion = request.body.SearchSucursal;
+    console.log(request.body);
+    const Direccion = request.body.SearchSucursal;
 
     console.log("Buscando sucursal...");
     console.log(id_Usuario);
-    console.log(direccion);
-    const [sucursales] = await Sucursales.searchSucursal(id_Usuario, direccion);
+    console.log(Direccion);
+    const [sucursales] = await Sucursales.searchSucursal(id_Usuario, Direccion);
+    console.log(sucursales);
     response.render("misSucursales", {
-        establecimientos: request.sesssion.establecimientos || [],
+        establecimientos: request.session.establecimientos || [],
         sucursales: sucursales || [],
         id_Establecimiento: request.session.establecimiento_id || [],
     })
@@ -47,21 +49,27 @@ exports.sucursalModificar = async (request, response) => {
     }
 }
 
-exports.eliminarSucursal = (request, response) => {
-    const id_Sucursal = request.body.id_Sucursal;
-    console.log("id_Sucursal", id_Sucursal);
-    Sucursales.eliminarSucursal(id_Sucursal) 
-        .then((results) => {
-            return response.render("misSucursales", {
-                sucursales: sucursales,
-                establecimientos:establecimientos,
-                id_Establecimiento: request.session.establecimiento_id || [],
+exports.eliminarSucursal = async (request, response) => {
+    try{
+        const id_Sucursal = request.body.id_Sucursal;
+        const id_Establecimiento = request.session.establecimiento_id;
+        const establecimientos = request.session.establecimientos;
+        const id_Usuario = request.session.usuario.id_Usuario;
+        console.log("id_Sucursal", id_Sucursal);
+        await Sucursales.eliminarSucursal(id_Sucursal);
+        console.log("Sucursal Eliminada")
+        const sucursales = await Sucursales.getSucursales(id_Usuario, id_Establecimiento);
+        return response.render("misSucursales", {
+            sucursales: sucursales,
+            establecimientos:establecimientos,
+            id_Establecimiento: request.session.establecimiento_id || [],
             })
-        })
-        .catch((err) => {
-            console.log(err);
-            return response.status(500).send({ message: "Error al buscar sellos del cliente" });
-        });
+    }
+    catch(err){
+        console.log(err);
+            return response.status(500).send({ message: "Error al buscar eliminar sucursal" });
+    }
+            
 }
 
 exports.crearSucursal = async (request, response) => {

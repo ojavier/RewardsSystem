@@ -72,7 +72,7 @@ router.get('/reportes/sellosPorDia', reportesController.getSellosPorDia);
 router.get('/reportes/topClientesSellos', reportesController.getTopClientesSellos);
 
 //rutas para sucursal
-router.get("/sucursal/searchBar", isAuth, sucursalesController.getSucursalesSearchBar);
+router.post("/sucursal/searchBar", isAuth, sucursalesController.getSucursalesSearchBar);
 
 router.post("/sucursal/modificar", isAuth, sucursalesController.sucursalModificar);
 

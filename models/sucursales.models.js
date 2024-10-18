@@ -10,7 +10,7 @@ class Sucursales {
 
     //Metodo para encontrar todas las sucursales que tiene un usuario
     static getSucursales(id_Usuario, id_Establecimiento){
-        const query = "SELECT * FROM Sucursales, SucursalesTieneUsuarios WHERE Sucursales.id_Sucursal = SucursalesTieneUsuarios.id_Sucursal AND id_Usuario = ? AND id_Establecimiento = ?";
+        const query = "SELECT * FROM Sucursales, SucursalesTieneUsuarios WHERE Sucursales.id_Sucursal = SucursalesTieneUsuarios.id_Sucursal AND id_Usuario = ? AND id_Establecimiento = ? AND Delete_At IS NULL";
         return db.execute(query, [
             id_Usuario,
             id_Establecimiento,
@@ -20,7 +20,8 @@ class Sucursales {
     //Metodo para encontrar una sola sucursal con la direccion
     static searchSucursal(id_Usuario, Direccion){
         const direccionparecida = `${Direccion}%`; 
-        const query = "SELECT * FROM Sucursales, SucursalesTieneUsuarios WHERE Sucursales.id_Sucursal = SucursalesTieneUsuarios.id_Sucursal AND id_Usuario = ? AND Direccion LIKE '? ';";
+        console.log(direccionparecida);
+        const query = "SELECT * FROM Sucursales, SucursalesTieneUsuarios WHERE Sucursales.id_Sucursal = SucursalesTieneUsuarios.id_Sucursal AND id_Usuario = ? AND Direccion LIKE ?;";
         return db.execute(query, [
             id_Usuario, 
             direccionparecida,
@@ -28,7 +29,7 @@ class Sucursales {
     }
 
     static eliminarSucursal(id_Sucursal){
-        const query = "UPDATE Sucursal SET Delete_At = CURRENT_TIMESTAMP WHERE id_Sucursal = ?";
+        const query = "UPDATE Sucursales SET Delete_At = CURRENT_TIMESTAMP WHERE id_Sucursal = ?";
         return db.execute(query,[
             id_Sucursal,
         ])

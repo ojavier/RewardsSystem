@@ -188,15 +188,22 @@ exports.registrarSello = async (request, response, next) => {
         //Vuelve a buscar el cliente por el Telefono
         const [results] = await Usuario.buscarClienteSearch(TelefonoCliente);
         const cliente= results[0];
+        Clientes.buscarSellosCliente(TelefonoCliente)
+                .then(([results, fieldData]) => {
+                    const sellos = results[0].cantidad_sellos;
+                    console.log(results);
+                    console.log(results[0].cantidad_sellos);
+                    return response.render("misClientes", {
+                        Clientes: cliente,
+                        sellos: sellos,
+                        establecimientos: request.session.establecimientos || [],
+                        id_Establecimiento: request.session.establecimiento_id || '',
+                        notification: 'Sello registrado correctamente',
+                        type: 'success',
+                        Telefono: TelefonoUsuario,
+                    });
+                })
         //Renderiza vista mis clientes con información
-        response.render('misClientes', {
-            notification: 'Sello registrado correctamente',
-            type: 'success',
-            Clientes: cliente,
-            establecimientos: request.session.establecimientos || [],
-            id_Establecimiento: request.session.establecimiento_id || '',
-            Telefono: TelefonoUsuario,
-        });
     }
     catch (err) {
         console.error(err);
