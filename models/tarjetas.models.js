@@ -20,13 +20,13 @@ class Tarjeta {
         ]);
     }
 
-    static eliminarVersion(Version) {
+    static eliminarVersion(Version, id_Establecimiento) {
         const query = `
-            UPDATE Tarjeta 
+            UPDATE Tarjetas 
             SET Delete_At = CURRENT_TIMESTAMP 
-            WHERE Version = ?
+            WHERE Version = ? AND id_Establecimiento = ?
         `;
-        return db.execute(query, [id_Etapa]);
+        return db.execute(query, [Version, id_Establecimiento]);
     }
 }
 
