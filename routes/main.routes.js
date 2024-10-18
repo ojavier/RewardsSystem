@@ -13,6 +13,8 @@ const reportesController = require('../controllers/reportes.controller');
 const sucursalesController = require("../controllers/sucursales.controller");
 
 
+router.post('/tarjetas/eliminar', isAuth, tarjetasController.postEliminarVersion);
+
 router.get('/crearTarjeta', isAuth, tarjetasController.getCrearTarjeta)
 
 router.get('/modificarEtapas', isAuth, mainController.getmodEtap);

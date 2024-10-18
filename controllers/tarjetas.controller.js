@@ -42,16 +42,20 @@ exports.getCrearTarjeta = (request, response, next) => {
 
 exports.postEliminarVersion = (request, response, next) => {
     const version = request.body.Version;
+    const id_Establecimiento = request.session.establecimiento_id;
 
-    Tarjetas.eliminarVersion(version)
+    Tarjeta.eliminarVersion(version, id_Establecimiento)
         .then(() => {
+            return Tarjeta.obtenerPorEstablecimiento(id_Establecimiento);
+        })
+        .then(tarjetas => {
             // Redireccionamos a la página de versiones después de eliminar
-            response.render('/misVersiones', {
-                pagePrimaryTitle: 'Mis Tarjetas',
-                isLoggedIn: isLoggedIn,
+            return response.render('misVersiones', {
+                pagePrimaryTitle: 'Mis tarjetas',
                 usuario: request.session.usuario || {},
                 establecimientos: request.session.establecimientos || [],
-                id_Establecimiento: request.session.establecimiento_id || '',
+                id_Establecimiento: id_Establecimiento || '',
+                tarjetas: tarjetas,
             });
         })
         .catch(err => {
