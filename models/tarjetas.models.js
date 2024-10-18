@@ -28,6 +28,15 @@ class Tarjeta {
         `;
         return db.execute(query, [Version, id_Establecimiento]);
     }
+
+    static modificarVersion(Version, id_Establecimiento) {
+        const query = `
+            UPDATE Tarjetas
+            SET Emision = ?
+            WHERE Version = ? AND id_Establecimiento = ?
+        `;
+        return db.execute(query, [Version, id_Establecimiento]);
+    }
 }
 
 // Exportar la clase Tarjeta
