@@ -74,32 +74,26 @@ exports.getModificarTarjeta = (request, response, next) => {
 */
 
 
-exports.getModificarTarjeta = (request, response, next) => {
+exports.getModificarTarjeta = async (request, response, next) => {
     // Obtener la tarjeta a modificar
     const id_Establecimiento = request.session.establecimiento_id;
-    const version = request.query.version; // Agregar esta línea para obtener la versión de la tarjeta
+    const version = request.body.version; // Agregar esta línea para obtener la versión de la tarjeta
+    const tarjetas = await Tarjeta.getTarjeta(id_Establecimiento, version)
 
     // Llamar al modelo para obtener los datos de la tarjeta
-    TarjetaModel.getTarjeta(id_Establecimiento, version)
-        .then((tarjeta) => {
-            response.render("modificarTarjeta", {
-                establecimientos: request.session.establecimientos || [],
-                id_Establecimiento: id_Establecimiento,
-                tarjeta: tarjeta,
-            });
-        })
-        .catch((err) => {
-            next(err);
-        });
+    response.render("modificarTarjeta", {
+        establecimientos: request.session.establecimientos || [],
+        id_Establecimiento: id_Establecimiento,
+        tarjetas: tarjetas,
+    });
 };
 
 exports.postModificarTarjeta = (request, response, next) => {
     const id_Establecimiento = request.session.establecimiento_id;
     const version = request.body.version;
-    const emision = request.body.emision;
 
     // Llamar al modelo para modificar la tarjeta
-    TarjetaModel.modificarVersion(emision, version, id_Establecimiento)
+    Tarjeta.modificarVersion(version, id_Establecimiento)
         .then(() => {
             console.log("todo funciona chido");
         })

@@ -37,6 +37,15 @@ class Tarjeta {
         `;
         return db.execute(query, [Version, id_Establecimiento]);
     }
+
+    static getTarjeta(id_Establecimiento, version) {
+        const query = `
+          SELECT *
+          FROM Tarjetas
+          WHERE id_Establecimiento = ? AND Version = ? 
+        `;
+        return db.execute(query, [id_Establecimiento, version]);
+    }
 }
 
 // Exportar la clase Tarjeta
