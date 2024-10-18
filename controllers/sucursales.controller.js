@@ -94,14 +94,18 @@ exports.crearSucursal = async (request, response) => {
         
         await Sucursales.crearSucursal(id_Sucursal, Direccion, Entidad, id_Establecimiento, id_Usuario, FechaIncorporacion);
         
-        const sucursales = await Sucursales.getSucursales(id_Usuario, id_Establecimiento);
-        return response.render(`misSucursales`, {
-            sucursales: sucursales,
-            establecimientos: request.session.establecimientos || [],
-            id_Establecimiento: request.session.establecimiento_id || '',
-            notification: "Sucursal creada con éxito",
-            type: "success",
-        }); 
+        Sucursales.getSucursales(id_Usuario, id_Establecimiento).then(([sucursales, fieldData]) => {
+            establecimientos = request.session.establecimientos;
+            return response.render(`misSucursales`, {
+                sucursales: sucursales,
+                establecimientos: request.session.establecimientos || [],
+                id_Establecimiento: request.session.establecimiento_id || '',
+                notification: "Sucursal creada con éxito",
+                type: "success",
+            })
+    
+        }).catch(err => {console.log(err)})
+        
       } 
       catch (err) {
         console.error(err);
