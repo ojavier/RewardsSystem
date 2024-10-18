@@ -18,32 +18,33 @@ exports.getSucursalesSearchBar = async (request,response, next) => {
     })
 }
 
-exports.sucursalModificar = (request, response) => {
-    const id_Sucursal = request.body.id_Sucursal;
-    const Direccion = request.body.Direccion;
-    const Entidad = request.body.Entidad;
-    const id_Establecimiento = request.session.establecimiento_id;
-    const establecimientos = request.session.establecimientos;
-    console.log("Esto es el mod");
-    console.log("id_Sucursal: ", id_Sucursal);
-    console.log("Direccion: ", Direccion);
-    console.log("Entidad: ", Entidad);
-    console.log("id_Establecimiento: ", id_Establecimiento);
-    Sucursales.modificarSucursal(id_Sucursal,Direccion,Entidad,id_Establecimiento)
-        .then(() => {
-            return response.render("misSucursales", {
-                notification: "La sucursal se modificó correctamente",
-                type: "success",
-                sucursales: sucursales,
-                establecimientos: establecimientos,
-                id_Establecimiento: id_Establecimiento || '',
-            })
-        })
-        .catch((err) => {
-            console.log(err);
-            return response.status(500).send({ message: "Error al buscar sellos del cliente" });
+exports.sucursalModificar = async (request, response) => {
+    try{
+        const id_Sucursal = request.body.id_Sucursal;
+        const Direccion = request.body.Direccion;
+        const Entidad = request.body.Entidad;
+        const id_Establecimiento = request.session.establecimiento_id;
+        const establecimientos = request.session.establecimientos;
+        const id_Usuario = request.session.usuario.id_Usuario;
+        console.log("Esto es el mod");
+        console.log("id_Sucursal: ", id_Sucursal);
+        console.log("Direccion: ", Direccion);
+        console.log("Entidad: ", Entidad);
+        console.log("id_Establecimiento: ", id_Establecimiento);
+        await Sucursales.modificarSucursal(id_Sucursal,Direccion,Entidad,id_Establecimiento)
+        const sucursales = await Sucursales.getSucursales(id_Usuario, id_Establecimiento);
+        return response.render("misSucursales", {
+            notification: "La sucursal se modificó correctamente",
+            type: "success",
+            sucursales: sucursales,
+            establecimientos: establecimientos,
+            id_Establecimiento: id_Establecimiento || '',
         });
-    
+    }
+    catch (err){
+        console.error(err);
+        return response.status(500).send('Error al modificar sucursal');
+    }
 }
 
 exports.eliminarSucursal = (request, response) => {
