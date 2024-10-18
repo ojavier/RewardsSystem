@@ -1,53 +1,104 @@
-<%- include('partials/head.ejs', {
+<%- include('partials/head.ejs', { 
     isLoggedIn: isLoggedIn, 
     permisos: permisos, 
-    usuario: usuario, 
-    establecimientos: establecimientos, 
-    id_Establecimiento: id_Establecimiento 
+    usuario: usuario,
+    establecimientos:establecimientos, 
+    id_Establecimiento: id_Establecimiento,
 }) %>
     <br>
+    <br>
+    <br>
+    <% if (typeof notification !== 'undefined') { %>
+        <div class="notification is-<%= type %>">
+          <%= notification %>
+        </div>
+    <% } %>
+    <h1 class="title is-1 has-text-weight-bold" style="margin-left: 10%; margin-right: 10%;"> Mis Establecimientos </h1>
+    <br>
+    
+    <section>
+        <button class="button is-primary is-rounded" id="crearEstButton" style="margin-left: 10%; margin-right: 10%;"> Crear Establecimiento </button>
+        <br>
+        <br>
+        <div class="modal" id="crearEstPopup">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="box">
+                    <h1 class="title is-centered">Crear Establecimiento</h1>
+                    <form action="<%= process.env.PATH_SERVER %>establecimiento/crear" method="post">
+                        <input class="input" type="text" placeholder="Direccion" name="Direccion" id="Direccion">
+                        <br>
+                        <br>
+                        <input class="input" type="text" placeholder="Entidad" name="Entidad" id="Entidad">
+                        <br>
+                        <br>
+                        <button class="button is-primary is is-centered is-expanded"> Crear </button>
+                    </form>
+                </div>
+            </div>
+            <button class="modal-close is-large" aria-label="cerrar"></button>
+        </div>
 
-    <h1 class="title title-large" style="margin-left: 10%;">Mis Establecimientos</h1>
-
+        <div class="container" style="margin-left: 10%;">
+            <form action="<%= process.env.PATH_SERVER %>establecimiento/searchBar" method="post">
+                <div class="field iconosearchbar">
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Establecimiento" name="SearchEstablecimiento" id="SearchEstablecimiento">
+                    </div>
+                    <img src="https://icones.pro/wp-content/uploads/2021/06/icone-loupe-gris.png" alt="lupa">
+                </div>
+            </form>
+        </div>
+    </section>
     <br><br>
 
-    <button class="button is-primary is-rounded" style="margin-left: 10%;">Crear nuevo establecimiento</button>
-
-    <br> <br>
-
-    <div class="establecimientos">
-        <% if (tarjetas.length===0) { %>
-            <p class="title is-3" style="margin-left: 10%;">Este usuario no cuenta con establecimientos</p>
-            <% } else { %>
-                <% establecimiento.forEach(establecimiento=> { %>
-                    <div class="box" style="margin-left: 10%; margin-right: 10%;">
-                        <div class="columns is-vcentered">
-                            <div class="column is-half">
-                                <h2 class="is-size-4 has-text-weight-bold">Informacion: </h2>
-
-                                <p class="subtitle is-size-5"><strong>Nombre del establecimiento:</strong>
-                                    <%= establecimiento.Nombre %>
-                                </p>
+    <% for (localizacion of localizaciones) { %>
+        <% console.log(localizacion);%>
+            <div class="box" style="margin-left: 10%; margin-right: 10%;">
+                <div class="columns is-vcentered">
+                    <div class="column is-half">
+                        <h2 class="is-size-4 has-text-weight-bold">Informacion: </h2>
+                        <br><br>
+                        <p class="subtitle is-size-5"><strong>Direccion: </strong>
+                            <%= sucursal.Direccion %>
                                 <br><br>
                                 <p class="subtitle is-size-5"><strong>Entidad:</strong>
-                                    <%= establecimiento.Entidad %>
-                                </p>
-
-                                <br> <br> <br>
-
-                                <button class="button is-primary is-rounded">Modificar</button>
-
-                                <button class="button is-danger is-rounded">Eliminar</a>
-                            </div>
-
-                            <div class="column is-one-quarter" style="text-align: right;">
-                                <figure class="image" style="display: inline-block;">
-                                    <img src="<%= process.env.PATH_SERVER %>Images/chilako.png" alt="Logo chilako">
-                                </figure>
-                            </div>
-                        </div>
+                                    <%= sucursal.Entidad %>
+                                        <br> <br> <br>
+                                        <div class="buttons">
+                                            <button class="button is-rounded is-primary" id="modEstButton">
+                                                Modificar
+                                            </button>
+                                            <form style="display: inline;" action="<%= process.env.PATH_SERVER %>establecimiento/eliminar" method="post">
+                                                <input type="hidden" name="id_Establecimiento" value="<%= establecimiento.id_Establecimiento %>">
+                                                <button class="button is-rounded is-danger"> Eliminar </button>
+                                            </form>
+                                        </div>
                     </div>
-                    <br>
-                    <% }) %>
-                        <% } %>
-    </div>
+                    <div class="column is-one-quarter" style="text-align: right;">
+                        <figure class="image" style="display: inline-block;">
+                            <img src="<%= process.env.PATH_SERVER %>Images/chilako.png" alt="Logo chilako">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            <div class="modal" id="modEstPopup">
+                <div class="modal-background"></div>
+                <div class="modal-content">
+                    <div class="box">
+                        <h1 class="title is-centered">Modificar Establecimiento</h1>
+                        <form action="<%= process.env.PATH_SERVER %>establecimiento/modificar" method="post">
+                            <input class="input" type="text" placeholder="Direccion" name="Direccion" id="Direccion">
+                            <br>
+                            <br>
+                            <input class="input" type="text" placeholder="Entidad" name="Entidad" id="Entidad">
+                            <br>
+                            <br>
+                            <input type="hidden" name="id_Establecimiento" id="id_Establecimiento" value="<%= establecimiento.id_Establecimiento %>">
+                            <button class="button is-primary"> Modificar </button>
+                        </form>
+                    </div>
+                </div>
+                <button class="modal-close is-large" aria-label="cerrar"></button>
+            </div>
+    <% } %>

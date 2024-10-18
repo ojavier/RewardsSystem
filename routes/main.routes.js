@@ -61,6 +61,11 @@ router.post("/usuario/modificar", isAuth, usuarioController.modificarUsuario);
 //Rutas para Establecimientos
 router.post("/establecimientos/cambiar", isAuth, establecimientosController.cambiarEstablecimiento);
 
+router.post("/establecimiento/modificar", isAuth, establecimientosController.establecimientoModificar);
+
+router.post("/establecimiento/eliminar", isAuth, establecimientosController.eliminarEstablecimiento);
+
+
 //Rutas para Ordenes
 router.post("/Orden/Registrar", isAuth, ordenesController.registrarOrden);
 
