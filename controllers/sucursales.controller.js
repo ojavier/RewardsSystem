@@ -34,14 +34,17 @@ exports.sucursalModificar = async (request, response) => {
         console.log("Entidad: ", Entidad);
         console.log("id_Establecimiento: ", id_Establecimiento);
         await Sucursales.modificarSucursal(id_Sucursal,Direccion,Entidad,id_Establecimiento)
-        const sucursales = await Sucursales.getSucursales(id_Usuario, id_Establecimiento);
-        return response.render("misSucursales", {
-            notification: "La sucursal se modificó correctamente",
-            type: "success",
-            sucursales: sucursales,
-            establecimientos: establecimientos,
-            id_Establecimiento: id_Establecimiento || '',
-        });
+        Sucursales.getSucursales(id_Usuario, id_Establecimiento).then(([sucursales, fieldData]) => {
+            establecimientos = request.session.establecimientos;
+            return response.render(`misSucursales`, {
+                sucursales: sucursales,
+                establecimientos: request.session.establecimientos || [],
+                id_Establecimiento: request.session.establecimiento_id || '',
+                notification: "Sucursal creada con éxito",
+                type: "success",
+            })
+    
+        }).catch(err => {console.log(err)})
     }
     catch (err){
         console.error(err);
@@ -58,13 +61,17 @@ exports.eliminarSucursal = async (request, response) => {
         console.log("id_Sucursal", id_Sucursal);
         await Sucursales.eliminarSucursal(id_Sucursal);
         console.log("Sucursal Eliminada")
-        const sucursales = await Sucursales.getSucursales(id_Usuario, id_Establecimiento);
-        console.log(sucursales);
-        return response.render("misSucursales", {
-            sucursales: sucursales,
-            establecimientos:establecimientos,
-            id_Establecimiento: request.session.establecimiento_id || [],
+        Sucursales.getSucursales(id_Usuario, id_Establecimiento).then(([sucursales, fieldData]) => {
+            establecimientos = request.session.establecimientos;
+            return response.render(`misSucursales`, {
+                sucursales: sucursales,
+                establecimientos: request.session.establecimientos || [],
+                id_Establecimiento: request.session.establecimiento_id || '',
+                notification: "Sucursal creada con éxito",
+                type: "success",
             })
+    
+        }).catch(err => {console.log(err)})
     }
     catch(err){
         console.log(err);
